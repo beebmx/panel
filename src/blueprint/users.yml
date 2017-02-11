@@ -1,0 +1,38 @@
+name: Usuarios
+class: App\User
+storage: usuario
+admin: true
+icon: ti-user
+fields:
+  id:
+    name: ID
+    type: id
+    list: false
+  email:
+    name: Email
+    type: email
+    required: true
+    unique: users
+  profile_id:
+    name: Perfil
+    type: select
+    options: class
+    query:
+      class: App\Profile
+      value: id
+      text: name
+      separator: |
+  password:
+    name: Contraseña
+    type: password
+    list: false
+    required: true
+  name:
+    name: Nombre
+    type: text
+  lastname:
+    name: Apellidos
+    type: text
+    list: true
+    hidden_xs: true
+files: true

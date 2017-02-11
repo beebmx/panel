@@ -1,0 +1,70 @@
+//
+// Bootstrap personalization
+// --------------------------------------------------
+
+// Colors
+// --------------------------------------------------
+$brand-primary:             #1A79B7;
+$brand-success:             #00A79D;
+$brand-info:                #5BC9E1;
+$brand-warning:             #EE554A;
+$brand-danger:              #F6943F;
+
+$white:                     #FFFFFF;
+//$body-bg:                   #FAFAFA;
+$body-bg:                   #F0F0F0;
+$gray-base:                 #37393C;
+$gray-dark:                 lighten($gray-base, 20%);
+//$gray-lighter:              #F2F2F2;
+$gray-lighter:              #FAFAFA;
+$text-hover:                $gray-dark;
+
+$label-color:               $gray-dark;
+//$text-color:                #37393C;
+
+// Fonts
+// --------------------------------------------------
+//$font-family-sans-serif:    'Lato', sans-serif;
+//$font-family-sans-serif:    'Raleway', sans-serif;
+$font-family-sans-serif:    'Helvetica Neue', helvetica, arial, 'Lucida Grande', sans-serif;
+$themify_font_path:         '../fonts/';
+$icon-font-path:            '../fonts/';
+
+// Bootstrap components
+// --------------------------------------------------
+$border-radius-base:        2px;
+$border-radius-large:       4px;
+$border-radius-small:       2px;
+$btn-default-border:        $gray-lighter;
+
+$btn-primary-border:        transparent;
+$btn-success-border:        transparent;
+$btn-info-border:           transparent;
+$btn-warning-border:        transparent;
+$btn-danger-border:         transparent;
+
+// Forms
+// --------------------------------------------------
+$input-border-focus:        lighten($brand-primary, 5%);
+$input-border:              #CCCCCC;       
+$input-color-placeholder:   #999;
+$legend-color:              $brand-primary;
+
+// Forms
+// --------------------------------------------------
+$table-bg:                  $white;
+
+// Pushy
+// --------------------------------------------------
+$menu_width:		240px;
+$pushy_arrow:       "../images/arrow.svg";
+$pushy_background:  $white;
+$pushy_color:       $brand-primary;
+$pushy_color_hover: $text-hover;
+
+// Panel theme
+// --------------------------------------------------
+$header-height:             3em;
+$sidebar-brand:             lighten($brand-primary, 35%);
+$sidebar-color:             $white;
+$header-shadow:             rgba(55, 57, 60, 0.35);

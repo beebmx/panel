@@ -1,0 +1,80 @@
+//
+// Forms
+// --------------------------------------------------
+.form-control{
+    box-shadow: none;
+}
+.input-icon{
+    display: block;
+    position: relative;
+    >input {
+        padding-left: 2.1em !important;
+        padding-right: 0.5em;
+    }
+    >i{
+        position: absolute;
+        top: 0; left: 0.4em; bottom: 0;
+        color: $brand-primary;
+        display: inline-block;
+        line-height: 2.5;
+        padding: 0 3px;
+        z-index: 2;
+    }
+}
+.form-group{
+    &.form-space{
+        margin-top: 1em;
+        padding-top: 1em;
+    }
+}
+.panel-checkbox{
+    >input[type="checkbox"]{
+        display: none;
+        &:checked{
+            +label{
+                &:before{
+                    border-width: 0.7em;
+                    border-color: $brand-primary;
+                }
+                &:after{
+                   content: "\e64c";
+                   color: $white;
+                   //
+                }
+            }
+        }    
+    }
+    label{
+        cursor: pointer;
+        font-weight: 400;
+        margin-right: 0.8em;
+        padding-left: 2.1em !important;
+        position: relative;
+        line-height: 1.7;
+        white-space: nowrap;
+        @include user-select(none);
+        @include transition(all 200ms ease-in-out);
+        
+        &:before{
+            content: "";
+            position: absolute;
+            top: 1px; left: 0;
+            display: inline-block;
+            background-color: $white;
+            border: 1px solid $input-border;
+            border-radius: $border-radius-base;
+            margin-right: em(10px);
+            width: 1.4em; height: 1.4em;
+            @include transition(all 200ms ease-in-out);
+        }
+        &:after{
+            position: absolute;
+            top: 0.22em; left: 0.35em;
+            display: inline-block;
+            font-size: 0.8em;
+            width: 0.9em; height: 0.9em;
+            font-family: 'themify';
+            @include transition(all 200ms ease-in-out);
+        }
+    }
+}

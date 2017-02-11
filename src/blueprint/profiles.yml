@@ -1,0 +1,30 @@
+name: Perfiles
+class: App\Profile
+storage: perfil
+admin: true
+icon: ti-id-badge
+fields:
+  id:
+    name: ID
+    type: id
+    list: false
+  name:
+    name: Nombre
+    type: text
+    required: true
+  is_admin:
+    name: ¿Es administrador?
+    type: checkbox
+  has_panel:
+    name: ¿Tiene acceso al panel?
+    type: checkbox
+  created_at:
+    name: Creado
+    type: timestamp
+    readonly: true
+    mobile: false
+  updated_at:
+    name: Modificado
+    type: timestamp
+    list: false
+    readonly: true
