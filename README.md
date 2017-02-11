@@ -27,13 +27,19 @@ Right now this project is only on GitHub and to use it you need to add the next 
 
 In the require section add:
 ```json
-"beebmx/panel": "^2.0",
+"beebmx/panel": "^2.0"
 ```
 
 Add the Service Provider in the file `config/app.php`:
 
 ```php
 Beebmx\Panel\ServiceProvider::class,
+```
+
+Then you need to run the next command line:
+
+```sh
+composer require beebmx/panel
 ```
 
 

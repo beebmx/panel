@@ -29,5 +29,5 @@
         "php artisan vendor:publish --provider=\"Beebmx\\Panel\\ServiceProvider\" --tag=config",
         "composer dump-autoload"
     ],
-    "minimum-stability" : "stable"
+    "minimum-stability" : "dev"
 }
