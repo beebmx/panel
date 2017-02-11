@@ -31,7 +31,7 @@ Right now this project is only on GitHub and to use it you need to add the next 
 
 In the require section add:
 ```json
-"beebmx/panel": "^2.0.0"
+"beebmx/panel": "2.0.*"
 ```
 
 Then you need to run the next command line:
