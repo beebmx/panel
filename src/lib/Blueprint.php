@@ -51,7 +51,8 @@ class Blueprint{
                 $this->url = url($this->model['url']);
             break;
             default:
-                $this->url = url(config('panel.prefix').'/page/'.File::name($file));
+                //$this->url = url(config('panel.prefix').'/page/'.File::name($file));
+                $this->url = File::name($file);
         }
         /*
         if ($this->class) {

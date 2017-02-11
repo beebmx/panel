@@ -15,6 +15,8 @@ class BaseField{
     
     public $required;
     public $unique;
+    public $readonly;
+    public $placeholder;
     public $opts;
     public $query;
     public $fields;
@@ -49,6 +51,8 @@ class BaseField{
         
         $this->required = isset($options['required']) ? $options['required'] : false;
         $this->unique = isset($options['unique']) ? $options['unique'] : false;
+        $this->readonly = isset($options['readonly']) ? $options['readonly'] : false;
+        $this->placeholder = isset($options['placeholder']) ? $options['placeholder'] : false;
         $this->validate = isset($options['validate']) ? $options['validate'] : false;
         $this->opts = isset($options['options']) ? $options['options'] : false;
         $this->query = isset($options['query']) ? $options['query'] : false;
@@ -59,14 +63,6 @@ class BaseField{
         $this->attr = isset($options['attr']) ? $options['attr'] : false;
         
         $this->error = $error ? $error : false;
-        /*
-        if (isset($options['label'])) $this->label = $options['label'];
-        if (isset($options['placeholder'])) $this->placeholder = $options['placeholder'];
-        if (isset($options['value'])) $this->value = $options['value'];
-        if (isset($options['readOnly'])) $this->readOnly = $options['readOnly'] ? true : false;
-        if (isset($options['disabled'])) $this->disabled = $options['disabled'] ? true : false;
-        if (isset($options['hasError'])) $this->hasError = $options['hasError'] ? true : false;
-        */
     }
     
     public function cell(){

@@ -32,7 +32,11 @@
             @foreach($models as $model)
                 @if (!$model->isChildren())
         	<li class="pushy-link">
+        	    @if ($model->type === 'external')
         	    <a href="{{ $model->url }}">
+                @else
+                <a href="{{ url(config('panel.prefix').'/page/'.$model->url) }}">
+                @endif
                 	<div class="link">
                     	<div class="link-icon"><i class="{{ $model->icon }}"></i></div>
                 	    <div class="link-text">{{ $model->name }}</div>
@@ -82,7 +86,11 @@
             	@foreach($models as $model)
             	    @if (!$model->isChildren())
             	<li>
+            	    @if ($model->type === 'external')
             	    <a href="{{ $model->url }}">
+                    @else
+                    <a href="{{ url(config('panel.prefix').'/page/'.$model->url) }}">
+                    @endif
                     	<div class="link">
                         	<div class="link-icon"><i class="{{ $model->icon }}"></i></div>
                     	    <div class="link-text">{{ $model->name }}</div>

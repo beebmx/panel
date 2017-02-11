@@ -17,20 +17,14 @@ class InputField extends BaseField{
         ];
         $input->addClass('input');
         $input->addClass('form-control');
-        /*
-        if(!is_array($this->value())) {
-        $input->val(html($this->value(), false));
-        }
         
-        
-        if($this->readonly()) {
-        $input->attr('tabindex', '-1');
-        $input->addClass('input-is-readonly');
+        if($this->readonly) {
+            $input->attr['readonly'] = 'readonly';
         }
-        */
+        if($this->placeholder) {
+            $input->attr['placeholder'] = $this->placeholder;
+        }
         
         return $input;
-    }
-    
-    
+    }   
 }

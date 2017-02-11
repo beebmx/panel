@@ -5,7 +5,7 @@ beebmx/panel is a CMS (Content Management System) build for kickoff simple and c
 beebmx/panel take your own structure made in Laravel Eloquent ORM and will process all the information in CRUD (create, read, update and delete) form easy as pie.
 
 - [Requirements](https://github.com/beebmx/panel#requirements)
-- [Introduction](https://github.com/beebmx/panel#installation)
+- [Installation](https://github.com/beebmx/panel#installation)
 - [Blueprint example](https://github.com/beebmx/panel#blueprint)
 - [Wiki](https://github.com/beebmx/panel/wiki)
 
