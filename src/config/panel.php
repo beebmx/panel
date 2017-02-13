@@ -3,15 +3,14 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | URL Admin
+    | Panel version
     |--------------------------------------------------------------------------
     |
-    | Prefix of the Panel Administrator.
-    | Default is 'panel'
+    | Specified the version of the current panel administration
     |
     */
     
-    'version' => '2.0.2',
+    'version' => '2.0.3',
     /*
     |--------------------------------------------------------------------------
     | URL Admin

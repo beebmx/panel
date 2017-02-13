@@ -24,9 +24,7 @@ var Panel = function() {
 		});
     }
     function getWindowSize(){
-        //$('nav.sidebar').height($( document ).height());
         $(window).resize(function() {
-            //$('nav.sidebar').height($( document ).height());
             if ($(window).width() > 992){
                 $('body.beebmx-panel').removeClass('pushy-open-left');
             }

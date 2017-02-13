@@ -6,6 +6,7 @@ use Beebmx\Panel\Brick;
 use Beebmx\Panel\Fields\BaseField;
 
 class ColorField extends BaseField{
+    public $rule = 'nullable|regex:/^#[a-fA-F0-9]{6}$/u';
     public function cell(){
         $cell = new Brick('span', false);
         if (!empty($this->value)){

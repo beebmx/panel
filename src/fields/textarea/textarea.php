@@ -6,7 +6,7 @@ use Beebmx\Panel\Brick;
 use Beebmx\Panel\Fields\BaseField;
 
 class TextareaField extends BaseField{
-    
+    public $rule = 'nullable|string';
     public function cell(){
         $limit = isset($this->opts['limit']) ? $this->opts['limit'] : 20;
         $cell = new Brick('span', str_limit(strip_tags($this->value), $limit));

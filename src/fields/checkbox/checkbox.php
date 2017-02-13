@@ -7,6 +7,7 @@ use Beebmx\Panel\Fields\InputField;
 
 class CheckboxField extends InputField{
     public $type = 'checkbox';
+    public $rule = 'nullable|boolean';
     
     public function cell(){        
         $i = new Brick('i');
@@ -26,7 +27,7 @@ class CheckboxField extends InputField{
         if ($this->value){
             $input->attr = [
                 'type'  => $this->type,
-                'value' => 'true',
+                'value' => '1',
                 'id'    => $this->id,
                 'name'  => $this->name,
                 'checked' => 'checked'
@@ -34,7 +35,7 @@ class CheckboxField extends InputField{
         }else{
             $input->attr = [
                 'type'  => $this->type,
-                'value' => 'true',
+                'value' => '1',
                 'id'    => $this->id,
                 'name'  => $this->name
             ];

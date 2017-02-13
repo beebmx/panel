@@ -200,6 +200,9 @@ class BaseField{
 		    $this->rules[] = 'unique:'.$this->unique.','.$this->id;
 	    }
 	    if ($this->rule){
+    	    if ($this->required){
+        	    $this->rule = str_replace("nullable", "", $this->rule);
+    	    }
 		    $this->rules[] = $this->rule;
 	    }
 	    if ($this->validate){

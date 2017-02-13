@@ -6,6 +6,7 @@ use Beebmx\Panel\Brick;
 use Beebmx\Panel\Fields\BaseField;
 
 class StructureField extends BaseField{
+    public $rule = 'nullable|json';
     public function input(){
         $content = new Brick('div');
         

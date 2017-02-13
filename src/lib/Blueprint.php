@@ -54,14 +54,6 @@ class Blueprint{
                 //$this->url = url(config('panel.prefix').'/page/'.File::name($file));
                 $this->url = File::name($file);
         }
-        /*
-        if ($this->class) {
-            //$this->url = File::name($file);
-            $this->url = url(config('panel.prefix').'/page/'.File::name($file));
-        }else {
-            $this->url = url($this->model['url']);
-        }
-        */
         $this->fields = isset($this->model['fields']) ? $this->model['fields'] : false;
         
         $this->files = isset($this->model['files']) ? $this->model['files'] : false;
