@@ -13,7 +13,7 @@ class CreateBlueprint extends Command
      *
      * @var string
      */
-    protected $signature = 'make:blueprint {name}';
+    protected $signature = 'panel:blueprint {name}';
 
     /**
      * The console command description.

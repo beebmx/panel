@@ -18,7 +18,6 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 |
 */
 class ServiceProvider extends BaseServiceProvider{
-    
     public function boot()
     {
         $this->publishes([
@@ -60,7 +59,9 @@ class ServiceProvider extends BaseServiceProvider{
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Commands\CreateBlueprint::class,
-                Commands\CreateField::class
+                Commands\CreateField::class,
+                Commands\LoadFiles::class,
+                Commands\ShowVersion::class,
             ]);
         }
     }
@@ -71,5 +72,4 @@ class ServiceProvider extends BaseServiceProvider{
             __DIR__.'/config/panel.php', 'panel'
         );
     }
-    
 }

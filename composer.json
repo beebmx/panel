@@ -19,18 +19,20 @@
     },
     "autoload": {
         "classmap" : [
-            "src/lib",
-            "src/controllers",
             "src/commands",
-            "src/templates"
+            "src/controllers",
+            "src/fields",
+            "src/lib",
+            "src/middleware",
+            "src/templates",
+            "src/views"
         ],
         "psr-4" : {
             "Beebmx\\Panel\\" : "src"
         }
     },
     "post-update-cmd": [
-        "php artisan vendor:publish --provider=\"Beebmx\\Panel\\ServiceProvider\" --tag=config",
-        "composer dump-autoload"
+        "php artisan vendor:publish --provider=\"Beebmx\\Panel\\ServiceProvider\" --tag=config"
     ],
     "minimum-stability" : "stable"
 }

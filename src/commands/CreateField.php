@@ -13,7 +13,7 @@ class CreateField extends Command
      *
      * @var string
      */
-    protected $signature = 'make:field {name}';
+    protected $signature = 'panel:field {name}';
 
     /**
      * The console command description.

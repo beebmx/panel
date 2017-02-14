@@ -101,10 +101,10 @@ body.beebmx-panel{
                 .link-icon, .link-text{
                     display: table-cell;
                     vertical-align: middle;
-                    padding: 8px 13px;
                 }
                 .link-icon{
                     font-size: 1.2em;
+                    padding: 8px 13px;
                     i{
                         vertical-align: middle;
                     }
@@ -114,6 +114,7 @@ body.beebmx-panel{
                 }
                 .link-text{
                     width: 100%;
+                    padding: 8px 13px 4px 0;
                     padding-left: 0;
                     text-align: left;
                     color: $text-hover;
