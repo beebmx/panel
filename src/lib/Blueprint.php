@@ -40,7 +40,7 @@ class Blueprint{
         $this->name = $this->model['name'];
         $this->admin = isset($this->model['admin']) ? $this->model['admin'] : false;
         $this->storage = isset($this->model['storage']) ? $this->model['storage'] : '';
-        $this->icon = isset($this->model['icon']) ? $this->model['icon'] : 'ti-view-list';
+        $this->icon = isset($this->model['icon']) ? $this->model['icon'] : '<i class="material-icons">view_headline</i>';
         $this->sidebarOrder = isset($this->model['sidebarOrder']) ? $this->model['sidebarOrder'] : 0;
         $this->paginate = isset($this->model['paginate']) ? $this->model['paginate'] : config('panel.paginate');
         $this->orderBy = isset($this->model['orderBy']) ? $this->model['orderBy'] : 'id';

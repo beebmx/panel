@@ -9,13 +9,14 @@ class CheckboxField extends InputField{
     public $type = 'checkbox';
     public $rule = 'nullable|boolean';
     
-    public function cell(){        
-        $i = new Brick('i');
+    public function cell(){
         if ((int)$this->value){
-            $i->addClass('ti-check');
+            $i = new Brick('i', 'check');
         }else{
-            $i->addClass('ti-close');
+            $i = new Brick('i', 'close');
         }
+        $i->addClass('material-icons');
+        $i->addClass('field-checkbox');
         $cell = new Brick('div');
         $cell->addClass('text-center');
         $cell->append($i);
@@ -66,12 +67,13 @@ class CheckboxField extends InputField{
     }
     
     public function inputShow() {
-        $i = new Brick('i');
         if ((int)$this->value){
-            $i->addClass('ti-check');
+            $i = new Brick('i', 'check');
         }else{
-            $i->addClass('ti-close');
+            $i = new Brick('i', 'close');
         }
+        $i->addClass('material-icons');
+        $i->addClass('field-checkbox');
         $cell = new Brick('div');
         $cell->append($i);
         return $cell;

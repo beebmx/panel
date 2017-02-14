@@ -2,7 +2,7 @@ name: Perfiles
 class: App\Profile
 storage: perfil
 admin: true
-icon: ti-id-badge
+icon: <i class="material-icons">supervisor_account</i>
 fields:
   id:
     name: ID

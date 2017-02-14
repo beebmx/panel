@@ -100,10 +100,17 @@ body.beebmx-panel{
                 display: table-row;
                 .link-icon, .link-text{
                     display: table-cell;
+                    vertical-align: middle;
                     padding: 8px 13px;
                 }
                 .link-icon{
                     font-size: 1.2em;
+                    i{
+                        vertical-align: middle;
+                    }
+                    .material-icons{
+                        font-size: 20px;
+                    }
                 }
                 .link-text{
                     width: 100%;

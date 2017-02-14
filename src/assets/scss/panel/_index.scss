@@ -14,11 +14,16 @@ body.index{
         .form-group{
             &.search{
                 margin: 1.45em 0em;
+                input{
+                    border-width: 2px;
+                }
                 .btn{
-                    color: $text-color;
+                    //color: $text-color;
+                    color: $input-border;
                     background-color: $white;
-                    border: 1px solid $input-border;
-                    border-left: none;
+                    border: 2px solid $input-border;
+                    border-left: 1px solid $input-border;
+                    padding: 5px 12px;
                 }
             }
         }
@@ -48,6 +53,9 @@ body.index{
                         background-color: transparent;
                         color: $text-color;
                     }
+                    i{
+                        font-size: 16px;
+                    }
                 }
             }
             .btn-group, .dropdown{
@@ -55,6 +63,9 @@ body.index{
                     //background-color: $gray-lighter;
                     border-color: darken($gray-lighter, 10%);
                     color: $brand-primary;
+                    i{
+                        font-size: 16px;
+                    }
                     &:hover{
                         background-color: $brand-primary;
                         border-color: $gray-lighter;
@@ -63,10 +74,12 @@ body.index{
                 }
             }
             .dropdown{
+                text-align: right;
                 >.btn{
-                    padding: 5px 10px;
                     font-size: 0.85em;
                     line-height: 1.5;
+                    margin: 0 1em;
+                    padding: 4px 5px 0;
                     &:focus{
                         outline: none;
                         background-color: $brand-primary;
@@ -81,12 +94,12 @@ body.index{
                         position: absolute;
                     }
                     &:before{
-                        top: -9px; right: 20px;
+                        top: -9px; right: 12px;
                         //@include triangle(18px, $input-border, up);
                         @include triangle(up, $input-border, 18px);
                     }
                     &:after{
-                        top: -8px; right: 21px;
+                        top: -8px; right: 13px;
                         //@include triangle(16px, $white, up);
                         @include triangle(up, $white, 16px);
                     }
@@ -111,6 +124,9 @@ body.index{
                 padding-right: 1.5em;
             }
         }
+    }
+    i.field-checkbox{
+        font-size: 18px;
     }
     .panel-paginator{
         text-align: center;

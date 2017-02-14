@@ -47,7 +47,7 @@ Beebmx\Panel\ServiceProvider::class,
 ```
 
 
-Add in the file `config/Http/Kernel.php`:
+Add in the file `app/Http/Kernel.php`:
 
 ```php
 'guest.panel' => \Beebmx\Panel\RedirectIfAuthenticated::class,
@@ -135,6 +135,6 @@ fields:
 All the Blueprints should be in the `app/Panel/Blueprints` directory.
 
 ##Roadmap
-- Console functionality for:
-    - `Blueprint`
-    - `Field`
+- Search information on list view
+- Blueprints reports
+- Blueprints import/export functionality

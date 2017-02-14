@@ -1,0 +1,10 @@
+name: Name
+class: App\Name
+storage: nstorage
+admin: true
+icon: <i class="material-icons">view_headline</i>
+fields:
+  id:
+    name: ID
+    type: id
+files: false

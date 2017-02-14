@@ -73,8 +73,8 @@ class StructureField extends BaseField{
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary save-structure">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary save-structure">Guardar</button>
                     </div>
                 </div>
             </div>

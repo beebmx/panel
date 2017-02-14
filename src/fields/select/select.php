@@ -16,8 +16,15 @@ class SelectField extends BaseField{
             }
         }else if(strtolower($this->opts) === 'class'){
             $model = new Model($this->query['class']);
-            $find = $model->find($this->query['value'], $this->value);
-            return $find->{ $this->query['text'] };
+            $cv = isset($this->query['value']) ? $this->query['value'] : 'id';
+            $ct = isset($this->query['text']) ? $this->query['text'] : 'name';
+            $separator = isset($this->query['separator']) ? $this->query['separator'] : '|';
+            $str = [];
+            $find = $model->find($cv, $this->value);
+            foreach(explode($separator, $ct) as $v){
+                $str[] = $find->{$v};
+            }
+            return implode(' ', $str);
         }else if(strtolower($this->opts) === 'file'){
             return $this->value;
         }
@@ -76,9 +83,18 @@ class SelectField extends BaseField{
             }
         }else if(strtolower($this->opts) === 'class'){
             $model = new Model($this->query['class']);
+            $cv = isset($this->query['value']) ? $this->query['value'] : 'id';
+            $ct = isset($this->query['text']) ? $this->query['text'] : 'name';
+            $separator = isset($this->query['separator']) ? $this->query['separator'] : '|';
+            $str = [];
+            
             foreach($model->all() as $field){
-                $options[] = ['value' => $field->{ $this->query['value'] },
-                              'text'  => $field->{ $this->query['text'] }];
+                $str = [];
+                foreach(explode($separator, $ct) as $v){
+                    $str[] = $field->{$v};
+                }
+                $options[] = ['value' => $field->{ $cv },
+                              'text'  => implode(' ', $str)];
             }
         }
         else if(strtolower($this->opts) === 'file'){

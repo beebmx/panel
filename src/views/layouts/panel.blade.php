@@ -10,11 +10,8 @@
 		<meta name="description" content="" />
 		<meta name="author" content="Beeb.mx" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-
-		{{--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">--}}
-		{{--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">--}}
-		{{--<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">--}}
-		{{--<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">--}}
+        
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('panel_assets/css/panel.min.css') }}">
@@ -38,7 +35,7 @@
                 <a href="{{ url(config('panel.prefix').'/page/'.$model->url) }}">
                 @endif
                 	<div class="link">
-                    	<div class="link-icon"><i class="{{ $model->icon }}"></i></div>
+                    	<div class="link-icon">{!! $model->icon !!}</div>
                 	    <div class="link-text">{{ $model->name }}</div>
                 	</div>
                 </a>
@@ -50,7 +47,7 @@
             	    {{ csrf_field() }}
             	    <button type="submit">
                     	<div class="link">
-                        	<div class="link-icon"><i class="ti-arrow-circle-right"></i></div>
+                        	<div class="link-icon"><i class="material-icons">chevron_right</i></div>
                     	    <div class="link-text">Cerrar sesión</div>
                     	</div>
             	    </button>
@@ -64,10 +61,10 @@
         	<div class="container-fluid">
             	<div class="row">
                 	<div class="hidden-md hidden-lg col-xs-2">
-                    	<a class="menu-btn" href="#"><i class="ti-align-justify"></i></a>
+                    	<a class="menu-btn" href="#"><i class="material-icons">view_headline</i></a>
                 	</div>
                 	<div class="hidden-xs hidden-sm col-xs-2">
-                    	<a class="menu-bar" href="#"><i class="ti-align-justify"></i></a>
+                    	<a class="menu-bar" href="#"><i class="material-icons">view_headline</i></a>
                 	</div>
                 	<div class="col-xs-8">
                     	<div class="title">{{ config('panel.name') }}</div>
@@ -92,7 +89,7 @@
                     <a href="{{ url(config('panel.prefix').'/page/'.$model->url) }}">
                     @endif
                     	<div class="link">
-                        	<div class="link-icon"><i class="{{ $model->icon }}"></i></div>
+                        	<div class="link-icon">{!! $model->icon !!}</div>
                     	    <div class="link-text">{{ $model->name }}</div>
                     	</div>
                     </a>
@@ -104,7 +101,7 @@
                 	    {{ csrf_field() }}
                 	    <button type="submit">
                         	<div class="link">
-                            	<div class="link-icon"><i class="ti-arrow-circle-right"></i></div>
+                            	<div class="link-icon"><i class="material-icons">chevron_right</i></div>
                         	    <div class="link-text">Cerrar sesión</div>
                         	</div>
                 	    </button>

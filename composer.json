@@ -20,7 +20,9 @@
     "autoload": {
         "classmap" : [
             "src/lib",
-            "src/controllers"
+            "src/controllers",
+            "src/commands",
+            "src/templates"
         ],
         "psr-4" : {
             "Beebmx\\Panel\\" : "src"

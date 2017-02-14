@@ -2,7 +2,7 @@ name: Usuarios
 class: App\User
 storage: usuario
 admin: true
-icon: ti-user
+icon: <i class="material-icons">account_circle</i>
 fields:
   id:
     name: ID
@@ -19,9 +19,6 @@ fields:
     options: class
     query:
       class: App\Profile
-      value: id
-      text: name
-      separator: |
   password:
     name: Contraseña
     type: password
@@ -34,5 +31,5 @@ fields:
     name: Apellidos
     type: text
     list: true
-    hidden_xs: true
+    mobile: false
 files: true

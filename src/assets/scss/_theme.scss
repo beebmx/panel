@@ -33,11 +33,11 @@
         &:checked{
             +label{
                 &:before{
-                    border-width: 0.7em;
+                    border-width: 0.72em;
                     border-color: $brand-primary;
                 }
                 &:after{
-                   content: "\e64c";
+                   content: "check";
                    color: $white;
                    //
                 }
@@ -69,11 +69,15 @@
         }
         &:after{
             position: absolute;
-            top: 0.22em; left: 0.35em;
+            //top: 0.22em; left: 0.35em;
+            top: 0; left: 0.25em;
             display: inline-block;
-            font-size: 0.8em;
-            width: 0.9em; height: 0.9em;
-            font-family: 'themify';
+            //font-size: 0.8em;
+            //width: 0.9em; height: 0.9em;
+            font-size: 1em;
+            width: 1em; height: 1em;
+            font-family: 'Material Icons';
+            text-rendering: optimizelegibility;
             @include transition(all 200ms ease-in-out);
         }
     }

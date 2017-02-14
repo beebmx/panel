@@ -59,9 +59,9 @@
 						</form>
                         <div class="hidden-xs hidden-sm btn-group btn-group-sm" role="group" aria-label="...">
                             @if ($parent === null)
-                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField]) }}"><i class="ti-eye"></i></a>
+                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField]) }}"><i class="material-icons">pageview</i></a>
                             @else
-                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField]) }}"><i class="ti-eye"></i></a>
+                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField]) }}"><i class="material-icons">pageview</i></a>
                             @endif
                             
                             
@@ -69,20 +69,19 @@
                             
                             @if ($model->update)
                                 @if ($parent === null)
-                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField].'/edit') }}"><i class="ti-pencil"></i></a>
+                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField].'/edit') }}"><i class="material-icons">mode_edit</i></a>
                                 @else
-                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField].'/edit') }}"><i class="ti-pencil"></i></a>
+                            <a class="btn btn-default" href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField].'/edit') }}"><i class="material-icons">mode_edit</i></a>
                                 @endif
                             @endif
                             @if ($model->delete)
-                            <a class="btn btn-default delete-data" href="#"><i class="ti-trash"></i></a>
+                            <a class="btn btn-default delete-data" href="#"><i class="material-icons">delete</i></a>
                             @endif
                         </div>
                         
                         <div class="hidden-md hidden-lg dropdown">
                             <a class="btn btn-default" id="controls" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti-settings"></i>
-                                <span class="caret"></span>
+                                <i class="material-icons">settings</i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="controls">
                                 @if ($parent === null)

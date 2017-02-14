@@ -57,6 +57,12 @@ class ServiceProvider extends BaseServiceProvider{
             }
         });
         
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\CreateBlueprint::class,
+                Commands\CreateField::class
+            ]);
+        }
     }
     
     public function register()
