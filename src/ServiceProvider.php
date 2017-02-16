@@ -41,6 +41,7 @@ class ServiceProvider extends BaseServiceProvider{
         
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->loadViewsFrom(__DIR__ . '/views', 'panel');
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'panel');
         
         if (! $this->app->routesAreCached()) {
             require __DIR__.'/routes/panel.php';

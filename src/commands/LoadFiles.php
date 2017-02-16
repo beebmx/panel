@@ -51,20 +51,19 @@ class LoadFiles extends Command
                     '--tag' => 'config',
                     '--force' => true,
                 ]);
-                $this->info('Files was force to be loaded.');
+                $this->info('Files was forced to be loaded.');
             }
-            $this->composer->dumpAutoloads();
         }else{
             Artisan::call('vendor:publish', [
                 '--provider' => 'Beebmx\Panel\ServiceProvider',
                 '--tag' => 'config',
                 '--force' => $force ? true : false,
             ]);
-            $this->composer->dumpAutoloads();
             if ($force) {
-                $this->info('Files was force to be loaded.');
+                $this->info('Files was forced to be loaded.');
             }
         }
+        $this->composer->dumpAutoloads();
         $this->info('Files loaded successfully.');
     }
 }

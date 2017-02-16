@@ -1,4 +1,4 @@
-@section('title', 'Formulario para captura de '.strtolower($model->name))
+@section('title', __('panel::form.title', ['title' => strtolower($model->name)]))
 @section('module', 'form')
 @extends('panel::layouts.panel')
 
@@ -33,7 +33,7 @@
         <input type="hidden" id="beebmx_panel_files_uploaded" name="files" value="[]" />
         @endif
         <div class="panel-form-submit text-center">
-            <button class="btn btn-primary">Guardar</button>
+            <button class="btn btn-primary">@lang('panel::form.save')</button>
         </div>
     </form>
     @if ($model->files)
@@ -41,7 +41,7 @@
 		<div>
 			<div class="panel-body">
 				<div class="btn btn-o btn-success fileinput-button">
-    				<i class="ti-plus"></i> <span>Agregar archivos</span>
+    				<i class="ti-plus"></i> <span>@lang('panel::form.add-files')</span>
     				<form>
     					{!! csrf_field() !!}
     					<input type="hidden" name="model" value="{{ $model->url }}" />
@@ -61,9 +61,9 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>Archivo</th>
-							<th class="hidden-xs">Tamaño</th>
-							<th>Borrar</th>
+							<th>@lang('panel::form.file')</th>
+							<th class="hidden-xs">@lang('panel::form.size')</th>
+							<th>@lang('panel::form.delete')</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -1,11 +1,11 @@
-@section('title', 'Listado de '.strtolower($model->name))
+@section('title', __('panel::index.title', ['title' => strtolower($model->name)]))
 @section('module', 'index')
 @extends('panel::layouts.panel')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <h3 class="index-title padding">Listado de {{ $model->name }}</h3>
+        <h3 class="index-title padding">@lang('panel::index.title', ['title' => strtolower($model->name)])</h3>
     </div>
 </div>
 <div class="container-fluid panel-container bg-gray">
@@ -13,9 +13,9 @@
         <div class="col-sm-3">
             @if ($model->create)
                 @if ($parent === null)
-            <a class="btn btn-primary btn-block create" href="{{ url(config('panel.prefix').'/page/'.$model->url).'/create' }}">Nuevo registro</a>
+            <a class="btn btn-primary btn-block create" href="{{ url(config('panel.prefix').'/page/'.$model->url).'/create' }}">@lang('panel::index.new')</a>
                 @else
-            <a class="btn btn-primary btn-block create" href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url).'/create' }}">Nuevo registro</a>
+            <a class="btn btn-primary btn-block create" href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url).'/create' }}">@lang('panel::index.new')</a>
                 @endif
             @endif
         </div>
@@ -23,7 +23,7 @@
             <form>
                 <div class="form-group search">
                     <div class="input-group">
-                        <input type="search" name="q" class="form-control" placeholder="Buscar">
+                        <input type="search" name="q" class="form-control" placeholder="@lang('panel::index.search')">
                         <span class="input-group-btn">
                             <button type="submit" class="btn"><span class="fa fa-search"></span></button>
                         </span>
@@ -85,19 +85,19 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="controls">
                                 @if ($parent === null)
-                                <li><a href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField]) }}">Ver</a></li>
+                                <li><a href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField]) }}">@lang('panel::index.view')</a></li>
                                 @else
-                                <li><a href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField]) }}">Ver</a></li>
+                                <li><a href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField]) }}">@lang('panel::index.view')</a></li>
                                 @endif
                                 @if ($model->update)
                                     @if ($parent === null)
-                                <li><a href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField].'/edit') }}">Editar</a></li>
+                                <li><a href="{{ url(config('panel.prefix').'/page/'.$model->url.'/'.$data[$index][$idField].'/edit') }}">@lang('panel::index.update')</a></li>
                                     @else
-                                <li><a href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField].'/edit') }}">Editar</a></li>
+                                <li><a href="{{ url(config('panel.prefix').'/page/'.$parent.'/'.$parent_id.'/'.$model->url.'/'.$data[$index][$idField].'/edit') }}">@lang('panel::index.update')</a></li>
                                     @endif
                                 @endif
                                 @if ($model->delete)
-                                <li><a class="delete-data" href="#">Eliminar</a></li>
+                                <li><a class="delete-data" href="#">@lang('panel::index.delete')</a></li>
                                 @endif
                             </ul>
                         </div>

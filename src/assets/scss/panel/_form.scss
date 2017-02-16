@@ -100,7 +100,7 @@ body.form{
         margin-bottom: 0;
         thead tr{
             th:last-child{
-                width: 5em;
+                width: 5.5em;
             }
         }
         tbody tr{
@@ -109,6 +109,9 @@ body.form{
                 a{
                     padding: 0em 0.45em;
                     text-decoration: none;
+                    i{
+                        font-size: 16px;
+                    }
                     &:focus{
                         outline: none;
                     }

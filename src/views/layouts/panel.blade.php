@@ -48,7 +48,7 @@
             	    <button type="submit">
                     	<div class="link">
                         	<div class="link-icon"><i class="material-icons">chevron_right</i></div>
-                    	    <div class="link-text">Cerrar sesión</div>
+                    	    <div class="link-text">@lang('panel::panel.logout')</div>
                     	</div>
             	    </button>
         	    </form>
@@ -102,7 +102,7 @@
                 	    <button type="submit">
                         	<div class="link">
                             	<div class="link-icon"><i class="material-icons">chevron_right</i></div>
-                        	    <div class="link-text">Cerrar sesión</div>
+                        	    <div class="link-text">@lang('panel::panel.logout')</div>
                         	</div>
                 	    </button>
             	    </form>

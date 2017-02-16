@@ -6,6 +6,9 @@ beebmx/panel take your own structure made in Laravel Eloquent ORM and will proce
 
 - [Requirements](https://github.com/beebmx/panel#requirements)
 - [Installation](https://github.com/beebmx/panel#installation)
+- [Publish Panel](https://github.com/beebmx/panel#publish-panel)
+- [Database](https://github.com/beebmx/panel#database)
+- [Storage](https://github.com/beebmx/panel#storage)
 - [Blueprint example](https://github.com/beebmx/panel#blueprint)
 - [Wiki](https://github.com/beebmx/panel/wiki)
 
@@ -80,25 +83,55 @@ if ($request->is(config('panel.prefix')) || $request->is(config('panel.prefix').
 }
 ```
 
-Then you need to copy panel files in the right place with the next command line:
+## Publish Panel
+To publish the files required to view the panel, you can to manually or use the command line created for that:
+
+### Manually
+
+It's necessary to export all the files to initialize the configuration of the Panel with the next command line:
 
 ```sh
 php artisan vendor:publish --provider="Beebmx\Panel\ServiceProvider" --tag=config
 ```
 
-After you need to update the database with the new configuration:
+If you are going to use the seeds created out of the box, you need to make them visible to the project with:
+
+```sh
+composer dump-autoload
+```
+
+### Command Line
+
+If you just want to let Panel to do all the work, you just need to run:
+
+```sh
+php artisan panel:files
+```
+
+And that's all you need to do.
+If you want to recreate all the original files again, just run:
+```sh
+php artisan panel:files --force
+```
+
+## Database
+
+By default the `Panel` use the basic structure of the Laravel Auth with a few updates on the tables (users and profiles tables are the convention for this package).
+
+Just run the migrate to install the panel structure with:
 
 ```sh
 php artisan migrate
 ```
 
-By default this `Panel` use a basic configuration for users and profiles structure.
-It also have seeds out of the box and you can use it with the next command lines:
+Out of the box the package has seeds that you can use it with the next command lines:
 
 ```sh
 php artisan db:seed --class=ProfilesTableSeeder
 php artisan db:seed --class=UsersTableSeeder
 ```
+
+## Storage
 
 This `Panel` use Laravel structure, for files storage, be sure than you run this command line before you upload anything:
 
@@ -106,7 +139,7 @@ This `Panel` use Laravel structure, for files storage, be sure than you run this
 php artisan storage:link
 ```
 
-##Blueprint
+## Blueprint
 The CMS works with files `.yml` than is used for set the instructions for the `CRUD` system.
 The typical file is represented by the next example:
 

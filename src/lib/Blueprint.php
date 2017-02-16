@@ -228,6 +228,16 @@ class Blueprint{
         return $this->fields[$field]['type'];
     }
     
+    private function getFullNamespace($filename) {
+        $lines = file($filename);
+        $regx = preg_grep('/^namespace /', $lines);
+        $namespaceLine = array_shift($regx);
+        $match = array();
+        preg_match('/^namespace (.*);$/', $namespaceLine, $match);
+        $fullNamespace = array_pop($match);
+        return $fullNamespace;
+    }
+    
     private function getClassField($type){
         $type = ucwords($type);
         if (class_exists('Beebmx\\Panel\\Fields\\' . $type . 'Field')){

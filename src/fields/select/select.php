@@ -76,7 +76,7 @@ class SelectField extends BaseField{
         $options = [];
         if(is_array($this->opts)) {
             $options[] = ['value' => ' ',
-                          'text'  => ' Seleccione una opción'];
+                          'text'  => __('panel::form.select-option')];
             foreach($this->opts as $value => $text ){
                 $options[] = ['value' => $value,
                               'text'  => $text];
@@ -99,7 +99,7 @@ class SelectField extends BaseField{
         }
         else if(strtolower($this->opts) === 'file'){
             $options[] = ['value' => ' ',
-                          'text'  => ' Seleccione una opción'];
+                          'text'  => __('panel::form.select-option')];
         }
         return collect($options)->sortBy('text');
     }

@@ -2,7 +2,7 @@ name: Usuarios
 class: App\User
 storage: usuario
 admin: true
-icon: <i class="material-icons">account_circle</i>
+icon: <i class="material-icons">person</i>
 fields:
   id:
     name: ID

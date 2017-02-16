@@ -4,7 +4,7 @@
 @import "bootstrap/mixins";
 @import "mixins";
 @import "bootstrap";
-@import "themify-icons";
+//@import "themify-icons";
 @import "theme";
 
 body.login{
@@ -16,6 +16,13 @@ body.login{
         padding: 0 10px;
         img{
             max-width: 90px;
+        }
+    }
+    .input-icon{
+        i.material-icons{
+            font-size: 18px;
+            line-height: 1.9;
+            padding: 0;
         }
     }
     .panel-login{

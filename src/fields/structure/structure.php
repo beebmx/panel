@@ -10,7 +10,7 @@ class StructureField extends BaseField{
     public function input(){
         $content = new Brick('div');
         
-        $btn = new Brick('a', '<i class="fa fa-plus-circle"></i> Agregar', [
+        $btn = new Brick('a', '<i class="fa fa-plus-circle"></i> '.__('panel::form.add'), [
             'href' => '#',
             'data-toggle' => 'modal',
             'data-target' => '#modal-'.$this->id,
@@ -73,8 +73,8 @@ class StructureField extends BaseField{
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary save-structure">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.__('panel::form.close').'</button>
+                        <button type="submit" class="btn btn-primary save-structure">'.__('panel::form.save').'</button>
                     </div>
                 </div>
             </div>

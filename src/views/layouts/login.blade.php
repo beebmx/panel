@@ -11,8 +11,7 @@
 		<meta name="author" content="Beeb.mx" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 		
-		{{--<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">--}}
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('panel_assets/css/login.min.css') }}">
 	</head>

@@ -89,15 +89,15 @@ var Structure = function() {
                 });
                 cell = row.insertCell(-1);
                 edit = $(document.createElement('a'));
-                edit.html('<i class="ti-pencil"></i>').attr('href', '#')
+                edit.html('<i class="material-icons">mode_edit</i>').attr('href', '#')
                                                       .attr('data-toggle', 'modal')
                                                       .attr('data-target', '#modal-'+id)
                                                       .data('index', i)
                                                       .data('data', JSON.stringify(e));
                 trash = $(document.createElement('a'));
-                trash.html('<i class="ti-trash"></i>').attr('href', '#')
-                                                      .addClass('element-delete')
-                                                      .data('index', i);
+                trash.html('<i class="material-icons">delete</i>').attr('href', '#')
+                                                                  .addClass('element-delete')
+                                                                  .data('index', i);
                 $(cell).append(edit);
                 $(cell).append(trash);
                 $(row).append(cell);
@@ -107,7 +107,6 @@ var Structure = function() {
                 event.preventDefault();
                 json.splice($(this).data('index'), 1);
                 field.val(JSON.stringify(json));
-                console.log(json, field, field.val());
                 writeTable(id);
             });
     }

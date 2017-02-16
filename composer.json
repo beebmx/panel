@@ -22,8 +22,10 @@
             "src/commands",
             "src/controllers",
             "src/fields",
+            "src/lang",
             "src/lib",
             "src/middleware",
+            "src/migrations",
             "src/templates",
             "src/views"
         ],

@@ -4,7 +4,9 @@ namespace Beebmx\Panel\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Composer;
 use File;
+use Artisan;
 
 class CreateField extends Command
 {
@@ -27,9 +29,11 @@ class CreateField extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Composer $composer)
     {
         parent::__construct();
+        
+        $this->composer = $composer;
     }
 
     /**
@@ -48,7 +52,10 @@ class CreateField extends Command
         if (!File::exists(app_path('Panel/Fields/'.$name.'/'.$name.'.php'))){
             $this->isDirectoryCreated(app_path('Panel/Fields/'.$name));
             File::put(app_path('Panel/Fields/'.$name.'/'.$name.'.php'), $template);  
-            $this->info('Field created successfully.'); 
+            $this->info('Field created successfully.');
+            
+            $this->composer->dumpAutoloads();
+            Artisan::call('optimize');
         }else{
             $this->error('[Error] Field already exists.'); 
         }
