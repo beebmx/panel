@@ -2,6 +2,14 @@
 @section('module', 'form')
 @extends('panel::layouts.panel')
 
+@section('css')
+
+@foreach($resource_css as $r_css)
+<link rel="stylesheet" href="{{ asset($r_css) }}">
+@endforeach
+
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -92,6 +100,11 @@
 @endsection
 
 @section('js')
+
+@foreach($resource_js as $r_js)
+<script src="{{ asset($r_js) }}"></script>
+@endforeach
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.3/tinymce.min.js"></script>
 <script>
 $(document).ready(function() {

@@ -76,13 +76,15 @@ class PanelController extends Controller{
         }
         if ($model = $this->getBlueprint($model)){
             $render = new RenderData($model, null, Session::get('errors'));
-            return view('panel::form', ['model'     => $model,
-                                        'parent_id' => $parent_id,
-                                        'parent'    => $parent,
-                                        'fields'    => $render->form(),
-                                        'modals'    => $render->modal(),
-                                        'files'     => [],
-                                        'method'    => 'post']);
+            return view('panel::form', ['model'        => $model,
+                                        'parent_id'    => $parent_id,
+                                        'parent'       => $parent,
+                                        'fields'       => $render->form(),
+                                        'modals'       => $render->modal(),
+                                        'resource_css' => $render->css(),
+                                        'resource_js'  => $render->js(),
+                                        'files'        => [],
+                                        'method'       => 'post']);
         }else{
             return response()->view('panel::error', ['error' => 404], 404);
         }
@@ -127,13 +129,15 @@ class PanelController extends Controller{
                 $record = $model->find($children_id);
             }
             $render = new RenderData($model, $record, Session::get('errors'));
-            return view('panel::view', ['model'       => $model,
-                                        'children_id' => $children_id,
-                                        'parent_id'   => $id,
-                                        'parent'      => $parent,
-                                        'fields'      => $render->view(),
-                                        'modals'    => $render->modal(),
-                                        'files'       => FilesPanel::all($model)]);
+            return view('panel::view', ['model'        => $model,
+                                        'children_id'  => $children_id,
+                                        'parent_id'    => $id,
+                                        'parent'       => $parent,
+                                        'fields'       => $render->view(),
+                                        'modals'       => $render->modal(),
+                                        'resource_css' => $render->css(),
+                                        'resource_js'  => $render->js(),
+                                        'files'        => FilesPanel::all($model)]);
         }else{
             return response()->view('panel::error', ['error' => 404], 404);
         }
@@ -152,14 +156,16 @@ class PanelController extends Controller{
                 $record = $model->find($children_id);
             }
             $render = new RenderData($model, $record, Session::get('errors'));
-            return view('panel::form', ['model'       => $model,
-                                        'children_id' => $children_id,
-                                        'parent_id'   => $id,
-                                        'parent'      => $parent,
-                                        'fields'      => $render->form(),
-                                        'modals'    => $render->modal(),
-                                        'files'       => FilesPanel::all($model),
-                                        'method'      => 'put']);
+            return view('panel::form', ['model'        => $model,
+                                        'children_id'  => $children_id,
+                                        'parent_id'    => $id,
+                                        'parent'       => $parent,
+                                        'fields'       => $render->form(),
+                                        'modals'       => $render->modal(),
+                                        'resource_css' => $render->css(),
+                                        'resource_js'  => $render->js(),
+                                        'files'        => FilesPanel::all($model),
+                                        'method'       => 'put']);
         }else{
             return response()->view('panel::error', ['error' => 404], 404);
         }

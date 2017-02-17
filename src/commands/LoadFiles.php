@@ -64,6 +64,7 @@ class LoadFiles extends Command
             }
         }
         $this->composer->dumpAutoloads();
+        Artisan::call('optimize');
         $this->info('Files loaded successfully.');
     }
 }

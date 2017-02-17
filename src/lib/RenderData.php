@@ -95,6 +95,34 @@ class RenderData{
         return $modals;
     }
     
+    public function css(){
+        $resource = [];
+        foreach($this->model->fields as $id => $field){
+            $classField = $this->getClassField($this->model->fields[$id]['type']);
+            $current = new $classField($id, $this->model->fields[$id], false);
+            if (count($current->css())) {
+                foreach($current->css() as $file){
+                    $resource[] = $file;
+                }
+            }
+        }
+        return $resource;
+    }
+    
+    public function js(){
+        $resource = [];
+        foreach($this->model->fields as $id => $field){
+            $classField = $this->getClassField($this->model->fields[$id]['type']);
+            $current = new $classField($id, $this->model->fields[$id], false);
+            if (count($current->js())) {
+                foreach($current->js() as $file){
+                    $resource[] = $file;
+                }
+            }
+        }
+        return $resource;
+    }
+        
     private function getFullNamespace($filename) {
         $lines = file($filename);
         $regx = preg_grep('/^namespace /', $lines);

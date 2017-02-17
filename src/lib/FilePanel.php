@@ -85,7 +85,8 @@ class FilePanel{
         if ($model->getId()){
             return 'resources/'.$model->storage.'/'.$model->getId();
         }else{
-            return 'resources/'.$model->storage.'/0';
+            return FilePanel::tmpPath($model);
+            //return 'resources/'.$model->storage.'/0';
         }
     }
 }

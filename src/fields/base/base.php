@@ -28,13 +28,16 @@ class BaseField{
     public $rule = false;
     public $rules;
     
+    public $js = [];
+    public $css = [];
+    
+    
     public static $recordable = true;
     public static $stored = true;
     public static $updateEmpty = true;
+    
     /*
     public $disabled = false;
-    public $readOnly = false;
-    public $hasError = false;
     */
     
     public function __construct($id, $options, $error = false, $prefix = false)
@@ -186,6 +189,14 @@ class BaseField{
     
     public function modal(){
         return false;
+    }
+    
+    public function css(){
+        return $this->css;
+    }
+    
+    public function js(){
+        return $this->js;
     }
     
     //ID is used to verify if the validation is for a new record or update record
