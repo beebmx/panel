@@ -10,7 +10,7 @@ return [
     |
     */
     
-    'version' => '2.0.7',
+    'version' => '2.0.8',
     /*
     |--------------------------------------------------------------------------
     | URL Admin
@@ -81,6 +81,18 @@ return [
     |
     */
     
-    'disk' => 'public'
+    'disk' => 'public',
+    
+    /*
+    |-----------------------------------------------------------------------------------
+    | Google Maps API Key
+    |-----------------------------------------------------------------------------------
+    |
+    | If you have need to use Geolocation Field, you required an API Key.
+    | You can obtain an API Key here: https://console.developers.google.com
+    |
+    */
+    
+    'maps_api' => env('PANEL_MAPS_API_KEY', ''),
     
 ];

@@ -117,6 +117,7 @@ $(document).ready(function() {
 Textarea.init("{{ asset('panel_assets/js/tinymce_es_MX.min.js') }}");
 Colorpicker.init();
 Structure.init();
+Geolocation.init();
 });
 </script>
 @endsection

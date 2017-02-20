@@ -43,6 +43,7 @@ class CheckboxField extends InputField{
         }
         $input->addClass('input');
         $input->addClass('form-control');
+        $input->addClass('checkbox');
         return $input;
     }
     

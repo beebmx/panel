@@ -12,4 +12,5 @@ return [
     'delete' => 'Delete',
     'add-files' => 'Add files',
     'select-option' => ' Select an option',
+    'search' => 'Search',
 ];

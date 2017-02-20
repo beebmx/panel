@@ -18,6 +18,7 @@ class Blueprint{
     public $icon;
     public $sidebarOrder;
     public $paginate;
+    private $search;
     private $orderBy;
     private $sort;
     public $url;
@@ -43,6 +44,7 @@ class Blueprint{
         $this->icon = isset($this->model['icon']) ? $this->model['icon'] : '<i class="material-icons">view_headline</i>';
         $this->sidebarOrder = isset($this->model['sidebarOrder']) ? $this->model['sidebarOrder'] : 0;
         $this->paginate = isset($this->model['paginate']) ? $this->model['paginate'] : config('panel.paginate');
+        $this->search = isset($this->model['search']) ? $this->model['search'] : 'name';
         $this->orderBy = isset($this->model['orderBy']) ? $this->model['orderBy'] : 'id';
         $this->sort = isset($this->model['sort']) ? $this->model['sort'] : 'asc';
         
@@ -74,9 +76,43 @@ class Blueprint{
         return $model::find($id);
     }
     
-    public function all(){
+    public function all($request = false){
+        $q = $request->has('q') ? $request->input('q') : false;
         $model = $this->class;
-        return $model::orderBy($this->orderBy, $this->sort)->paginate($this->paginate);
+        if (!$q) {
+            return $model::orderBy($this->orderBy, $this->sort)->paginate($this->paginate);
+        }else {
+            $search = $this->getAllSearchableFields($q);
+            $wmodel = $model::orderBy($this->orderBy, $this->sort);
+            $first = false;
+            foreach($search as $w){
+                if (!$first){
+                    $first = true;
+                    $wmodel->where($w[0], $w[1], $w[2]);
+                }else{
+                    $wmodel->orWhere($w[0], $w[1], $w[2]);
+                }
+            }
+            return $wmodel->paginate($this->paginate);
+            //return $model::where($search)->orderBy($this->orderBy, $this->sort)->paginate($this->paginate);
+        }
+    }
+    
+    public function getAllSearchableFields($q){
+        $search = [];
+        if(is_array($this->search)) {
+            $search = [];
+            foreach($this->search as $field => $option){
+                if ($option !== null) {
+                    $search[] = [$field, $option, $q];
+                } else {
+                    $search[] = [$field, 'LIKE', '%'.$q.'%'];
+                }
+            }
+        }else{
+            $search[] = [$this->search, 'LIKE', '%'.$q.'%'];
+        }
+        return $search;
     }
     
     public function allForeign($record){

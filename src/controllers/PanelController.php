@@ -27,7 +27,8 @@ class PanelController extends Controller{
         return view('panel::dashboard', []);
     }
     
-    public function index($model, $parent_id = null, $children = null){
+    public function index(Request $request, $model, $parent_id = null, $children = null){
+        $q = $request->has('q') ? $request->input('q') : false;
         $parent = null;
         if ($children !== null){
             $parent = $model;
@@ -48,7 +49,7 @@ class PanelController extends Controller{
                     $model->fields[$id]['mobile'] = isset($field['mobile']) ? $field['mobile'] : true;
                 }
                 if ($children === null){
-                    $data = $model->all();
+                    $data = $model->all($request);
                 }else{
                     $data = $model->allForeign($parent_id);
                 }
@@ -59,7 +60,8 @@ class PanelController extends Controller{
                                              'fields'    => $model->getListHeaders(),
                                              'data'      => $data,
                                              'list'      => $render->index(),
-                                             'idField'   => $model->getIdField()]);
+                                             'idField'   => $model->getIdField(),
+                                             'q'         => $q]);
             }else{
                 return response()->view('panel::error', ['error' => 401], 401);
             }

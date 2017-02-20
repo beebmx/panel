@@ -119,6 +119,21 @@ body.form{
             }
         }
     }
+    div.checkboxes-container{
+        .checkbox-inline{
+            margin-left: 0;
+            padding-left: 0;
+            width: (100% / 2);
+            @media screen and (min-width: $screen-md-min) {
+                margin-left: 10px;
+                padding-left: 20px;
+                width: auto;
+                &:first-child{
+                    padding-left: 0;
+                }
+            }
+        }
+    }
     .panel-form-submit{
         float: left;
         position: relative;

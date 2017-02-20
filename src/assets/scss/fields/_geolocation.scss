@@ -1,0 +1,20 @@
+div.map-geolocation{
+    .input-group{
+        .map-search{
+            border-bottom-left-radius: 0;
+        }
+        .map-button{
+            border-bottom-right-radius: 0;
+        }
+    }
+    .map-canvas{
+        width: 100%;
+        border-left: 2px solid $input-border;
+        border-right: 2px solid $input-border;
+    }
+    input.map{
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        
+    }
+}

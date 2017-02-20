@@ -33,6 +33,7 @@
   ],
   "private": true,
   "dependencies": {
-    "spectrum": "^1.8.0"
+    "spectrum": "^1.8.0",
+    "bootstrap-datepicker": "^1.6.4"
   }
 }

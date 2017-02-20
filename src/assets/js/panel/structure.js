@@ -22,47 +22,74 @@ var Structure = function() {
         
         $('#modal-'+id).on('show.bs.modal', function (event) {
             var modal = $(this), 
-                target = $(event.relatedTarget),
-                json = structure.val() !== '' ? JSON.parse(structure.val()) : [],
-                data = target.data('data'),
-                index = target.data('index'),
-                form = modal.find('form'),
-                save = modal.find('.save-structure'),
-                obj = {}, field,
-                action = 'new';
-            
-            if (typeof data === 'undefined'){
-                action = 'new';
-            }else{
-                action = 'edit';
-                obj = JSON.parse(data);
-                $.each(fields, function(i,f){
-                    field = modal.find('#modal-'+f);
-                    field.val(obj[f]);
-                    if (field.hasClass('textarea')){
-                        tinymce.get('modal-'+f).setContent(obj[f]);
+                target = $(event.relatedTarget);
+            if (target.length){
+                var json = structure.val() !== '' ? JSON.parse(structure.val()) : [],
+                    data = target.data('data'),
+                    index = target.data('index'),
+                    form = modal.find('form'),
+                    save = modal.find('.save-structure'),
+                    obj = {}, field, value, vjson = [],
+                    current_field, modal_action = 'new';
+                
+                if (typeof data === 'undefined'){
+                    modal_action = 'new';
+                }else{
+                    modal_action = 'edit';
+                    obj = JSON.parse(data);
+                    $.each(fields, function(i,f){
+                        field = modal.find('#modal-'+f);
+                        field.val(obj[f]);
+                        if (field.hasClass('textarea')){
+                            tinymce.get('modal-'+f).setContent(obj[f]);
+                        }
+                        if (field.hasClass('checkbox')){
+                            if (obj[f]) {
+                                $(field).prop('checked', true);
+                            }
+                        }
+                        if (modal.find('input[name="modal-'+f+'[]"]').length){
+                            $.each(obj[f], function(mci, vci){
+                                $.each(modal.find('input[name="modal-'+f+'[]"]'), function(mcj, vcj){
+                                    if (vcj.value === vci){
+                                        $(vcj).prop('checked', true);
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }
+                
+                $(save).on('click', function(evt){
+                    $(save).off('click');
+                    if (modal.find('textarea.textarea').length){
+                        tinymce.triggerSave();
                     }
+                    $.each(fields, function(i,f){
+                        current_field = modal.find('#modal-'+f);
+                        value = current_field.val();
+                        
+                        if (current_field.hasClass('checkbox')){
+                            value = current_field.is(':checked') ? 1 : 0;
+                        }
+                        if (typeof value === 'undefined'){
+                            $.each(modal.find('input[name="modal-'+f+'[]"]:checked'), function(i, vj){
+                                vjson.push($(vj).val());
+                            });
+                            value = vjson;
+                        }
+                        obj[f] = value;
+                    });
+                    if (modal_action === 'new'){
+                        json.push(obj);
+                    }else{
+                        json[index] = obj;
+                    }
+                    structure.val(JSON.stringify(json));
+                    writeTable(id);
+                    modal.modal('hide');
                 });
             }
-            
-            $(save).on('click', function(evt){
-                $(save).off('click');
-                if (modal.find('textarea.textarea').length){
-                    tinymce.triggerSave();
-                }
-                $.each(fields, function(i,f){
-                    obj[f] = modal.find('#modal-'+f).val();
-                });
-                if (action === 'new'){
-                    json.push(obj);
-                }else{
-                    json[index] = obj;
-                }
-                structure.val(JSON.stringify(json));
-                
-                writeTable(id);
-                modal.modal('hide');
-            });
         });
         
         $('#modal-'+id).on('hidden.bs.modal', function (event) {

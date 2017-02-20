@@ -12,4 +12,5 @@ return [
     'delete' => 'Borrar',
     'add-files' => 'Agregar archivos',
     'select-option' => ' Seleccione una opción',
+    'search' => 'Buscar',
 ];

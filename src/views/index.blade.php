@@ -108,7 +108,11 @@
                 @endforeach
             </tbody>
         </table>
+        @if ($q)
+        <div class="panel-paginator">{{ $data->appends(['q' => $q])->links() }}</div>
+        @else
         <div class="panel-paginator">{{ $data->links() }}</div>
+        @endif
     </div>
 </div>
 @endsection
