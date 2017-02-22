@@ -18,8 +18,7 @@ body.index{
                     border-width: 2px;
                 }
                 .btn{
-                    //color: $text-color;
-                    color: $input-border;
+                    color: $text-color;
                     background-color: $white;
                     border: 2px solid $input-border;
                     border-left: 1px solid $input-border;
@@ -95,12 +94,10 @@ body.index{
                     }
                     &:before{
                         top: -9px; right: 12px;
-                        //@include triangle(18px, $input-border, up);
                         @include triangle(up, $input-border, 18px);
                     }
                     &:after{
                         top: -8px; right: 13px;
-                        //@include triangle(16px, $white, up);
                         @include triangle(up, $white, 16px);
                     }
                 }

@@ -77,11 +77,11 @@
 					<tbody>
     					@if ($files)
 						@foreach ($files as $file)
-						<tr data-uri="{{ url($file->url()) }}" data-basename="{{ $file->basename() }}" data-mime="{{ $file->mime() }}" data-remote="true">
+						<tr data-uri="{{ $file->url() }}" data-thumb="{{ $file->thumb() }}" data-basename="{{ $file->basename() }}" data-mime="{{ $file->mime() }}" data-remote="true">
 							<td></td>
 							<td>{{ $file->basename() }}</td>
 							<td class="hidden-xs">{{ $file->size() }}</td>
-							<td><a href="#" class="btn btn-transparent btn-md row-remove"><i class="ti-trash"></i></a></td>
+							<td><a href="#" class="btn btn-transparent btn-md row-remove"><i class="material-icons">delete</i></a></td>
 						</tr>
 						@endforeach
 						@endif
@@ -99,15 +99,19 @@
 @endforeach
 @endsection
 
-@section('js')
+@section('jsrequired')
 
 @foreach($resource_js as $r_js)
 <script src="{{ asset($r_js) }}"></script>
 @endforeach
 
+@endsection
+
+@section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.3/tinymce.min.js"></script>
 <script>
 $(document).ready(function() {
+    Panel.init();
 @if ($model->files)
 	File.init({size: {{$model->maxFileSize}}});
 	if ($('select.dynamic').length){

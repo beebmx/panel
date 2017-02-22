@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        Dashboard
+        
     </div>
 </div>
 @endsection

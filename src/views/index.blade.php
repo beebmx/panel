@@ -23,9 +23,9 @@
             <form>
                 <div class="form-group search">
                     <div class="input-group">
-                        <input type="search" name="q" class="form-control" placeholder="@lang('panel::index.search')">
+                        <input type="search" name="q" class="form-control" placeholder="@lang('panel::index.search')" value="{{ $q or '' }}">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn"><span class="fa fa-search"></span></button>
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
                         </span>
                     </div>
                 </div>
@@ -121,6 +121,28 @@
 <script>
 $(document).ready(function() {
 	Panel.index();
+	$('table.table .delete-data').on('click', function(event){
+		event.preventDefault();
+		var row = $(this).closest('tr')[0],
+			text = $(row).children('td:first').html(),
+			form = $(row).find('form');
+		swal({
+			title: "@lang('panel::index.warning')",
+			text: "@lang('panel::index.warning-delete'): <strong>"+text+"</strong>?",
+			type: "warning",
+			html: true,
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "@lang('panel::index.delete')",
+			cancelButtonText: "@lang('panel::index.cancel')",
+			closeOnConfirm: false
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				form.submit();
+			}
+		});
+	});
 });
 </script>
 @endsection

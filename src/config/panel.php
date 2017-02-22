@@ -10,7 +10,7 @@ return [
     |
     */
     
-    'version' => '2.0.8',
+    'version' => '2.0.9',
     /*
     |--------------------------------------------------------------------------
     | URL Admin
@@ -93,6 +93,6 @@ return [
     |
     */
     
-    'maps_api' => env('PANEL_MAPS_API_KEY', ''),
+    'maps_api' => env('MAPS_API_KEY', ''),
     
 ];

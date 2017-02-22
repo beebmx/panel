@@ -21,3 +21,4 @@
 
 // @codekit-prepend "./fields/date.js"; 
 // @codekit-prepend "./fields/geolocation.js"; 
+// @codekit-prepend "./fields/datetime.js"; 

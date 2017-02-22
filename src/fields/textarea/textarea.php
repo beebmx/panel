@@ -4,6 +4,7 @@ namespace Beebmx\Panel\Fields;
 
 use Beebmx\Panel\Brick;
 use Beebmx\Panel\Fields\BaseField;
+use App;
 
 class TextareaField extends BaseField{
     public $rule = 'nullable|string';
@@ -15,7 +16,8 @@ class TextareaField extends BaseField{
     public function input(){
         $input = new Brick('textarea', $this->value, [
             'id'    => $this->id,
-            'name'  => $this->name
+            'name'  => $this->name,
+            'data-locale' => App::getLocale()
         ]);
         $input->addClass('input');
         $input->addClass('textarea');

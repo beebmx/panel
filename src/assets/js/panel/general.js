@@ -1,27 +1,5 @@
 var Panel = function() {
     function setIndex(){
-        $('table.table .delete-data').on('click', function(event){
-			event.preventDefault();
-			var row = $(this).closest('tr')[0],
-				text = $(row).children('td:first').html(),
-				form = $(row).find('form');
-			swal({
-				title: "¡Cuidado!",
-				text: '¿Realmente deseas eliminar el registro: <strong>'+text+'</strong>?',
-				type: "warning",
-				html: true,
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Eliminar",
-				cancelButtonText: "Cancelar",
-				closeOnConfirm: false
-			},
-			function(isConfirm){
-				if (isConfirm) {
-					form.submit();
-				}
-			});
-		});
     }
     function getWindowSize(){
         $(window).resize(function() {

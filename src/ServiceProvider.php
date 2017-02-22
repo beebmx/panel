@@ -28,6 +28,8 @@ class ServiceProvider extends BaseServiceProvider{
             __DIR__.'/assets/js/login.min.js' => public_path('panel_assets/js/login.min.js'),
             __DIR__.'/assets/js/panel.min.js' => public_path('panel_assets/js/panel.min.js'),
             __DIR__.'/assets/js/panel/tinymce_es_MX.min.js' => public_path('panel_assets/js/tinymce_es_MX.min.js'),
+            __DIR__.'/assets/js/fields/moment-with-locales.js' => public_path('panel_assets/js/moment-with-locales.js'),
+            __DIR__.'/assets/js/fields/bootstrap-datetimepicker.min.js' => public_path('panel_assets/js/bootstrap-datetimepicker.min.js'),
             __DIR__.'/models/' => app_path(),
             __DIR__.'/blueprint/' => app_path('Panel/Blueprints/'),
             __DIR__.'/seeds/' => database_path('seeds'),
@@ -36,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider{
         ], 'config');
         
         $this->publishes([
-            __DIR__.'/assets/scss/' => public_path('panel_assets/scss/'),
+            __DIR__.'/assets/scss/' => resource_path('assets/sass/panel/'),
         ], 'source');
         
         $this->loadMigrationsFrom(__DIR__ . '/migrations');

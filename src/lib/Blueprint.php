@@ -94,7 +94,29 @@ class Blueprint{
                 }
             }
             return $wmodel->paginate($this->paginate);
-            //return $model::where($search)->orderBy($this->orderBy, $this->sort)->paginate($this->paginate);
+        }
+    }
+    
+    public function allForeign($request = false, $record){
+        $q = $request->has('q') ? $request->input('q') : false;
+        $model = $this->class;
+        if (!$q) {
+            return $model::where($this->getForeign(), $record)->orderBy($this->orderBy, $this->sort)->paginate($this->paginate);
+        }else {
+            $search = $this->getAllSearchableFields($q);
+            $wmodel = $model::where($this->getForeign(), $record)->orderBy($this->orderBy, $this->sort);
+            $wmodel->where(function ($query) use ($search) {
+                $first = false;
+                foreach($search as $w){
+                    if (!$first){
+                        $first = true;
+                        $query->where($w[0], $w[1], $w[2]);
+                    }else{
+                        $query->orWhere($w[0], $w[1], $w[2]);
+                    }
+                }
+            });
+            return $wmodel->paginate($this->paginate);
         }
     }
     
@@ -113,11 +135,6 @@ class Blueprint{
             $search[] = [$this->search, 'LIKE', '%'.$q.'%'];
         }
         return $search;
-    }
-    
-    public function allForeign($record){
-        $model = $this->class;
-        return $model::where($this->getForeign(), $record)->orderBy($this->orderBy, $this->sort)->paginate($this->paginate);
     }
     
     public function insert($fields){
@@ -237,6 +254,11 @@ class Blueprint{
         }else{
             return false;
         }
+    }
+    
+    public function files(){
+        //$files = new FilesPanel($this);
+        return new FilesPanel($this);
     }
     
     public function setId($id){

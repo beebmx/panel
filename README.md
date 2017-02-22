@@ -8,6 +8,7 @@ beebmx/panel take your own structure made in Laravel Eloquent ORM and will proce
 - [Installation](https://github.com/beebmx/panel#installation)
 - [Publish Panel](https://github.com/beebmx/panel#publish-panel)
 - [Database](https://github.com/beebmx/panel#database)
+- [Database](https://github.com/beebmx/panel#image)
 - [Storage](https://github.com/beebmx/panel#storage)
 - [Blueprint example](https://github.com/beebmx/panel#blueprint)
 - [Wiki](https://github.com/beebmx/panel/wiki)
@@ -131,6 +132,14 @@ php artisan db:seed --class=ProfilesTableSeeder
 php artisan db:seed --class=UsersTableSeeder
 ```
 
+## Image
+
+This `Panel` use `Intervention` for images processing, so you need to install this package with the instructions in the follow link:
+
+```
+http://image.intervention.io/getting_started/installation
+```
+
 ## Storage
 
 This `Panel` use Laravel structure, for files storage, be sure than you run this command line before you upload anything:
@@ -168,6 +177,5 @@ fields:
 All the Blueprints should be in the `app/Panel/Blueprints` directory.
 
 ##Roadmap
-- Search information on list view
 - Blueprints reports
 - Blueprints import/export functionality

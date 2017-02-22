@@ -31,8 +31,14 @@
     			<tbody>
     				@if ($files)
     				@foreach ($files as $file)
-    				<tr data-uri="{{ url($file->url()) }}" data-basename="{{ $file->basename() }}" data-mime="{{ $file->mime() }}" data-remote="true">
-    					<td><div class="file-viewer"><img src="{{ $file->url() }}" /><div></td>
+    				<tr data-uri="{{ $file->url() }}" data-basename="{{ $file->basename() }}" data-mime="{{ $file->mime() }}" data-remote="true">
+    					<td>
+        					@if($file->thumb())
+        					<span class="file-viewer"><img src="{{ $file->thumb() }}" /></span>
+            				@else
+            				<span class="file-icon"><i class="material-icons">insert_drive_file</i></span>
+            				@endif
+                        </td>
     					<td>{{ $file->basename() }}</td>
     					<td class="hidden-xs">{{ $file->size() }}</td>
     				</tr>

@@ -16,6 +16,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('panel_assets/css/panel.min.css') }}">
 		@yield('css')
+		@yield('style')
 	</head>
 	<body class="beebmx-panel @yield('module')">
 	<nav class="pushy pushy-left">
@@ -116,14 +117,9 @@
     	</div>
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>--}}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    @yield('jsrequired')
 	<script src="{{ asset('panel_assets/js/panel.min.js') }}"></script>
-    <script language="javascript">
-    $(document).ready(function() {
-    	Panel.init();
-    });
-    </script>
 	@yield('js')
 	</body>
 </html>

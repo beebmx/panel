@@ -35,7 +35,7 @@ var File = function() {
         			$(row.insertCell(-1)).html(fileIcon);
         			$(row.insertCell(-1)).html(f.name);
         			$(row.insertCell(-1)).html(getFileSize(f.size)).addClass('hidden-xs');
-        			$(row.insertCell(-1)).html('<a href="#" class="btn btn-transparent btn-md row-remove"><i class="ti-trash"></i></a>');
+        			$(row.insertCell(-1)).html('<a href="#" class="btn btn-transparent btn-md row-remove"><i class="material-icons">delete</i></a>');
         			$(row).data('file', data);
         			$(row).data('remote', false);
         			$(row).data('basename', f.name);
@@ -121,7 +121,6 @@ var File = function() {
 		var preview, rows = $('body.form #beebmx-panel-files tbody tr');
 		if (rows.length){
 			$.each(rows, function(i, row){
-				//makeCanvas($(row).data('uri'), $(row).children('td').eq(0));
 				var fileIcon = getTypeIcon($(row).data('mime'), false, row);
 				if (fileIcon){
     				$(row).children('td').eq(0).html(fileIcon);
@@ -134,26 +133,18 @@ var File = function() {
     	document.dispatchEvent(eventFile.add);
     	var fileIcon = false;
     	switch(type){
+			case "image":
 			case "image/jpeg":
 			case "image/gif":
             case "image/png":
                 if (f){ fileIcon = f.preview; }
-                else{ makeCanvas($(row).data('uri'), $(row).children('td').eq(0)); }
-            break;
-            case "application/pdf":
-            	fileIcon = '<span class="file-icon"><i class="fa fa-file-pdf-o"></i></span>';
-            break;
-            case "application/zip":
-            	fileIcon ='<span class="file-icon"><i class="fa fa-file-archive-o"></i></span>';
-            break;
-            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-            	fileIcon = '<span class="file-icon"><i class="fa fa-file-word-o"></i></span>';
-            break;
-            case "application/vnd.ms-excel":
-            	fileIcon = '<span class="file-icon"><i class="fa fa-file-excel-o"></i></span>';
+                else{ 
+                    fileIcon = '<span class="file-viewer"><img src="'+$(row).data('thumb')+'" /></span>';
+                    //makeCanvas($(row).data('uri'), $(row).children('td').eq(0));
+                }
             break;
             default:
-            	fileIcon = '<span class="file-icon"><i class="fa fa-file-o"></i></span>';
+            	fileIcon = '<span class="file-icon"><i class="material-icons">insert_drive_file</i></span>';
         }
         return fileIcon;
 	};

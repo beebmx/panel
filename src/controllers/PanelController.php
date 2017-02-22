@@ -51,7 +51,7 @@ class PanelController extends Controller{
                 if ($children === null){
                     $data = $model->all($request);
                 }else{
-                    $data = $model->allForeign($parent_id);
+                    $data = $model->allForeign($request, $parent_id);
                 }
                 $render = new RenderData($model, $data);
                 return view('panel::index', ['model'     => $model,
@@ -139,7 +139,7 @@ class PanelController extends Controller{
                                         'modals'       => $render->modal(),
                                         'resource_css' => $render->css(),
                                         'resource_js'  => $render->js(),
-                                        'files'        => FilesPanel::all($model)]);
+                                        'files'        => FilesPanel::get($model)]);
         }else{
             return response()->view('panel::error', ['error' => 404], 404);
         }
@@ -166,7 +166,7 @@ class PanelController extends Controller{
                                         'modals'       => $render->modal(),
                                         'resource_css' => $render->css(),
                                         'resource_js'  => $render->js(),
-                                        'files'        => FilesPanel::all($model),
+                                        'files'        => FilesPanel::get($model),
                                         'method'       => 'put']);
         }else{
             return response()->view('panel::error', ['error' => 404], 404);
