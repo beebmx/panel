@@ -22,7 +22,7 @@ class PasswordField extends InputField{
         
         return $input;
     }
-    public static function store($value){
+    public static function store($value, $field){
         return bcrypt($value);
     }
     public function validate($id = false, $idField = false){

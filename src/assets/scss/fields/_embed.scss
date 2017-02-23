@@ -1,0 +1,22 @@
+body.form{
+    textarea.embed{
+        background-color: #3F3E40;
+        border: 2px solid $input-border;
+        border-radius: $border-radius-base;
+        color: $white;
+        font-family: Monaco, MonoSpace;
+        font-size: 0.85em;
+    }
+}
+body.view{
+    .embed.view{
+        background-color: #3F3E40;
+        border: 2px solid $input-border;
+        border-radius: $border-radius-base;
+        color: $white;
+        font-family: Monaco, MonoSpace;
+        font-size: 0.85em;
+        overflow-y: scroll;
+        padding: 1em 1em;
+    }
+}

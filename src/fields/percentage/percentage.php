@@ -18,7 +18,7 @@ class PercentageField extends BaseField{
     	return $this->cell();  
     }
 
-    public static function store($value){
+    public static function store($value, $field){
         return $value/100;
     }
 

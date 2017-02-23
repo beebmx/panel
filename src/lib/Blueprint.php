@@ -142,7 +142,7 @@ class Blueprint{
         $record = new $model;
         foreach($fields as $field => $data){
             $classField = $this->getClassField(strtolower($this->getFieldType($field)));
-            $record->$field = $classField::store($data);
+            $record->$field = $classField::store($data, $this->getField($field));
         }
         $record->save();
         $id = $this->getIdField();
@@ -156,7 +156,7 @@ class Blueprint{
         foreach($fields as $field => $data){
             $classField = $this->getClassField(strtolower($this->getFieldType($field)));
             if ($classField::$updateEmpty || !empty($data)){
-                $record->$field = $classField::store($data);
+                $record->$field = $classField::store($data, $this->getField($field));
             }
         }
         $record->save();
@@ -280,6 +280,10 @@ class Blueprint{
     
     public static function exists($model){
         return File::exists(Blueprint::path($model));
+    }
+    
+    private function getField($field){
+        return $this->fields[$field];
     }
     
     private function getFieldType($field){

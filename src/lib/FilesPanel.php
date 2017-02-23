@@ -42,6 +42,7 @@ class FilesPanel{
     }
     
     public function images()    { return $this->getByType('image');    }
+    public function imagesx()   { return $this->getByType('imagex');   }
     public function videos()    { return $this->getByType('video');    }
     public function documents() { return $this->getByType('document'); }
     public function audio()     { return $this->getByType('audio');    }

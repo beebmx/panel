@@ -32,7 +32,7 @@ class NameField extends BaseField{
         return $input;
     }*/
     
-    /*public static function store($value){
+    /*public static function store($value, $field){
         return $value;
     }*/
 

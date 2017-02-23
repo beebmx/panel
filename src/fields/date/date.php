@@ -50,7 +50,7 @@ class DateField extends BaseField{
         return $input_container;
     }
     
-    /*public static function store($value){
+    /*public static function store($value, $field){
         return $value;
     }*/
 

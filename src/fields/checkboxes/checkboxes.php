@@ -120,7 +120,7 @@ class CheckboxesField extends BaseField{
         return collect($options);
     }
 
-    public static function store($value){
+    public static function store($value, $field){
     	return json_encode($value);
     }
 

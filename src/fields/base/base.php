@@ -179,7 +179,7 @@ class BaseField{
         return $element;
     }
     
-    public static function store($value){
+    public static function store($value, $field){
         return $value;
     }
     

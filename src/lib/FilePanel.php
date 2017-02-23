@@ -267,7 +267,8 @@ class FilePanel{
     public static function getProcessMethod($image, $method, $options){
         switch ($method){
             case 'fit': case 'resize':
-                $size = explode('x', $options['size']);
+                $size = isset($options['size']) ? $options['size'] : '200x200';
+                $size = explode('x', $size);
                 return $image->$method($size[0], isset($size[1]) ? $size[1] : null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
@@ -279,7 +280,7 @@ class FilePanel{
                 return $image->$method($amount);
             break;
             case 'flip':
-                $mode = isset($options['mode']) ? $options['mode'] : '';
+                $mode = isset($options['mode']) ? $options['mode'] : 'h';
                 return $image->$method($mode);
             break;
             case 'greyscale': case 'invert':
