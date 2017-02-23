@@ -77,7 +77,7 @@ class FilePanel{
         if (static::existsProcessMethod($this->model, $find)) {
             $name = static::getName($this->name());
             $extension = static::getExtension($this->name());
-            $prefix = isset($this->files[$find]['prefix']) ? true : false;
+            $prefix = isset($this->model->files[$find]['prefix']) ? true : false;
             $file = $prefix ? $find.'_'.$name.'.'.$extension :
                               $name.'_'.$find.'.'.$extension;
             if (static::exists($this->processDirectory().'/'.$file)) {
