@@ -38,6 +38,7 @@ class ServiceProvider extends BaseServiceProvider{
         ], 'config');
         
         $this->publishes([
+            __DIR__.'/assets/fonts/' => resource_path('assets/fonts/'),
             __DIR__.'/assets/scss/' => resource_path('assets/sass/panel/'),
         ], 'source');
         

@@ -8,7 +8,7 @@ beebmx/panel take your own structure made in Laravel Eloquent ORM and will proce
 - [Installation](https://github.com/beebmx/panel#installation)
 - [Publish Panel](https://github.com/beebmx/panel#publish-panel)
 - [Database](https://github.com/beebmx/panel#database)
-- [Database](https://github.com/beebmx/panel#image)
+- [Image](https://github.com/beebmx/panel#image)
 - [Storage](https://github.com/beebmx/panel#storage)
 - [Blueprint example](https://github.com/beebmx/panel#blueprint)
 - [Wiki](https://github.com/beebmx/panel/wiki)
@@ -26,10 +26,10 @@ Right now this project is only on GitHub and to use it you need to add the next 
 
 ```json
 "repositories": [
-  {
-    "type": "vcs",
-    "url": "git@github.com:beebmx/panel.git"
-  }
+    {
+        "type": "vcs",
+        "url": "git@github.com:beebmx/panel.git"
+    }
 ],
 ```
 
@@ -134,7 +134,7 @@ php artisan db:seed --class=UsersTableSeeder
 
 ## Image
 
-This `Panel` use `Intervention` for images processing, so you need to install this package with the instructions in the follow link:
+This `Panel` use [Intervention](http://image.intervention.io) for images processing, so you need to install this package with the instructions in the follow link:
 
 ```
 http://image.intervention.io/getting_started/installation
