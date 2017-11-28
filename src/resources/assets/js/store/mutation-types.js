@@ -7,3 +7,4 @@ export const SIDEBAR_CLOSE = 'SIDEBAR_CLOSE'
 
 export const MODEL_CURRENT = 'MODEL_CURRENT'
 export const MODEL_ADD = 'MODEL_ADD'
+export const MODEL_ROWS = 'MODEL_ROWS'

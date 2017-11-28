@@ -8,44 +8,27 @@
                 <panel-button design="is-primary is-fullwidth" :link="{name:'model.create'}">Nuevo</panel-button>
             </div>
         </div>
-        <panel-table-view :headers="headers" :rows="data" :permission="permission" />
+        <panel-table-view />
         <div slot="footer">
-            <panel-pagination size="is-small" :pager="pager" @update="refresh" />
+            <panel-pagination size="is-small" @update="refresh" />
         </div>
     </panel-content>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-    props: {
-    },
     computed: {
-        headers() {
-            return this.$store.getters['model/getHeaders']
-        },
         permission() {
             return this.$store.getters['model/getPermissions']
         },
     },
-    data () {
-        return {
-            data: {},
-            links: {},
-            pager: {},
-        }
-    },
     mounted() {
+        this.getData()
         this.getData(this.$route.params.blueprint)
     },
     methods: {
-        getData(blueprint, p = false) {
-            const page = !p ? '' :`?page=${p}`
-            this.$http.get(`api/model/${ blueprint }/data${page}`)
-                .then(response => {
-                    this.data = response.data.data;
-                    this.links = response.data.links;
-                    this.pager = response.data.meta;
-                });
+        getData(blueprint, paginate = false) {
+            this.$store.dispatch('model/getDataRows', {blueprint, paginate})
         },
         refresh(page) {
             this.getData(this.$route.params.blueprint, page)

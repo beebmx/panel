@@ -1,21 +1,24 @@
 <template>
     <thead>
         <tr>
-            <th v-for="header in headers" :class="{'is-hidden-mobile' : !header.mobile}" v-text="header.label"></th>
+            <th v-for="(header, index) in headers" :key="index" :class="{'is-hidden-mobile' : !header.mobile}" v-text="header.label"></th>
         </tr>
     </thead>
 </template>
     
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
-    components: {
-
+    computed: {
+        ...mapGetters({
+            headers: 'model/getHeaders',
+        })
     },
-    props: {
-        headers: {
-            type: Object
-        }
-    }
+    // props: {
+    //     headers: {
+    //         type: Object
+    //     }
+    // }
 }
 </script>
 

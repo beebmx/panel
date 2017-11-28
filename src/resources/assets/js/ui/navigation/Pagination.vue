@@ -30,18 +30,30 @@
 </template>
     
 <script>
+import { mapGetters } from 'vuex'
 export default {
     props: {
         size: {
             type: String,
             default: ''
-        },
-        pager: {
-            type: Object,
-            required: true
         }
     },
     computed: {
+        ...mapGetters({
+            pagination: 'model/getPagination'
+        }),
+        current() {
+            return this.pagination.current_page
+        },
+        last() {
+            return this.pagination.last_page
+        },
+        total() {
+            return this.pagination.total
+        },
+        range() {
+            return this.pagination.per_page
+        },
         onFirstPage() {
             return this.current === 1
         },
@@ -85,12 +97,6 @@ export default {
     },
     data () {
         return {
-            current: 1,
-            to: 1,
-            from: 1,
-            last: 1,
-            total: 1,
-            range: 1,
             block: 2
         }
     },
@@ -100,19 +106,8 @@ export default {
         },
         update(page) {
             if (page !== this.current) {
-                this.current = page
                 this.$emit('update',page)
             }
-        }
-    },
-    watch: {
-        pager: function (pager) {
-            this.current =  pager.current_page;
-            this.to =  pager.to;
-            this.from =  pager.from;
-            this.last =  pager.last_page;
-            this.total =  pager.total;
-            this.range =  pager.per_page;
         }
     }
 }

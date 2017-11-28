@@ -1,11 +1,7 @@
 <template>
     <tr>
-        <!-- <td v-for="(field, id) in row" v-if="id !== 'model_row_id'" :class="{'is-hidden-mobile' : !headers[id]['mobile']}">
-            <component :is="headers[id]['cell']" :mobile="headers[id]['mobile']" :value="field"></component>
-        </td> -->
         <td v-for="(field, id) in headers" v-if="id !== 'panel_row_id'" :key="id" :class="{'is-hidden-mobile' : !field['mobile']}">
-            <component :is="field['cell']" :value="row[id]"></component>
-            
+            <component :is="field['cell']" :value="row[id]"></component>    
         </td>
         <td v-if="permission.update || permission.delete">
                 <p class="field">
@@ -20,17 +16,18 @@
     </tr>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
     props: {
-        headers: {
-            type: Object
-        },
         row: {
             type: [Array, Object]
         },
-        permission: {
-            type: Object
-        }
+    },
+    computed: {
+        ...mapGetters({
+            headers: 'model/getHeaders',
+            permission: 'model/getPermissions',
+        })
     },
     methods: {
         editRow(id) {

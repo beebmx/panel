@@ -15710,9 +15710,9 @@ module.exports = {
 "use strict";
 /* unused harmony export Store */
 /* unused harmony export install */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapState; });
 /* unused harmony export mapMutations */
-/* unused harmony export mapGetters */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapGetters; });
 /* unused harmony export mapActions */
 /* unused harmony export createNamespacedHelpers */
 /**
@@ -17224,11 +17224,12 @@ exports.clearImmediate = clearImmediate;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GENERAL_SETTINGS; });
 /* unused harmony export GENERAL_LINKS */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SIDEBAR_LIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SIDEBAR_TOGGLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SIDEBAR_CLOSE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SIDEBAR_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SIDEBAR_TOGGLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SIDEBAR_CLOSE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return MODEL_CURRENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return MODEL_ADD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return MODEL_ROWS; });
 var GENERAL_SETTINGS = 'GENERAL_SETTINGS';
 var GENERAL_LINKS = 'GENERAL_LINKS';
 
@@ -17238,6 +17239,7 @@ var SIDEBAR_CLOSE = 'SIDEBAR_CLOSE';
 
 var MODEL_CURRENT = 'MODEL_CURRENT';
 var MODEL_ADD = 'MODEL_ADD';
+var MODEL_ROWS = 'MODEL_ROWS';
 
 /***/ }),
 /* 11 */
@@ -30847,26 +30849,26 @@ var actions = {
     setList: function setList(_ref, list) {
         var commit = _ref.commit;
 
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SIDEBAR_LIST */], list);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SIDEBAR_LIST */], list);
     },
     toggle: function toggle(_ref2) {
         var commit = _ref2.commit;
 
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SIDEBAR_TOGGLE */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SIDEBAR_TOGGLE */]);
     },
     close: function close(_ref3) {
         var dispatch = _ref3.dispatch,
             commit = _ref3.commit;
 
-        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* SIDEBAR_CLOSE */]);
+        commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SIDEBAR_CLOSE */]);
     }
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SIDEBAR_LIST */], function (state, list) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SIDEBAR_LIST */], function (state, list) {
     state.list = list;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SIDEBAR_TOGGLE */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SIDEBAR_TOGGLE */], function (state) {
     state.isOpen = !state.isOpen;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* SIDEBAR_CLOSE */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SIDEBAR_CLOSE */], function (state) {
     state.isOpen = false;
 }), _mutations);
 
@@ -30891,7 +30893,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var state = {
     blueprints: {},
-    current: null
+    current: null,
+    rows: {
+        data: {},
+        links: {},
+        meta: {}
+    },
+    data: {}
 };
 
 var getters = {
@@ -30917,6 +30925,15 @@ var getters = {
         } else {
             return {};
         }
+    },
+    getCurrentBlueprint: function getCurrentBlueprint(state) {
+        return state.current;
+    },
+    getRows: function getRows(state) {
+        return state.rows.data;
+    },
+    getPagination: function getPagination(state) {
+        return state.rows.meta;
     }
 };
 
@@ -30933,6 +30950,23 @@ var actions = {
         } else {
             commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* MODEL_CURRENT */], blueprint);
         }
+    },
+    getDataRows: function getDataRows(_ref2, _ref3) {
+        var commit = _ref2.commit,
+            getters = _ref2.getters;
+        var blueprint = _ref3.blueprint,
+            paginate = _ref3.paginate;
+
+        if (blueprint) {
+            var page = !paginate ? '' : '?page=' + paginate;
+            return $http.get('api/model/' + blueprint + '/data' + page).then(function (response) {
+                commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* MODEL_ROWS */], response.data);
+            });
+        } else {
+            return new Promise(function (resolve, reject) {
+                resolve(false);
+            });
+        }
     }
 };
 
@@ -30940,6 +30974,11 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
     state.blueprints[model.blueprint] = model.data;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* MODEL_CURRENT */], function (state, current) {
     state.current = current;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* MODEL_ROWS */], function (state, rows) {
+    state.rows.data = rows.data;
+    state.rows.links = rows.links;
+    state.rows.meta = rows.meta;
+    //{state.rows.data, state.rows.links, state.rows.meta} = {rows.data, rows.links, rows.meta}
 }), _mutations);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -33887,38 +33926,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {},
     computed: {
-        headers: function headers() {
-            return this.$store.getters['model/getHeaders'];
-        },
         permission: function permission() {
             return this.$store.getters['model/getPermissions'];
         }
     },
-    data: function data() {
-        return {
-            data: {},
-            links: {},
-            pager: {}
-        };
-    },
     mounted: function mounted() {
+        this.getData();
         this.getData(this.$route.params.blueprint);
     },
 
     methods: {
         getData: function getData(blueprint) {
-            var _this = this;
+            var paginate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-            var p = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-            var page = !p ? '' : '?page=' + p;
-            this.$http.get('api/model/' + blueprint + '/data' + page).then(function (response) {
-                _this.data = response.data.data;
-                _this.links = response.data.links;
-                _this.pager = response.data.meta;
-            });
+            this.$store.dispatch('model/getDataRows', { blueprint: blueprint, paginate: paginate });
         },
         refresh: function refresh(page) {
             this.getData(this.$route.params.blueprint, page);
@@ -33975,20 +33997,14 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("panel-table-view", {
-        attrs: {
-          headers: _vm.headers,
-          rows: _vm.data,
-          permission: _vm.permission
-        }
-      }),
+      _c("panel-table-view"),
       _vm._v(" "),
       _c(
         "div",
         { attrs: { slot: "footer" }, slot: "footer" },
         [
           _c("panel-pagination", {
-            attrs: { size: "is-small", pager: _vm.pager },
+            attrs: { size: "is-small" },
             on: { update: _vm.refresh }
           })
         ],
@@ -34308,7 +34324,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])({
         name: function name(state) {
             return state.general.panel.name;
         },
@@ -34613,7 +34629,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     store: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */],
     components: { PanelSidebarList: __WEBPACK_IMPORTED_MODULE_2__SidebarList_vue___default.a },
-    computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])({
         base: function base(state) {
             return state.general.panel.base;
         },
@@ -35909,6 +35925,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -35943,18 +35960,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         size: {
             type: String,
             default: ''
-        },
-        pager: {
-            type: Object,
-            required: true
         }
     },
-    computed: {
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        pagination: 'model/getPagination'
+    }), {
+        current: function current() {
+            return this.pagination.current_page;
+        },
+        last: function last() {
+            return this.pagination.last_page;
+        },
+        total: function total() {
+            return this.pagination.total;
+        },
+        range: function range() {
+            return this.pagination.per_page;
+        },
         onFirstPage: function onFirstPage() {
             return this.current === 1;
         },
@@ -35997,15 +36025,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         pages: function pages() {
             return Math.ceil(this.total / this.range);
         }
-    },
+    }),
     data: function data() {
         return {
-            current: 1,
-            to: 1,
-            from: 1,
-            last: 1,
-            total: 1,
-            range: 1,
             block: 2
         };
     },
@@ -36016,19 +36038,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         update: function update(page) {
             if (page !== this.current) {
-                this.current = page;
                 this.$emit('update', page);
             }
-        }
-    },
-    watch: {
-        pager: function pager(_pager) {
-            this.current = _pager.current_page;
-            this.to = _pager.to;
-            this.from = _pager.from;
-            this.last = _pager.last_page;
-            this.total = _pager.total;
-            this.range = _pager.per_page;
         }
     }
 });
@@ -36232,6 +36243,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -36240,21 +36254,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        headers: {
-            type: Object,
-            required: true
-        },
-        rows: {
-            type: [Array, Object],
-            required: true
-        },
-        permission: {
-            type: Object,
-            required: true
-        }
-    }
+    // props: {
+    //     headers: {
+    //         type: Object,
+    //         required: true
+    //     },
+    //     rows: {
+    //         type: [Array, Object],
+    //         required: true
+    //     },
+    //     permission: {
+    //         type: Object,
+    //         required: true
+    //     }
+    // },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        headers: 'model/getHeaders'
+    }))
 });
 
 /***/ }),
@@ -36268,17 +36286,7 @@ var render = function() {
   return _c(
     "table",
     { staticClass: "table table-data is-fullwidth" },
-    [
-      _c("panel-table-header", { attrs: { headers: _vm.headers } }),
-      _vm._v(" "),
-      _c("panel-table-body", {
-        attrs: {
-          headers: _vm.headers,
-          rows: _vm.rows,
-          permission: _vm.permission
-        }
-      })
-    ],
+    [_c("panel-table-header"), _vm._v(" "), _c("panel-table-body")],
     1
   )
 }
@@ -36356,6 +36364,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -36365,13 +36376,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {},
-    props: {
-        headers: {
-            type: Object
-        }
-    }
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        headers: 'model/getHeaders'
+    }))
+    // props: {
+    //     headers: {
+    //         type: Object
+    //     }
+    // }
 });
 
 /***/ }),
@@ -36385,8 +36399,9 @@ var render = function() {
   return _c("thead", [
     _c(
       "tr",
-      _vm._l(_vm.headers, function(header) {
+      _vm._l(_vm.headers, function(header, index) {
         return _c("th", {
+          key: index,
           class: { "is-hidden-mobile": !header.mobile },
           domProps: { textContent: _vm._s(header.label) }
         })
@@ -36468,41 +36483,20 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {},
-    props: {
-        headers: {
-            type: Object
-        },
-        rows: {
-            type: [Array, Object]
-        },
-        permission: {
-            type: Object
-        }
-    },
-    computed: {},
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        rows: 'model/getRows'
+    })),
     data: function data() {
         return {};
     },
@@ -36531,10 +36525,7 @@ var render = function() {
   return _c(
     "tbody",
     _vm._l(_vm.rows, function(row, id) {
-      return _c("panel-table-row", {
-        key: id,
-        attrs: { headers: _vm.headers, row: row, permission: _vm.permission }
-      })
+      return _c("panel-table-row", { key: id, attrs: { row: row } })
     })
   )
 }
@@ -36612,10 +36603,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -36634,18 +36624,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        headers: {
-            type: Object
-        },
         row: {
             type: [Array, Object]
-        },
-        permission: {
-            type: Object
         }
     },
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        headers: 'model/getHeaders',
+        permission: 'model/getPermissions'
+    })),
     methods: {
         editRow: function editRow(id) {
             return this.permission.url + '/' + id + '/edit';
