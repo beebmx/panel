@@ -1,0 +1,26 @@
+// Sidebar
+// --------------------------------------------------
+
+.panel-menu {
+    position: absolute;
+    z-index: 100;
+    .menu-label {
+        margin: 1em 0 1em;
+    }
+    @include touch {
+        flex: none;
+        top: $sidebar-top;
+        left: -($sidebar-width);
+        background-color: $white;
+        width: $sidebar-width;
+        height: calc(100vh - #{$sidebar-top});
+        overflow-y: auto;
+        transition: transform $sidebar-speed;
+        &.is-active {
+            transform: translateX($sidebar-width);
+        }
+    }
+    @include desktop {
+        position: relative;
+    }
+}

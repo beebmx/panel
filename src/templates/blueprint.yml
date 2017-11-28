@@ -1,7 +1,7 @@
 name: Name
 class: App\Name
 storage: nstorage
-icon: <i class="material-icons">view_headline</i>
+icon: <i class="fa fa-fw fa-list"></i>
 fields:
   id:
     name: ID

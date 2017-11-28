@@ -3,16 +3,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Panel version
-    |--------------------------------------------------------------------------
-    |
-    | Specified the version of the current panel administration
-    |
-    */
-    
-    'version' => '2.0.13',
-    /*
-    |--------------------------------------------------------------------------
     | URL Admin
     |--------------------------------------------------------------------------
     |
@@ -46,8 +36,8 @@ return [
     |
     */
     
-    'logo' => 'panel_assets/images/logo.svg',
-    
+    'logo' => 'images/logo.png',
+
     /*
     |-----------------------------------------------------------------------------------
     | Sidebar Order
@@ -94,5 +84,18 @@ return [
     */
     
     'maps_api' => env('MAPS_API_KEY', ''),
+
+    /*
+    |-----------------------------------------------------------------------------------
+    | Social
+    |-----------------------------------------------------------------------------------
+    |
+    | You can define the URL of your social networks if you have it
+    | The icon is a font-awesome selector. The `fa-` prefix is not required.
+    |
+    */
+    
+    'links' => [['icon' => 'facebook', 'type' => 'fab', 'url' => 'https://www.facebook.com/beebusinessmx/'],
+                ['icon' => 'twitter', 'type' => 'fab', 'url' => 'https://twitter.com/beebmx/']],
     
 ];

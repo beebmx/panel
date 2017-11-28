@@ -1,0 +1,15 @@
+body.login{
+    figure.image{
+        margin: 0.75rem 1.5rem 0.75rem;
+        padding: 0 10px;
+        img{
+            max-width: 90px;
+            max-width: 80px;
+        }
+    }
+    .field:not(:last-child) {
+        margin-bottom: 1.45rem;
+    }
+    @include desktop {
+    }
+}

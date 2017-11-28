@@ -1,0 +1,292 @@
+// Sidebar
+// --------------------------------------------------
+ .panel-main-container {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+.panel-pusher {
+    position: relative;
+    left: 0;
+    z-index: 99;
+    height: 100%;
+    perspective: 1000px;
+    transition: transform $sidebar-transition;
+    &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        background: rgba(0,0,0,0.2);
+        content: '';
+        opacity: 0;
+        transition: opacity $sidebar-transition, width 0.1s $sidebar-transition, height 0.1s $sidebar-transition;
+    }
+}
+
+nav.panel-menu {
+    background-color: $sidebar-background-color;
+    padding: 0 0 0.2rem;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    visibility: hidden;
+    width: $sidebar-width;
+    height: 100%;
+    transition: all $sidebar-transition;
+    
+    &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.2);
+        content: '';
+        opacity: 1;
+        transition: opacity $sidebar-transition;
+    }
+
+
+    ul {
+        li {
+            a, button {
+                display: table;
+                color: $sidebar-text-color;
+                cursor: pointer;
+                .link {
+                    display: table-row
+                }
+                .icon, .link-text {
+                    display: table-cell;
+                    vertical-align: middle
+                }
+                .icon {
+                    padding: 0.5rem 0.25rem 0.5rem 0.55rem;
+                    i {
+                        margin: 0.45rem 0 0;
+                    }
+                }
+                .link-text {
+                    padding: 0.5rem 0.5rem 0.25rem 0.25rem;
+                    text-align: left;
+                    width: 100%;
+                    font-size: 0.95rem;
+                }
+            }
+            button{
+                border: 0;
+                background: transparent;
+                padding: 0;
+            }
+        }
+    }
+    @include tablet {
+        top: $nav-height;
+        height: calc(100% - #{$nav-height});
+        visibility: visible;
+        box-shadow: 1px 0 4px $grey-light;
+        transition: none;
+    }
+}
+
+
+.sidebar-open {
+    nav.panel-menu {
+
+    }
+    .panel-main-content {
+    }
+    .panel-pusher{
+        cursor: pointer;
+        &:after {
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            transition: opacity $sidebar-transition;
+        }
+    }
+}
+
+.panel-main-content {
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    // background-color: $body-bg;
+}
+
+.panel-main-container {
+
+}
+
+// Effects
+// --------------------------------------------------
+.panel-main-container.sidebar-open {
+    .panel-menu {
+        //left: 0;
+        //opacity: 1;
+    }
+}
+
+// Slide In
+// --------------------------------------------------
+.panel-main-container.slide-in {
+    .panel-menu {
+        visibility: visible;
+        transform: translate3d(-100%, 0, 0);
+        &:after {
+            display: none;
+        }
+        @include tablet {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    &.sidebar-open .panel-menu {
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+// Reveal
+// --------------------------------------------------
+.panel-main-container.reveal {  
+    .panel-menu {
+        z-index: 1;
+        &:after {
+            display: none;
+        }
+        @include tablet {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    &.sidebar-open{
+        .panel-pusher {
+            transform: translate3d($sidebar-width, 0, 0);
+            //transition: transform $sidebar-transition;
+        }
+        .panel-menu {
+            visibility: visible;
+        }
+    }
+}
+
+// Push
+// --------------------------------------------------
+.panel-main-container.push {  
+    .panel-menu {
+        transform: translate3d(-100%, 0, 0);
+        &:after {
+            display: none;
+        }
+        @include tablet {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    &.sidebar-open{
+        .panel-pusher {
+            transform: translate3d($sidebar-width, 0, 0);
+        }
+        .panel-menu {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}
+
+// Slide Along
+// --------------------------------------------------
+.panel-main-container.slide-along {  
+    .panel-menu {
+        z-index: 1;
+        transform: translate3d(-50%, 0, 0);
+        &:after {
+            display: none;
+        }
+        @include tablet {
+            visibility: visible;
+            z-index: 100;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    &.sidebar-open{
+        .panel-pusher {
+            transform: translate3d($sidebar-width, 0, 0);
+        }
+        .panel-menu {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}
+
+// Scale Down
+// --------------------------------------------------
+.panel-main-container.scale-down{
+    perspective: 1500px;
+
+    .panel-menu {
+        opacity: 1;
+        transform: translate3d(-100%, 0, 0);
+        &:after {
+            display: none;
+        }
+        @include tablet {
+            visibility: visible;
+            z-index: 100;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    &.sidebar-open{
+        .panel-pusher {
+            transform: translate3d(0, 0, -$sidebar-width);
+        }
+        .panel-menu {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}
+
+// Open Door
+// --------------------------------------------------
+.panel-main-container.open-door{
+    perspective: 1500px;
+
+    .panel-menu {
+        opacity: 1;
+        transform: translate3d(-100%, 0, 0);
+        &:after {
+            display: none;
+        }
+        @include tablet {
+            visibility: visible;
+            z-index: 100;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    .panel-pusher {
+        transform-origin: 100% 50%;
+        transform-style: preserve-3d;
+    }
+
+    &.sidebar-open{
+        .panel-pusher {
+            transform: rotateY(-10deg);
+        }
+        .panel-menu {
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}
+
+// .no-csstransforms3d .st-pusher,
+// .no-js .st-pusher {
+//     padding-left: 300px;
+// }

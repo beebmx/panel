@@ -1,7 +1,7 @@
 {
     "name": "beebmx/panel",
     "description": "Beebmx Panel.",
-    "version":"2.0.13",
+    "version":"3.0.0-alpha.1",
     "keywords": ["cms", "panel", "beebmx", "beeb.mx", "administrator"],
     "homepage": "https://github.com/beebmx/panel",
     "authors": [
@@ -13,29 +13,25 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0.0",
         "doctrine/dbal": "^2.5",
         "symfony/yaml": "^3.1",
+        "illuminate/support": "~5.0",
         "intervention/image": "^2.3"
     },
     "autoload": {
-        "classmap" : [
-            "src/commands",
-            "src/controllers",
-            "src/fields",
-            "src/lang",
-            "src/lib",
-            "src/middleware",
-            "src/migrations",
-            "src/templates",
-            "src/views"
-        ],
         "psr-4" : {
-            "Beebmx\\Panel\\" : "src"
+            "Beebmx\\Panel\\" : "src/"
         }
     },
     "post-update-cmd": [
-        "php artisan vendor:publish --provider=\"Beebmx\\Panel\\ServiceProvider\" --tag=config"
+        "php artisan vendor:publish --provider=\"Beebmx\\Panel\\PanelServiceProvider\" --tag=config"
     ],
-    "minimum-stability" : "stable"
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Beebmx\\Panel\\PanelServiceProvider"
+            ]
+        }
+    }
 }

@@ -1,10 +1,38 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => config('panel.prefix')], function() {
-    Route::get('login', 'Beebmx\Panel\LoginController@showLoginForm')->name('panel.login');
-    Route::post('login', 'Beebmx\Panel\LoginController@login')->name('panel.login');
-    Route::post('logout', 'Beebmx\Panel\LoginController@logout')->name('panel.logout');
+Route::group(['middleware' => 'web',
+              'namespace' => 'Beebmx\Panel\Http\Controllers',
+              'prefix' => config('panel.prefix')], function() {
+
+    Route::get('login', 'LoginController@showLoginForm')->name('panel.login');
+    Route::post('login', 'LoginController@login');
+    Route::post('logout', 'LoginController@logout')->name('panel.logout');
+
+    Route::group(['middleware' => ['auth', 'panel'], 'as' => 'panel.'], function () {
+
+        Route::group(['prefix' => 'api'], function () {
+            Route::get('/', 'ApiController@index')->name('api.index');
+
+            Route::get('/model/{model}', 'PanelModelController@index')->name('model.index');
+            Route::get('/model/{model}/data', 'PanelModelController@data')->name('model.data');
+        });
+
+        Route::get('/{view?}', 'PanelController@index')->where('view', '(.*)')->name('views');
+
+        // Route::get('', 'PanelController@dashboard')->name('dashboard');
         
+        // Route::get('model/{model}', 'PanelModelController@index')->name('model.index');
+        // Route::get('model/{model}/create', 'PanelModelController@create')->name('model.create');
+        // Route::post('model/{model}/{id}', 'PanelModelController@store')->name('model.store');
+        // Route::get('model/{model}/{id}/edit', 'PanelModelController@edit')->name('model.edit');
+        // Route::put('model/{model}/{id}', 'PanelModelController@update')->name('model.update');
+        // Route::delete('model/{model}/{id}', 'PanelModelController@destroy')->name('model.delete');
+
+
+        // Route::get('page/{model}', 'PanelPageController@index')->name('page.index');
+    });
+
+    /*
 	Route::group(['middleware' => ['auth', 'panel'], 'as' => 'panel.'], function () {
     	Route::get('', 'Beebmx\Panel\PanelController@dashboard')->name('dashboard');
     	Route::get('page/{model}', 'Beebmx\Panel\PanelController@index')->name('index');
@@ -25,4 +53,5 @@ Route::group(['middleware' => 'web', 'prefix' => config('panel.prefix')], functi
     	
     	Route::post('file/upload', 'Beebmx\Panel\FileController@upload')->name('upload');
     });
+    */
 });
