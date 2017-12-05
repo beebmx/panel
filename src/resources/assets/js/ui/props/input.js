@@ -1,47 +1,54 @@
 export default {
     props: {
-        'label': {
+        id: {
             type: String,
             default: ''
-        }, 
-        'icon': {
+        },
+        label: {
+            type: String,
+            default: ''
+        },
+        icon: {
+            type: [Boolean, String],
             default: false
-        }, 
-        'name': {
+        },
+        name: {
             type: String,
             default: ''
         },
-        'value': {
-            type: String,
+        value: {
             default: ''
         },
-        'placeholder': {
-            type: String,
-            default: ''
+        placeholder: {
+            type: [Boolean, String],
+            default: false
         },
-        'required': {
+        required: {
             type: Boolean,
             default: false
         }, 
-        'readonly': {
+        readonly: {
             type: Boolean,
             default: false
         },
-        'autofocus': {
+        autofocus: {
             type: Boolean,
             default: false
         },
-        'autocomplete': {
+        autocomplete: {
             type: [String, Boolean],
             default: 'off'
         },
-        'help': {
+        help: {
             type: String,
             default: ''
         },
-        'type': {
+        type: {
             type: String,
             default: 'text'
+        },
+        width: {
+            type: [String, Number]
         }
     }
 }

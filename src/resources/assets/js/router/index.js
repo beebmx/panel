@@ -32,7 +32,7 @@ export default new VueRouter({
                     path: ':id/edit',
                     name: 'model.edit',
                     component: require('../views/model/Form.vue'),
-                    props: {type: 'create'}
+                    props: {type: 'update'}
                 }
             ]
         },

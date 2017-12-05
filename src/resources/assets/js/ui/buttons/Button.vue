@@ -17,8 +17,6 @@ export default {
             default: ''
         }
     },
-    computed: {
-    },
     methods: {
         click: function () {
             if (this.link) {

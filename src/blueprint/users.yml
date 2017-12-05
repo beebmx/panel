@@ -24,13 +24,15 @@ fields:
     required: true
     unique: users
     mobile: false
-  profile_id:
-    label: Perfil
-    type: select
-    options: class
-    query:
-      parent: profile
   password:
     label: Contraseña
     type: password
     required: true
+  profile_id:
+    label: Perfil
+    type: select
+    icon: users
+    options: parent
+    parent: 
+      model: App\Profile
+      relation: profile

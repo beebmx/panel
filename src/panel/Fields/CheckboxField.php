@@ -2,13 +2,11 @@
 
 namespace Beebmx\Panel\Fields;
 
-use Beebmx\Panel\Fields\InputField;
-
 class CheckboxField extends InputField
 {
     protected $type = 'checkbox';
     protected $defaults = [
-        'cell'  => 'panel-checkbox-cell',
-        'input' => 'panel-text-field'
+        'cell' => 'panel-checkbox-cell',
+        'field' => 'panel-text-field'
     ];
 }

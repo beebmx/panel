@@ -5,6 +5,7 @@ import axios from 'axios'
 import vuexI18n from 'vuex-i18n';
 import store from './store'
 import router from './router'
+import VueProgressBar from 'vue-progressbar'
 
 import './layouts'
 import './panel'
@@ -19,6 +20,11 @@ Vue.prototype.$http = axios.create({
 });
 
 Vue.use(vuexI18n.plugin, store);
+const progressOptions = {
+    color: 'hsl(141, 71%, 48%)',
+    failedColor: 'hsl(348, 100%, 61%)'
+}
+Vue.use(VueProgressBar, progressOptions)
 
 new Vue({
     el: '#root',
@@ -43,57 +49,3 @@ new Vue({
     }
 });
 
-// new Vue({
-//     el: '#sidebar',
-//     store,
-//     computed: mapGetters({
-//         isOpen: 'sbStatus'
-//     }),
-//     methods: {
-//         slideBarToggle: () => store.dispatch('sbToggle'),
-//         closeSideBar: () => store.dispatch('sbClose'),
-//         hasClass: (e, cName) => {
-//             const rg = new RegExp("(^|\\s+)" + cName + "(\\s+|$)");
-//             return rg.test(e.className);
-
-//         },
-//         closeSideBarIfOpen: (event) => {
-//             const e = event.target,
-//                   testCurrent = new RegExp("(^|\\s+)" + e.className + "(\\s+|$)").test('panel-menu'),
-//                   testParent = new RegExp("(^|\\s+)" + e.parentNode.className + "(\\s+|$)").test('panel-menu');
-//             if (!testCurrent && !testParent) {
-//                 store.dispatch('sbClose');
-//             }
-//         },
-//         closeSideBarOnEsc: (event) => {
-//             if (event.keyCode === 27) {
-//                 store.dispatch('sbClose');
-//             }
-//         }
-//     },
-//     watch: {
-//         isOpen: function (val) {
-//             if (val) {
-//                 setTimeout(() => {
-//                     document.addEventListener('click', this.closeSideBarIfOpen);
-//                     document.addEventListener('keyup', this.closeSideBarOnEsc);
-//                 }, 350);
-                
-//             } else {
-//                 document.removeEventListener('click', this.closeSideBarIfOpen);
-//                 document.removeEventListener('keyup', this.closeSideBarOnEsc);
-//             }
-//         }
-//     },
-//     mounted() {
-//         window.addEventListener('resize', () => {
-//             if (window.innerWidth > 769) {
-//                 store.dispatch('sbClose');
-//             }
-//         });
-        
-//     },
-//     beforeDestroy() {
-//         window.removeEventListener('resize');
-//     }
-// })

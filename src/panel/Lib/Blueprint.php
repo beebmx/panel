@@ -3,28 +3,23 @@
 namespace Beebmx\Panel;
 
 use File;
-use Lang;
-use Exception;
 use Symfony\Component\Yaml\Yaml;
-use Illuminate\Support\Collection;
-use Beebmx\Panel\Fields;
 use Beebmx\Panel\Features\HasSettings;
 
 class Blueprint
-{   
+{
     use HasSettings;
 
-    protected $id = false;
     protected $filename;
     protected $class;
     protected $file;
-    
+
     public function __construct($file)
     {
         $this->filename = File::name($file);
         $this->file = Yaml::parse(File::get($file));
         $this->class = isset($this->file['class']) ? $this->file['class'] : false;
-        
+
         foreach ($this->file as $setting => $value) {
             $this->setSetting($setting, $value);
         }
@@ -34,29 +29,18 @@ class Blueprint
 
     protected function getDefaults()
     {
-        return ['name'    => ucfirst($this->filename),
-                'admin'   => false,
-                'type'    =>'model',
-                'icon'    => 'list',
+        return ['name' => ucfirst($this->filename),
+                'admin' => false,
+                'type' => 'model',
+                'icon' => 'list',
                 'options' => [],
-                'order'   => [],
+                'order' => [],
         ];
     }
 
-    public function getFields()
+    public function fields()
     {
         return new Fields($this->fields);
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this->id;
-    }
-    
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getUrl()
@@ -86,7 +70,7 @@ class Blueprint
 
     public static function path($file)
     {
-        return app_path('Panel/Blueprints/'.$file.'.yml');
+        return app_path('Panel/Blueprints/' . $file . '.yml');
     }
 
     public static function getAllModels($admin = false)
@@ -97,7 +81,7 @@ class Blueprint
             $model = new Blueprint($file);
             if ($model->admin && $admin) {
                 $models[] = $model;
-            }else if (!$model->admin) {
+            } elseif (!$model->admin) {
                 $models[] = $model;
             }
         }
@@ -110,15 +94,14 @@ class Blueprint
         $models = collect();
         foreach ($all as $model) {
             $models->push(['blueprint' => $model->filename,
-                           'name'      => $model->name,
-                           'type'      => $model->type,
+                           'name' => $model->name,
+                           'type' => $model->type,
                            //'admin'    => $model->admin,
-                           'icon'      => $model->icon,
+                           'icon' => $model->icon,
                            //'url'      => $model->getUrl()
-                           
                           ]);
         }
-        
+
         if (config('panel.sidebarOrder')) {
             return $models->groupBy('type')->sortBy('sidebarOrder')->toArray();
         } else {

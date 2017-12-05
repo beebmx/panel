@@ -2,21 +2,15 @@
 
 namespace Beebmx\Panel;
 
-use File;
-use Lang;
-use Exception;
-use Symfony\Component\Yaml\Yaml;
-use Illuminate\Support\Collection;
-
 class Fields
 {
     protected $fields = [];
     public $original;
-    
+
     public function __construct($fields)
     {
         $this->original = $fields;
-        
+
         foreach ($fields as $id => $settings) {
             $this->setField($id, $settings);
         }
@@ -30,27 +24,29 @@ class Fields
     public function getSettings()
     {
         $settings = [];
-        foreach ($this->fields as $id => $field){
+        foreach ($this->fields as $id => $field) {
             $settings[$id] = $field->attributes;
         }
         return $settings;
     }
 
-    public function getIdField(){
-        return collect($this->fields)->first(function($field, $id){
+    public function getIdField()
+    {
+        return collect($this->fields)->first(function ($field, $id) {
             return strtolower($field->getType()) === 'id';
         });
     }
 
-    public function getIdKeyField(){
-        return collect($this->fields)->filter(function($field, $id){
+    public function getIdKeyField()
+    {
+        return collect($this->fields)->filter(function ($field, $id) {
             return strtolower($field->getType()) === 'id';
         })->keys()->first();
     }
-    
+
     protected function getField($id)
     {
-        if (! $id) {
+        if (!$id) {
             return;
         }
         if (isset($this->fields[$id])) {
@@ -61,7 +57,8 @@ class Fields
     protected function setField($id, $settings)
     {
         $classField = $this->getClassField($settings['type']);
-        $this->fields[$id] = new $classField($id, $settings);;
+        $this->fields[$id] = new $classField($id, $settings);
+        ;
         return $this;
     }
 
@@ -75,9 +72,9 @@ class Fields
         $type = ucwords($type);
         if (class_exists('Beebmx\\Panel\\Fields\\' . $type . 'Field')) {
             return 'Beebmx\\Panel\\Fields\\' . $type . 'Field';
-        }elseif (file_exists(app_path('Panel/Fields/'.$type.'/'.$type.'.php'))) {
-            $filename = app_path('Panel/Fields/'.$type.'/'.$type.'.php');
-            return $this->getFullNamespace($filename).'\\' . $type . 'Field';
+        } elseif (file_exists(app_path('Panel/Fields/' . $type . '/' . $type . '.php'))) {
+            $filename = app_path('Panel/Fields/' . $type . '/' . $type . '.php');
+            return $this->getFullNamespace($filename) . '\\' . $type . 'Field';
         } else {
             return 'Beebmx\\Panel\\Fields\\BaseField';
         }

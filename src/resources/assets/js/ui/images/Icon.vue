@@ -1,6 +1,6 @@
 <template>
     <span class="icon">
-        <i :class="[getType, getIcon]"></i>
+        <i :class="[getType, getIcon, getSpin]"></i>
     </span>
 </template>
 <script>
@@ -13,6 +13,10 @@ export default {
         type: {
             type: String,
             default: 'fal'
+        },
+        spin: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -21,6 +25,9 @@ export default {
         },
         getIcon() {
             return `fa-${this.icon}`
+        },
+        getSpin() {
+            return this.spin ? 'fa-spin' : false
         }
     },
     methods: {

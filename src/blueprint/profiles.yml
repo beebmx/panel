@@ -17,9 +17,11 @@ fields:
   is_admin:
     label: Administrador
     type: checkbox
+    width: 6
   has_panel:
     label: Panel
     type: checkbox
+    width: 6
   created_at:
     label: Creado
     type: timestamp

@@ -8,7 +8,7 @@
                 <panel-button design="is-primary is-fullwidth" :link="{name:'model.create'}">Nuevo</panel-button>
             </div>
         </div>
-        <panel-table-view />
+        <panel-dataset-view />
         <div slot="footer">
             <panel-pagination size="is-small" @update="refresh" />
         </div>
@@ -21,17 +21,19 @@ export default {
         permission() {
             return this.$store.getters['model/getPermissions']
         },
+        blueprint() {
+            return this.$route.params.blueprint;
+        }
     },
-    mounted() {
-        this.getData()
-        this.getData(this.$route.params.blueprint)
+    created() {
+        this.getData(this.blueprint)
     },
     methods: {
         getData(blueprint, paginate = false) {
             this.$store.dispatch('model/getDataRows', {blueprint, paginate})
         },
         refresh(page) {
-            this.getData(this.$route.params.blueprint, page)
+            this.getData(this.blueprint, page)
         }
     },
     beforeRouteUpdate (to, from, next) {

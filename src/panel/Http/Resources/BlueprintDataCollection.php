@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 class BlueprintDataCollection extends ResourceCollection
 {
     use Blueprintable;
+
     /**
      * Transform the resource collection into an array.
      *
@@ -24,7 +25,7 @@ class BlueprintDataCollection extends ResourceCollection
     protected function getRows($request)
     {
         $blueprint = $this->collection->first()->getBlueprint();
-        $fields = $blueprint->getFields();
+        $fields = $blueprint->fields();
         $headers = $blueprint->data()->getHeaders();
 
         $idKey = $fields->getIdKeyField();

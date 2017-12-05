@@ -1,6 +1,6 @@
 <template>
     <tbody>
-        <panel-table-row v-for="(row, id) in rows" :key="id" :row="row" />
+        <panel-dataset-row v-for="(row, id) in rows" :key="id" :row="row" />
     </tbody>
 </template>
 <script>

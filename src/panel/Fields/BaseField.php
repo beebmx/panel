@@ -46,13 +46,14 @@ class BaseField
 
     protected function getDefaults()
     {
-        return ['id'     => $this->id,
-                'label'  => ucfirst($this->id),
-                'cell'   => 'panel-cell',
-                'input'  => 'panel-input',
+        return ['id' => $this->id,
+                'label' => ucfirst($this->id),
+                'cell' => 'panel-cell',
+                'field' => 'panel-text-field',
                 'parent' => false,
                 'mobile' => true,
-                'list'   => true,
+                'list' => true,
+                'width' => 'full',
                 'recordable' => static::$recordable];
     }
 

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class PanelModelController extends Controller
 {
     use Blueprintable;
+
     /**
      * Create a new controller instance.
      *
@@ -24,7 +25,7 @@ class PanelModelController extends Controller
     public function index(Request $request, $model)
     {
         $model = $this->getBlueprint($model);
-        $fields = $model->getFields()->getSettings();
+        $fields = $model->fields()->getSettings();
         $permissions = $model->data()->getPermissions();
 
         $headers = $model->data()->getHeaders();
@@ -35,14 +36,23 @@ class PanelModelController extends Controller
     {
         $model = $this->getBlueprint($model);
         $data = $model->data()->all();
-        
+
         return new BlueprintDataCollection($data);
+    }
+
+    public function show(Request $request, $model, $id)
+    {
+        $model = $this->getBlueprint($model);
+        $models = $model->data()->getAllRelatinshipsData();
+        $data = $model->data()->find($id);
+
+        return response()->json(compact('models', 'data'));
     }
 
     public function create()
     {
     }
-    
+
     public function store()
     {
     }

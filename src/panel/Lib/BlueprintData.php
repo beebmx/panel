@@ -2,32 +2,26 @@
 
 namespace Beebmx\Panel;
 
-use File;
-use Lang;
-use Exception;
-use Symfony\Component\Yaml\Yaml;
-use Illuminate\Support\Collection;
-
 class BlueprintData
 {
     protected $blueprint;
     protected $id = false;
     protected $class;
-    
+
     public function __construct($blueprint)
     {
         $this->blueprint = $blueprint;
         $this->class = $this->blueprint->getClass();
         $options = [
-            'storage'  => str_singular($this->blueprint->getFilename()),
+            'storage' => str_singular($this->blueprint->getFilename()),
             'paginate' => config('panel.paginate'),
-            'create'   => true,
-            'update'   => true,
-            'delete'   => true
+            'create' => true,
+            'update' => true,
+            'delete' => true
         ];
         $order = [
             'field' => 'id',
-            'sort'  => 'asc'
+            'sort' => 'asc'
         ];
 
         $this->options = array_merge($options, $blueprint->options);
@@ -38,7 +32,7 @@ class BlueprintData
     {
         $relationships = $this->getRelationships();
         $q = request()->has('q') ?: false;
-        if (! $q) {
+        if (!$q) {
             if (count($relationships)) {
                 return $this->class::with($relationships)
                                 ->orderBy($this->order['field'], $this->order['sort'])
@@ -50,9 +44,29 @@ class BlueprintData
         }
     }
 
+    public function find($id)
+    {
+        if ($data = $this->class::find($id)) {
+            return $data;
+        } else {
+            return $this->getEmptyData();
+        }
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this->id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getHeaders()
     {
-        return collect($this->blueprint->getFields()->all())->filter(function($field, $id) {
+        return collect($this->blueprint->fields()->all())->filter(function ($field, $id) {
             return $field->list;
         })->map(function ($field, $id) {
             return collect($field->attributes)->only('id', 'label', 'cell', 'mobile', 'parent');
@@ -62,9 +76,9 @@ class BlueprintData
     public function getPermissions()
     {
         return collect(['create' => $this->options['create'],
-                        'update' => $this->options['update'],
-                        'delete' => $this->options['delete'],
-                        'url'    => $this->getBaseUrl()]);
+        'update' => $this->options['update'],
+        'delete' => $this->options['delete'],
+        'url' => $this->getBaseUrl()]);
     }
 
     public function getBaseurl()
@@ -72,14 +86,32 @@ class BlueprintData
         return $this->blueprint->getUrl();
     }
 
-    protected function getRelationships()
+    public function getAllRelatinshipsData()
     {
         $relationships = [];
-        foreach ($this->blueprint->getFields()->all() as $id => $field) {
+        foreach ($this->blueprint->fields()->all() as $id => $field) {
             if ($parent = $field->hasParent()) {
-                $relationships[] = $parent;
+                $relationships[$parent['relation']] = $parent['model']::all();
             }
         }
         return $relationships;
+    }
+
+    protected function getRelationships()
+    {
+        $relationships = [];
+        foreach ($this->blueprint->fields()->all() as $id => $field) {
+            if ($parent = $field->hasParent()) {
+                $relationships[] = $parent['relation'];
+            }
+        }
+        return $relationships;
+    }
+
+    protected function getEmptyData()
+    {
+        return collect($this->blueprint->fields()->all())->map(function ($field, $id) {
+            return '';
+        });
     }
 }

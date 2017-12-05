@@ -16,8 +16,11 @@ import input from '../props/input'
 export default {
     mixins: [field, input],
     props: {
+        icon: {
+            default: 'envelope'
+        },
         type: {
-            default: 'text'
+            default: 'email'
         }
     },
     data () {

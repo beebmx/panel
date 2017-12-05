@@ -1,20 +1,24 @@
 <template>
-    <panel-layout>
+    <panel-layout :loading="loading">
         <router-view></router-view>
     </panel-layout>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
-    props: {
-    },
-    data () {
-        return {
-        }
+    computed: {
+        ...mapState({
+            loading: state => state.model.loading,
+        })
     },
     methods: {
+        ...mapMutations({
+            updateRelationships: 'model/MODEL_RELATIONSHIPS',
+            updateData: 'model/MODEL_RECORD'
+        }),
         getModel(blueprint) {
+            this.updateData({});
             this.$store.dispatch('model/setModel', blueprint);
         }
     },

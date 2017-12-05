@@ -11,18 +11,32 @@
                 </div>
             </div>
         </div>
+        <vue-progress-bar></vue-progress-bar>
     </div>
 </template>
     
 <script>
 export default {
     props: {
+        loading: {
+            type: Boolean,
+            default: false
+        },
     },
     data () {
         return {
         }
     },
     methods: {
+    },
+    watch: {
+        loading(ld) {
+            if (ld) {
+                this.$Progress.start()
+            } else {
+                this.$Progress.finish()
+            }
+        }
     }
 }
 </script>
