@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="field">
-                            <input class="is-checkbox is-small" id="remember" type="checkbox" name="remember" />
+                            <input class="is-checkradio is-small is-primary has-background-color" id="remember" type="checkbox" name="remember" />
                             <label for="remember">@lang('panel::login.remember')</label>
                         </div>
 

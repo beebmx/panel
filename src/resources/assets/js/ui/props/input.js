@@ -4,14 +4,6 @@ export default {
             type: String,
             default: ''
         },
-        label: {
-            type: String,
-            default: ''
-        },
-        icon: {
-            type: [Boolean, String],
-            default: false
-        },
         name: {
             type: String,
             default: ''
@@ -31,6 +23,10 @@ export default {
             type: Boolean,
             default: false
         },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         autofocus: {
             type: Boolean,
             default: false
@@ -39,16 +35,9 @@ export default {
             type: [String, Boolean],
             default: 'off'
         },
-        help: {
-            type: String,
-            default: ''
-        },
-        type: {
-            type: String,
-            default: 'text'
-        },
-        width: {
-            type: [String, Number]
+        size: {
+            type: [String, Boolean],
+            default: false
         }
     }
 }

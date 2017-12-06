@@ -1,5 +1,6 @@
 <template>
     <panel-field v-bind="$props">
+        <label class="label" :for="id" v-text="label"></label>
         <div class="control" :class="{'has-icons-left':icon}">
             <div class="select is-fullwidth">
                 <panel-select-input
@@ -12,15 +13,17 @@
                 <panel-icon :icon="icon" />
             </span>
         </div>
+        <p v-if="help" class="help" v-text="help"></p>
     </panel-field>
 </template>
 
 <script>
+import field from '../props/field'
 import props from '../props/input'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    mixins: [props],
+    mixins: [field, props],
     props: {
         options: {
             type: [Array, String]

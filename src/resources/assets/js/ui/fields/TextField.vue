@@ -1,11 +1,13 @@
 <template>
     <panel-field v-bind="$props">
+        <label class="label" :for="id" v-text="label"></label>
         <div class="control" :class="{'has-icons-right':icon}">
             <panel-text-input v-bind="$props" v-model="data" />
             <span v-if="icon" class="icon is-small is-right">
                 <panel-icon :icon="icon" />
             </span>
         </div>
+        <p v-if="help" class="help" v-text="help"></p>
     </panel-field>
 </template>
     

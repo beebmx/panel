@@ -7,6 +7,6 @@ class CheckboxField extends InputField
     protected $type = 'checkbox';
     protected $defaults = [
         'cell' => 'panel-checkbox-cell',
-        'field' => 'panel-text-field'
+        'field' => 'panel-checkbox-field'
     ];
 }

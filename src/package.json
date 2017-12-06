@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "moment": "^2.18.1",
-    "vue-progressbar": "^0.7.3"
+    "vue-progressbar": "^0.7.3",
+    "vue-quill-editor": "^3.0.4"
   },
   "devDependencies": {
     "axios": "^0.16.2",

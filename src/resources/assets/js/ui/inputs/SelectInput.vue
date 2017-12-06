@@ -31,12 +31,12 @@ export default {
         }
     },
     watch: {
-        data () {
-            this.$emit('input', this.data)
-        },
-        value(value) {
-            this.data = value
-        }
+        // data () {
+        //     this.$emit('input', this.data)
+        // },
+        // value(value) {
+        //     this.data = value
+        // }
     }
 }
 </script>

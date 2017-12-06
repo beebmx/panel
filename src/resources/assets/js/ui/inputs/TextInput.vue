@@ -18,6 +18,12 @@ import props from '../props/input'
 
 export default {
     mixins: [props],
+    props: {
+        type: {
+            type: String,
+            default: 'text'
+        },
+    },
     data () {
         return {
             // data: this.value,
