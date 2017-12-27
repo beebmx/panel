@@ -24,20 +24,24 @@ class BlueprintDataCollection extends ResourceCollection
 
     protected function getRows($request)
     {
-        $blueprint = $this->collection->first()->getBlueprint();
-        $fields = $blueprint->fields();
-        $headers = $blueprint->data()->getHeaders();
+        if ($blueprint = $this->collection->count()) {
+            $blueprint = $this->collection->first()->getBlueprint();
+            $fields = $blueprint->fields();
+            $headers = $blueprint->data()->getHeaders();
 
-        $idKey = $fields->getIdKeyField();
-        $all = $fields->all();
+            $idKey = $fields->getIdKeyField();
+            $all = $fields->all();
 
-        return $this->collection->map(function ($field, $id) use ($headers, $all, $idKey) {
-            $row = [];
-            foreach ($headers as $key => $cell) {
-                $row[$key] = $all[$key]->parseCell($field);
-            }
-            $row['panel_row_id'] = $field[$idKey];
-            return $row;
-        });
+            return $this->collection->map(function ($field, $id) use ($headers, $all, $idKey) {
+                $row = [];
+                foreach ($headers as $key => $cell) {
+                    $row[$key] = $all[$key]->parseCell($field);
+                }
+                $row['panel_row_id'] = $field[$idKey];
+                return $row;
+            });
+        } else {
+            return $this->collection;
+        }
     }
 }

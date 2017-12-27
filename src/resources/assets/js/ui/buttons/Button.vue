@@ -1,5 +1,8 @@
 <template>
-    <button type="button" class="button" :class="design" :disabled="disabled" @click="click">
+    <button type="button"
+            class="button"
+            :class="[size, design, {'is-loading':loading}, {'is-selected':selected}]"
+            :disabled="disabled" @click="click">
         <span class="panel-button-text"><slot /></span>
     </button>
 </template>
@@ -12,10 +15,30 @@ export default {
             type: Boolean,
             default: false
         },
+        size: {
+            type: [String, Boolean],
+            default: false
+        },
         design: {
-            type: String,
-            default: ''
+            type: [String, Boolean],
+            default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        loading: {
+            type: Boolean,
+            defalt: false
+        },
+        selected: {
+            type: Boolean,
+            defalt: false
+        },
+        control: {
+            default: false
         }
+
     },
     methods: {
         click: function () {

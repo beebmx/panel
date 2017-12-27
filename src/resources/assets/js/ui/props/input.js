@@ -38,6 +38,10 @@ export default {
         size: {
             type: [String, Boolean],
             default: false
+        },
+        design: {
+            type: [String, Boolean],
+            default: false
         }
     }
 }

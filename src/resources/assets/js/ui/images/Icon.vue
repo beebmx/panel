@@ -1,6 +1,9 @@
 <template>
-    <span class="icon">
-        <i :class="[getType, getIcon, getSpin]"></i>
+    <span class="icon" :class="[size]">
+        <i :class="[getType, getIcon, getSpin, getPulse, {'fa-inverse':inverse}]"
+           :data-fa-transform="transform"
+           :data-fa-mask="mask"
+           v-text="text"></i>
     </span>
 </template>
 <script>
@@ -17,6 +20,30 @@ export default {
         spin: {
             type: Boolean,
             default: false
+        },
+        pulse: {
+            type: Boolean,
+            default: false
+        },
+        transform: {
+            type: [String, Object],
+            default: null
+        },
+        mask: {
+            type: [Object, Array, String],
+            default: null
+        },
+        size: {
+            type: String,
+            default: null,
+        },
+        text: {
+            type: String,
+            default: null,
+        },
+        inverse: {
+            type: Boolean,
+            default: null
         }
     },
     computed: {
@@ -28,6 +55,9 @@ export default {
         },
         getSpin() {
             return this.spin ? 'fa-spin' : false
+        },
+        getPulse() {
+            return this.spin ? 'fa-pulse' : false
         }
     },
     methods: {

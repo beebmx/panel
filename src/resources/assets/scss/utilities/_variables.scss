@@ -4,84 +4,84 @@
 
 // Colors
 // --------------------------------------------------
-$black:                     hsl(0, 0%, 4%);
-$black-bis:                 hsl(0, 0%, 7%);
-$black-ter:                 hsl(0, 0%, 14%);
+$black:                           hsl(0, 0%, 4%);
+$black-bis:                       hsl(0, 0%, 7%);
+$black-ter:                       hsl(0, 0%, 14%);
 
-$grey-darker:               hsl(0, 0%, 21%);
-$grey-dark:                 hsl(0, 0%, 29%);
-$grey:                      hsl(0, 0%, 48%);
-$grey-light:                hsl(0, 0%, 71%);
-$grey-lighter:              hsl(0, 0%, 86%);
+$grey-darker:                     hsl(0, 0%, 21%);
+$grey-dark:                       hsl(0, 0%, 29%);
+$grey:                            hsl(0, 0%, 48%);
+$grey-light:                      hsl(0, 0%, 71%);
+$grey-lighter:                    hsl(0, 0%, 86%);
 
-$white-ter:                 hsl(0, 0%, 96%);
-$white-bis:                 hsl(0, 0%, 98%);
-$white:                     hsl(0, 0%, 100%);
+$white-ter:                       hsl(0, 0%, 96%);
+$white-bis:                       hsl(0, 0%, 98%);
+$white:                           hsl(0, 0%, 100%);
 
-$orange:                    #F6943F;
-$yellow:                    hsl(48,  100%, 67%);
-$green:                     #00A79D;
-$turquoise:                 #5BC9E1;
-$blue:                      #1A79B7;
-$purple:                    hsl(271, 100%, 71%);
-$red:                       #EE554A;
+$orange:                          #F6943F;
+$yellow:                          hsl(48,  100%, 67%);
+$green:                           #00A79D;
+$turquoise:                       #5BC9E1;
+$blue:                            #1A79B7;
+$purple:                          hsl(271, 100%, 71%);
+$red:                             #EE554A;
 
 
 // Primary colors
 // --------------------------------------------------
-$primary: $blue;
-$info: $turquoise;
+$primary:                           $blue;
+$info:                              $turquoise;
 
 // Text colors
 // --------------------------------------------------
-$text:                      $grey-dark;
-$text-light:                $grey;
-$text-strong:               $grey-darker;
+$text:                              $grey-dark;
+$text-light:                        $grey;
+$text-strong:                       $grey-darker;
 
 // Body
-$body-background-color:     #F1F1F1;
-//$body-background:           #f0f0f0;
-$body-size: 14px !default
+$body-background-color:           #F1F1F1;
+//$body-background:                 #f0f0f0;
+$body-size:                         14px;
 
 // Miscellaneous
-$radius-small: 1px;
-$radius: 2px;
-$radius-large: 3px;
+$radius-small:                      1px;
+$radius:                            2px;
+$radius-large:                      3px;
 
 // Sidebar
 // --------------------------------------------------
-$sidebar-text-color:        $text;
-$sidebar-background-color:  $white;
-$sidebar-width:             200px;
-$sidebar-transition:        250ms cubic-bezier(.16, .68, .43, .99);
-$sidebar-shadow-color:      $grey-light;
+$sidebar-text-color:                $text;
+$sidebar-background-color:          $white;
+$sidebar-width:                     200px;
+$sidebar-transition:                250ms cubic-bezier(.16, .68, .43, .99);
+$sidebar-shadow-color:              $grey-light;
 
 // Navbar
 // --------------------------------------------------
-$navbar-background-color:            $blue;
-$navbar-title-color:                 $white;
-$navbar-title-size:                  1.25rem;
-$navbar-height:                      2.65rem;
-$navbar-item-color:                  $white;
-$navbar-item-hover-color:            $white-ter;
-$navbar-item-hover-background-color: transparent;
+$navbar-background-color:           $blue;
+$navbar-title-color:                $white;
+$navbar-title-size:                 1.25rem;
+$navbar-height:                     2.65rem;
+$navbar-item-color:                 $white;
+$navbar-item-hover-color:           $white-ter;
+$navbar-item-hover-background-color:transparent;
 
 // Sidebar
 // --------------------------------------------------
-$sidebar-top:               $navbar-height;
-$sidebar-width:             17.55rem;
-$sidebar-speed:             86ms;
-$sidebar-easing:            ease-out;
+$sidebar-top:                       $navbar-height;
+$sidebar-width:                     17.55rem;
+$sidebar-speed:                     86ms;
+$sidebar-easing:                    ease-out;
 
 // Box
 // --------------------------------------------------
-$box-radius:                $radius;
+$box-radius:                        $radius;
 
 // Tables
 // --------------------------------------------------
-$table-cell-border:         0;
-$table-cell-padding:        0.6em 0.75em;
-$table-background-color:    transparent;
+$table-cell-border:                 0;
+$table-cell-padding:                0.6em 0.75em;
+$table-background-color:            transparent;
 
 // Forms
 // --------------------------------------------------
@@ -90,9 +90,14 @@ $table-background-color:    transparent;
 // $input-color-placeholder:   #999;
 // $legend-color:              $brand-primary;
 
+// Modal
+// --------------------------------------------------
+$modal-z:                           100;
+$modal-card-head-background-color:  $white;
+
 // Extensions
 // --------------------------------------------------
-$checkradio-focus:          0;
+$checkradio-focus:                  0;
 
 
 // Panel theme

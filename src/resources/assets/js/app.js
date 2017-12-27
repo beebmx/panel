@@ -12,8 +12,6 @@ import './panel'
 import './ui'
 import App from './App.vue'
 
-import { mapActions } from 'vuex'
-
 Vue.prototype.$http = axios.create({
     baseURL: panel.baseURL,
     headers: {'X-CSRF-TOKEN': panel.token}

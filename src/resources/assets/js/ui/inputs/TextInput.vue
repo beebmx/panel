@@ -1,5 +1,6 @@
 <template>
     <input class="input"
+            :class="[size, design]"
             :type="type"
             :id="id"
             :name="id"
@@ -7,6 +8,7 @@
             :placeholder="placeholder"
             :required="required"
             :readonly="readonly"
+            :disabled="disabled"
             :autofocus="autofocus"
             :autocomplete="autocomplete"
             @input="update"

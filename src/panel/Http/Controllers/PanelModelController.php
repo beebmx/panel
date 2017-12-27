@@ -53,8 +53,12 @@ class PanelModelController extends Controller
     {
     }
 
-    public function store()
+    public function store($model)
     {
+        $model = $this->getBlueprint($model);
+        $data = $model->data()->save();
+
+        return response()->json(compact('data'));
     }
 
     public function edit(Request $request, $model)
@@ -62,8 +66,12 @@ class PanelModelController extends Controller
         $model = $this->getBlueprint($model);
     }
 
-    public function update()
+    public function update($model, $id)
     {
+        $model = $this->getBlueprint($model);
+        $data = $model->data()->save($id);
+
+        return response()->json(compact('data'));
     }
 
     public function destroy()

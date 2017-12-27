@@ -5,7 +5,7 @@ namespace Beebmx\Panel\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
+class PanelLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -35,8 +35,9 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest.panel', ['except' => 'logout']);
-        $this->redirectTo = '/'.config('panel.prefix');
+        $this->redirectTo = '/' . config('panel.prefix');
     }
+
     public function showLoginForm()
     {
         return view('panel::login');

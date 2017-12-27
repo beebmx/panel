@@ -53,6 +53,31 @@ class BlueprintData
         }
     }
 
+    public function save($id = false)
+    {
+        if ($id) {
+            $this->setId($id);
+        }
+        $inputs = request()->validate($this->validation());
+        if (!$id && request()->isMethod('post')) {
+            $model = new $this->class;
+        } elseif ($id && request()->isMethod('put')) {
+            $model = $this->class::find($this->getId());
+        }
+
+        foreach ($inputs as $id => $value) {
+            $model->$id = $value;
+        }
+
+        $model->save();
+
+        return $model;
+    }
+
+    public function delete()
+    {
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -69,7 +94,7 @@ class BlueprintData
         return collect($this->blueprint->fields()->all())->filter(function ($field, $id) {
             return $field->list;
         })->map(function ($field, $id) {
-            return collect($field->attributes)->only('id', 'label', 'cell', 'mobile', 'parent');
+            return collect($field->attributes)->only('id', 'label', 'cell', 'mobile', 'parent', 'maxCellChars');
         });
     }
 
@@ -95,6 +120,15 @@ class BlueprintData
             }
         }
         return $relationships;
+    }
+
+    protected function validation()
+    {
+        $validations = [];
+        foreach (request()->only($this->blueprint->fields()->recordableKeys()) as $id => $field) {
+            $validations[$id] = $this->blueprint->fields()->{ $id }->validate($this->getId(), $field);
+        }
+        return $validations;
     }
 
     protected function getRelationships()

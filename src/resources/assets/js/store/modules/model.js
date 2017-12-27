@@ -98,6 +98,26 @@ const actions = {
             .catch(error => {
                 console.log(error)
             });
+    },
+    saveData ({commit, state}, {type, id}) {
+        if (type === 'create') {
+            $http.post(`api/model/${ state.current }`, state.data)
+              .then(function (response) {
+                console.log('success', response);
+              })
+              .catch(function (error) {
+                console.log('error or validation', error.response.status, error.response.data);
+              });
+        }
+        if (type === 'update') {
+            $http.put(`api/model/${ state.current }/${id}`, state.data)
+              .then(function (response) {
+                console.log('success', response);
+              })
+              .catch(function (error) {
+                console.log('error or validation', error.response.status, error.response.data);
+              });
+        }
     }
 }
 

@@ -1,0 +1,7 @@
+.modal.is-card {
+    .modal-card-foot {
+        &.is-right {
+            justify-content: flex-end;
+        }
+    }
+}

@@ -4,12 +4,12 @@
             <div class="column">
                 FORMULARIO
             </div>
-            <div class="column is-1">
-                <panel-icon icon="spinner-third" :spin="true" />
+            <div class="column is-1 has-text-right">
+                <!-- <panel-icon icon="spinner-third" :spin="true" /> -->
             </div>
         </div>
         <div class="columns is-multiline">
-            <component v-for="(field, index) in fields"
+            <component v-for="field in fields"
                        v-if="field.field"
                        v-bind="field"
                        :key="field.id"
@@ -20,7 +20,7 @@
         <div slot="footer" class="columns">
             <div class="column has-text-right">
                 <panel-button design="is-white" :link="{name:'model.index'}">Cancelar</panel-button>
-                <panel-button design="is-primary" :link="{name:'model.create'}">Guardar</panel-button>
+                <panel-button design="is-primary" @click="save">Guardar</panel-button>
             </div>
         </div>
     </panel-content>
@@ -35,6 +35,9 @@ export default {
         blueprint() {
                 return this.$route.params.blueprint;
         },
+        id() {
+            return this.$route.params.id || false
+        },
         ...mapGetters({
             fields: 'model/getFields',
             data: 'model/getDataFields'
@@ -42,24 +45,25 @@ export default {
     },
     data () {
         return {
-            id: false
+            processing: false
         }
     },
     mounted() {
-        if (this.$route.params.id) {
-            this.id = this.$route.params.id;
-        }
         this.getData({ blueprint: this.blueprint, id:this.id })
     },
     methods: {
-        ...mapActions({
-            getData: 'model/getData'
-        }),
         ...mapMutations({
             updateField: 'model/MODEL_UPDATE_FIELD'
         }),
+        ...mapActions({
+            getData: 'model/getData',
+            saveData: 'model/saveData'
+        }),
         update(data) {
             this.updateField({ id:data.id, value:data.value })
+        },
+        save() {
+            this.saveData({type:this.type, id:this.id})
         }
     },
     beforeRouteUpdate (to, from, next) {

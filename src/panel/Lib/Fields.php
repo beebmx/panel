@@ -44,6 +44,17 @@ class Fields
         })->keys()->first();
     }
 
+    public function recordableKeys()
+    {
+        $keys = [];
+        foreach ($this->fields as $id => $field) {
+            if ($field->recordable) {
+                $keys[] = $id;
+            }
+        }
+        return $keys;
+    }
+
     protected function getField($id)
     {
         if (!$id) {
@@ -58,7 +69,7 @@ class Fields
     {
         $classField = $this->getClassField($settings['type']);
         $this->fields[$id] = new $classField($id, $settings);
-        ;
+
         return $this;
     }
 

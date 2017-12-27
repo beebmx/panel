@@ -8,21 +8,20 @@
     "lib": "lib"
   },
   "dependencies": {
-    "moment": "^2.18.1",
+    "moment": "^2.20.1",
     "vue-progressbar": "^0.7.3",
     "vue-quill-editor": "^3.0.4"
   },
   "devDependencies": {
     "axios": "^0.16.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "bourbon": "^5.0.0-beta.8",
     "bulma": "^0.6.1",
-    "laravel-mix": "^1.6.2",
+    "laravel-mix": "^1.7.2",
     "lodash": "^4.17.4",
-    "vue": "^2.5.9",
-    "vue-router": "^2.7.0",
+    "vue": "^2.5.13",
+    "vue-router": "^2.8.1",
     "vuedraggable": "^2.14.1",
-    "vuex": "^2.3.1",
+    "vuex": "^2.5.0",
     "vuex-i18n": "^1.7.0"
   },
   "scripts": {

@@ -13,7 +13,7 @@ class BaseField
     public $attributes = [];
 
     protected $type = 'base';
-    protected $value = null;
+    protected $rules = [];
 
     public static $listable = true;
     public static $recordable = true;
@@ -65,6 +65,15 @@ class BaseField
     public function hasParent()
     {
         return $this->parent;
+    }
+
+    public function validate($id = false, $value = false)
+    {
+        $rules = [];
+        if ($this->required) {
+            $rules[] = 'required';
+        }
+        return array_merge($rules, $this->rules);
     }
 
     public function __toString()

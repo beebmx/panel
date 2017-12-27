@@ -17,9 +17,7 @@ mix.options({
 
 mix.js('resources/assets/js/app.js', 'resources/dist/js/')
    .js('resources/assets/js/login.js', 'resources/dist/js/')
-   .js(['resources/assets/js/fontawesome/light.js',
-        'resources/assets/js/fontawesome/brands.js',
-        'resources/assets/js/fontawesome.js'], 'resources/dist/js/fontawesome.js')
+   .js('resources/assets/js/fontawesome/fontawesome-all.js', 'resources/dist/js/fontawesome.js')
    .sass('resources/assets/scss/components.scss', 'resources/dist/css/')
    .sass('resources/assets/scss/panel.scss', 'resources/dist/css/')
    .sass('resources/assets/scss/login.scss', 'resources/dist/css/');

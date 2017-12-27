@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td v-for="(field, id) in headers" v-if="id !== 'panel_row_id'" :key="id" :class="{'is-hidden-mobile' : !field['mobile']}">
-            <component :is="field['cell']" :value="row[id]"></component>    
+            <component :is="field['cell']" :value="row[id]" :maxChars="field['maxCellChars']"></component>    
         </td>
         <td v-if="permission.update || permission.delete">
                 <p class="field">
@@ -22,6 +22,9 @@ export default {
         row: {
             type: [Array, Object]
         },
+        maxCellChars: {
+            type: String
+        }
     },
     computed: {
         ...mapGetters({

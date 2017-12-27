@@ -1,9 +1,9 @@
 <?php
 
 Route::group(['middleware' => 'web', 'namespace' => 'Beebmx\Panel\Http\Controllers', 'prefix' => config('panel.prefix')], function () {
-    Route::get('login', 'LoginController@showLoginForm')->name('panel.login');
-    Route::post('login', 'LoginController@login');
-    Route::post('logout', 'LoginController@logout')->name('panel.logout');
+    Route::get('login', 'PanelLoginController@showLoginForm')->name('panel.login');
+    Route::post('login', 'PanelLoginController@login');
+    Route::post('logout', 'PanelLoginController@logout')->name('panel.logout');
 
     Route::group(['middleware' => ['auth', 'panel'], 'as' => 'panel.'], function () {
         Route::group(['prefix' => 'api'], function () {
@@ -12,6 +12,9 @@ Route::group(['middleware' => 'web', 'namespace' => 'Beebmx\Panel\Http\Controlle
             Route::get('/model/{model}', 'PanelModelController@index')->name('model.index');
             Route::get('/model/{model}/data', 'PanelModelController@data')->name('model.data');
             Route::get('/model/{model}/{id}', 'PanelModelController@show')->name('model.show');
+
+            Route::post('model/{model}', 'PanelModelController@store')->name('model.store');
+            Route::put('model/{model}/{id}', 'PanelModelController@update')->name('model.update');
         });
 
         Route::get('/{view?}', 'PanelController@index')->where('view', '(.*)')->name('views');

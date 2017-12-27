@@ -1,7 +1,7 @@
 <template>
     <panel-field v-bind="$props">
         <label class="label" :for="id" v-text="label"></label>
-        <div class="control" :class="{'has-icons-left':icon}">
+        <div class="control" :class="[size, design, {'has-icons-left':icon}]">
             <div class="select is-fullwidth">
                 <panel-select-input
                     v-bind="$props"
@@ -20,7 +20,7 @@
 <script>
 import field from '../props/field'
 import props from '../props/input'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     mixins: [field, props],
@@ -65,7 +65,7 @@ export default {
                     }).join(' ');
                     return {value, text}
                 })]
-            } else if (typeof this.options === 'array') {
+            } else if (typeof this.options === 'object') {
                 return this.options
             } else {
                 return []

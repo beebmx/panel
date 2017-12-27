@@ -1,18 +1,16 @@
 html, body {
     height: 100%;
 }
-body.beebmx-panel{
-    
-}
+
+// html {
+//     &.is-clipped {
+//         overflow: hidden !important;
+//     }
+// }
 
 .panel-top-container {
     position: initial;
     @include desktop {
         position: relative;
     }
-}
-.panel-general-content {
-    // @include grid-media($nt-tablet) {
-    //     margin-left: $sidebar-width;
-    // }
 }

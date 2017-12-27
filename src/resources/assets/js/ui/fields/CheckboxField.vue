@@ -1,7 +1,7 @@
 <template>
     <panel-field v-bind="$props">
         <panel-checkbox-input v-bind="$props" v-model="data" />    
-        <label class="label" :for="id" v-text="label"></label>
+        <label class="label" :for="id" :disabled="disabled" v-text="label"></label>
         <p v-if="help" class="help" v-text="help"></p>
     </panel-field>
 </template>
