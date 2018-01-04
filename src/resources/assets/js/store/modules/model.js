@@ -56,6 +56,13 @@ const getters = {
     },
     getRelationship: state => (relationship) => {
         return state.relationships[relationship];
+    },
+    allowFiles: state => {
+        if (typeof state.blueprints[state.current] !== 'undefined') {
+            return state.blueprints[state.current].files !== false && !(_.isEmpty(state.data)) ? true : false
+        } else {
+            return false
+        }
     }
 }
 
@@ -83,7 +90,7 @@ const actions = {
                             commit(types.MODEL_ROWS, response.data)
                         });
         } else {
-            return new Promise((resolve, reject) => {
+            return new Promise(resolve => {
                 resolve(false)
             })
         }
@@ -99,24 +106,28 @@ const actions = {
                 console.log(error)
             });
     },
-    saveData ({commit, state}, {type, id}) {
+    saveData ({state}, {type, id}) {
         if (type === 'create') {
-            $http.post(`api/model/${ state.current }`, state.data)
-              .then(function (response) {
-                console.log('success', response);
-              })
-              .catch(function (error) {
-                console.log('error or validation', error.response.status, error.response.data);
-              });
+            return new Promise((resolve, reject) => {
+                 $http.post(`api/model/${ state.current }`, state.data)
+                    .then(response => {
+                        resolve (response.data.data)
+                    })
+                    .catch(error => {
+                        reject (error.response.data)
+                    });
+            })
         }
         if (type === 'update') {
-            $http.put(`api/model/${ state.current }/${id}`, state.data)
-              .then(function (response) {
-                console.log('success', response);
-              })
-              .catch(function (error) {
-                console.log('error or validation', error.response.status, error.response.data);
-              });
+            return new Promise((resolve, reject) => {
+                 $http.put(`api/model/${ state.current }/${id}`, state.data)
+                    .then(response => {
+                        resolve (response.data.data)
+                    })
+                    .catch(error => {
+                        reject (error.response.data)
+                    });
+            })
         }
     }
 }

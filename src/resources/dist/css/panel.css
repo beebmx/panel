@@ -6681,7 +6681,7 @@ a.dropdown-item.is-active {
   .modal-card {
     margin: 0 auto;
     max-height: calc(100vh - 40px);
-    width: 640px;
+    width: 820px;
   }
 }
 
@@ -11647,6 +11647,10 @@ nav.panel-navbar .navbar-image img {
   max-height: calc(2.65rem - 8px);
 }
 
+nav.panel-navbar .has-logo {
+  padding: 0;
+}
+
 .panel-content {
   background-color: white;
   border-radius: 2px;
@@ -11667,6 +11671,88 @@ nav.panel-navbar .navbar-image img {
 .panel-content > .panel-content-footer {
   border-top: 1px solid #dbdbdb;
   padding: 0.75rem;
+}
+
+.panel-dropzone .overlay,
+.panel-dropzone .error {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.75);
+  z-index: 200;
+}
+
+.panel-files-manager .has-progress {
+  padding: 0.15rem 0.75rem;
+  min-height: 1rem;
+}
+
+.panel-files-manager .has-table {
+  border: 2px solid #dbdbdb;
+}
+
+.panel-files-manager .table {
+  margin-bottom: 0.55rem;
+}
+
+.panel-files-manager thead th {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.panel-files-manager th.is-last {
+  width: 3rem;
+}
+
+.panel-files-manager .panel-input-upload {
+  position: absolute;
+  top: 0;
+  left: -3000px;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.panel-files-manager progress.progress::-webkit-progress-value {
+  -webkit-transition: 86ms width ease-out;
+  transition: 86ms width ease-out;
+}
+
+.panel-files-manager .progress-fade-enter,
+.panel-files-manager .progress-fade-leave-to {
+  opacity: 0;
+}
+
+.panel-files-manager .progress-fade-enter-active {
+  -webkit-transition: 86ms width ease-out;
+  transition: 86ms width ease-out;
+}
+
+.panel-files-manager .progress-fade-leave-active {
+  -webkit-transition: 258ms width ease-out;
+  transition: 258ms width ease-out;
+}
+
+.panel-files-manager .progress-fade-enter-active,
+.panel-files-manager .progress-fade-leave-active {
+  opacity: 1;
+}
+
+.modal.is-card .modal-card-foot.is-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .panel-menu {
@@ -11709,12 +11795,6 @@ nav.panel-navbar .navbar-image img {
 
 .table.table-data {
   margin-bottom: 0;
-}
-
-.modal.is-card .modal-card-foot.is-right {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
 
 .is-checkradio[type="radio"],
@@ -12646,6 +12726,22 @@ nav.panel-navbar .navbar-image img {
 .panel-field {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
+}
+
+.is-structure-field .has-table {
+  border: 2px solid #dbdbdb;
+}
+
+.is-structure-field .table {
+  margin-bottom: 0.55rem;
+}
+
+.is-structure-field thead th {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.is-structure-field th.is-last {
+  width: 5rem;
 }
 
 /*!

@@ -17,6 +17,7 @@
                        :value="data[field.id]"
                        @input="update"></component>
         </div>
+        <panel-files-manager ref="files" v-if="allowFiles" :url="upload" :search="!!id" />
         <div slot="footer" class="columns">
             <div class="column has-text-right">
                 <panel-button design="is-white" :link="{name:'model.index'}">Cancelar</panel-button>
@@ -32,25 +33,32 @@ export default {
         'type'
     ],
     computed: {
+        ...mapGetters({
+            fields: 'model/getFields',
+            data: 'model/getDataFields',
+            allowFiles: 'model/allowFiles'
+        }),
         blueprint() {
                 return this.$route.params.blueprint;
         },
         id() {
             return this.$route.params.id || false
         },
-        ...mapGetters({
-            fields: 'model/getFields',
-            data: 'model/getDataFields'
-        })
+        upload() {
+            return this.id ? `api/files/${this.blueprint}/${this.id}` : `api/files/${this.blueprint}`
+        }
     },
     data () {
         return {
-            processing: false
+            processing: false,
         }
     },
     mounted() {
         this.getData({ blueprint: this.blueprint, id:this.id })
     },
+    // beforeUpdate() {
+    //     console.log('update', this.id, this.redirect)
+    // },
     methods: {
         ...mapMutations({
             updateField: 'model/MODEL_UPDATE_FIELD'
@@ -63,12 +71,27 @@ export default {
             this.updateField({ id:data.id, value:data.value })
         },
         save() {
-            this.saveData({type:this.type, id:this.id})
+            this.saveData({type:this.type, id:this.id}).then(data => {
+                if (this.id === false) {
+                    this.$refs.files.manage(`${this.upload}/${data.id}`)
+                    this.$router.push({name:'model.edit', params:{id:data.id}})
+                } else {
+                    this.$refs.files.manage(this.upload)
+                }
+            })
+            .catch(error => {
+                console.log('Error: ', error)
+            })
         }
     },
     beforeRouteUpdate (to, from, next) {
-        this.id = to.params.id;
-        this.getData(to.params.blueprint, this.id)
+        this.getData({ blueprint: to.params.blueprint, id:to.params.id })
+        next()
+    },
+    beforeRouteLeave (to, from, next) {
+        if (to.name === 'model.edit') {
+            this.getData({ blueprint: to.params.blueprint, id:to.params.id })
+        }
         next()
     }
 }

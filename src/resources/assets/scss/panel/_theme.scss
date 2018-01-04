@@ -2,12 +2,6 @@ html, body {
     height: 100%;
 }
 
-// html {
-//     &.is-clipped {
-//         overflow: hidden !important;
-//     }
-// }
-
 .panel-top-container {
     position: initial;
     @include desktop {

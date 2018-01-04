@@ -4,11 +4,13 @@
             <div class="navbar-burger burger" @click="toggle" :class="{'is-active':isOpen}">
                 <span></span><span></span><span></span>
             </div>
-            <div class="navbar-title is-hidden-desktop" v-text="name"></div>
-            <figure class="navbar-image">
-                <img :src="logo" :alt="name" />
-            </figure>
-            <div class="navbar-title is-hidden-touch" v-text="name"></div>
+            <router-link to="/" exact class="navbar-item has-logo">
+                <figure class="navbar-image">
+                    <img :src="logo" :alt="name" />
+                </figure>
+                <span class="navbar-title" v-text="name"></span>
+                <!-- <span class="navbar-title is-hidden-touch" v-text="name"></span> -->
+            </router-link>
         </div>
         
         <div class="navbar-menu">

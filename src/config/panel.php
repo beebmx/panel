@@ -10,9 +10,9 @@ return [
     | Default is 'panel'
     |
     */
-    
+
     'prefix' => 'panel',
-    
+
     /*
     |-----------------------------------------------------------------------------------
     | Proyect Name
@@ -22,9 +22,9 @@ return [
     | This value it will be displayed in the header and dashboard.
     |
     */
-    
+
     'name' => 'Bee business',
-    
+
     /*
     |-----------------------------------------------------------------------------------
     | Proyect Logo
@@ -35,7 +35,7 @@ return [
     | Set null if you don't want to show any logo.
     |
     */
-    
+
     'logo' => 'images/logo.png',
 
     /*
@@ -48,9 +48,9 @@ return [
     | If 'sidebarOrder' is false, the sidebar will be order by the name in Blueprint
     |
     */
-    
+
     'sidebarOrder' => false,
-    
+
     /*
     |-----------------------------------------------------------------------------------
     | Paginate
@@ -59,9 +59,9 @@ return [
     | This option define the default value for pagination if is not defined in Blueprint
     |
     */
-    
+
     'paginate' => 10,
-    
+
     /*
     |-----------------------------------------------------------------------------------
     | Disk
@@ -70,9 +70,9 @@ return [
     | This option define where the files will be storage
     |
     */
-    
+
     'disk' => 'public',
-    
+
     /*
     |-----------------------------------------------------------------------------------
     | Google Maps API Key
@@ -82,7 +82,7 @@ return [
     | You can obtain an API Key here: https://console.developers.google.com
     |
     */
-    
+
     'maps_api' => env('MAPS_API_KEY', ''),
 
     /*
@@ -94,8 +94,7 @@ return [
     | The icon is a font-awesome selector. The `fa-` prefix is not required.
     |
     */
-    
+
     'links' => [['icon' => 'facebook', 'type' => 'fab', 'url' => 'https://www.facebook.com/beebusinessmx/'],
                 ['icon' => 'twitter', 'type' => 'fab', 'url' => 'https://twitter.com/beebmx/']],
-    
 ];

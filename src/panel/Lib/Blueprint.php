@@ -43,6 +43,16 @@ class Blueprint
         return new Fields($this->fields);
     }
 
+    public function data()
+    {
+        return new BlueprintData($this);
+    }
+
+    public function files()
+    {
+        return new PFiles($this);
+    }
+
     public function getUrl()
     {
         return route('panel.' . $this->type . '.index', ['model' => $this->filename]);
@@ -56,11 +66,6 @@ class Blueprint
     public function getFilename()
     {
         return $this->filename;
-    }
-
-    public function data()
-    {
-        return new BlueprintData($this);
     }
 
     public static function exists($model)

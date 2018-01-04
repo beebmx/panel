@@ -10,7 +10,6 @@
 export default {
     props: {
         link: [String, Object],
-        upload: Boolean,
         disabled: {
             type: Boolean,
             default: false
@@ -21,10 +20,6 @@ export default {
         },
         design: {
             type: [String, Boolean],
-            default: false
-        },
-        disabled: {
-            type: Boolean,
             default: false
         },
         loading: {

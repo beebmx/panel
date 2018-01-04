@@ -15,7 +15,6 @@
     </panel-content>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
 export default {
     computed: {
         permission() {

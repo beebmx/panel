@@ -1,0 +1,41 @@
+.panel-files-manager {
+    .has-progress {
+        padding: 0.15rem 0.75rem;
+        min-height: 1rem;
+    }
+    .has-table {
+        border: 2px solid $grey-lighter;
+    }
+    .table {
+        margin-bottom: 0.55rem;
+    }
+    thead th {
+        border-bottom: 1px solid $grey-lighter;
+    }
+    th.is-last {
+        width: 3rem;
+    }
+    .panel-input-upload {
+        position: absolute;
+        top: 0;
+        left: -3000px;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+    }
+    progress.progress::-webkit-progress-value {
+        transition: $speed width $easing;
+    }
+    .progress-fade-enter, .progress-fade-leave-to {
+        opacity: 0;
+    }
+    .progress-fade-enter-active {
+        transition: $speed width $easing;
+
+    } .progress-fade-leave-active {
+        transition: ($speed * 3) width $easing;
+    }
+    .progress-fade-enter-active, .progress-fade-leave-active {
+        opacity: 1
+    }
+}

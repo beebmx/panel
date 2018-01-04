@@ -4,9 +4,10 @@ import Vuex from 'vuex'
 //import * as actions from './actions'
 //import * as getters from './getters'
 //import * as mutations from './mutations'
+import files from './modules/files'
 import general from './modules/general'
-import sidebar from './modules/sidebar'
 import model from './modules/model'
+import sidebar from './modules/sidebar'
 
 Vue.use(Vuex)
 
@@ -23,9 +24,10 @@ export default new Vuex.Store({
     //getters
     //mutations
     modules: {
+        files,
         general,
-        sidebar,
         model,
+        sidebar
     },
     strict: debug
 })

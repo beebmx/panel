@@ -12,7 +12,7 @@ const actions = {
     toggle ({ commit }) {
         commit(types.SIDEBAR_TOGGLE)
     },
-    close ({ dispatch, commit }) {
+    close ({ commit }) {
         commit(types.SIDEBAR_CLOSE)
     }
 }

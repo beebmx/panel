@@ -11,6 +11,7 @@
                 </div>
             </div>
         </div>
+        <panel-dropzone v-if="files" />
         <vue-progress-bar></vue-progress-bar>
     </div>
 </template>
@@ -22,6 +23,10 @@ export default {
             type: Boolean,
             default: false
         },
+        files: {
+            type: Boolean,
+            default: false
+        }
     },
     data () {
         return {

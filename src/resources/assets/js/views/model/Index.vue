@@ -1,15 +1,18 @@
 <template>
-    <panel-layout :loading="loading">
+    <panel-layout :loading="loading" :files="allowFiles">
         <router-view></router-view>
     </panel-layout>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
     computed: {
         ...mapState({
             loading: state => state.model.loading,
+        }),
+        ...mapGetters({
+            allowFiles: 'model/allowFiles'
         })
     },
     methods: {

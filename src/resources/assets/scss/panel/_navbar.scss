@@ -23,4 +23,7 @@ nav.panel-navbar {
             max-height: calc(#{$navbar-height} - 8px);
         }
     }
+    .has-logo {
+        padding: 0;
+    }
 }

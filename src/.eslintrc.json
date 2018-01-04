@@ -32,6 +32,8 @@
     },
     "globals": {
         "_": false,
-        "panel": false
+        "panel": false,
+        "$http": false,
+        "axios": false
     }
 }

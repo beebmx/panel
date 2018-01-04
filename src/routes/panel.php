@@ -15,6 +15,11 @@ Route::group(['middleware' => 'web', 'namespace' => 'Beebmx\Panel\Http\Controlle
 
             Route::post('model/{model}', 'PanelModelController@store')->name('model.store');
             Route::put('model/{model}/{id}', 'PanelModelController@update')->name('model.update');
+
+            Route::get('files/{model}/{id}', 'FilesController@all')->name('files.all');
+            Route::post('files/{model}/{id?}', 'FilesController@upload')->name('files.upload');
+            Route::post('files/{model}/{id}/process', 'FilesController@process')->name('files.process');
+            Route::post('files/{model}/{id?}/reverse', 'FilesController@reverse')->name('files.reverse');
         });
 
         Route::get('/{view?}', 'PanelController@index')->where('view', '(.*)')->name('views');

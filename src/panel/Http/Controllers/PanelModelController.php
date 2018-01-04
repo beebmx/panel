@@ -25,11 +25,12 @@ class PanelModelController extends Controller
     public function index(Request $request, $model)
     {
         $model = $this->getBlueprint($model);
-        $fields = $model->fields()->getSettings();
         $permissions = $model->data()->getPermissions();
-
+        $fields = $model->fields()->getSettings();
         $headers = $model->data()->getHeaders();
-        return response()->json(compact('permissions', 'fields', 'headers'));
+        $files = $model->files()->getSettings();
+
+        return response()->json(compact('permissions', 'fields', 'headers', 'files'));
     }
 
     public function data(Request $request, $model)
@@ -49,21 +50,12 @@ class PanelModelController extends Controller
         return response()->json(compact('models', 'data'));
     }
 
-    public function create()
-    {
-    }
-
     public function store($model)
     {
         $model = $this->getBlueprint($model);
         $data = $model->data()->save();
 
         return response()->json(compact('data'));
-    }
-
-    public function edit(Request $request, $model)
-    {
-        $model = $this->getBlueprint($model);
     }
 
     public function update($model, $id)

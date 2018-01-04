@@ -1,6 +1,9 @@
 <template>
-    <panel-layout></panel-layout>
+    <div class="panel-files-manager">
+
+    </div>
 </template>
+    
 <script>
 
 export default {
@@ -9,7 +12,8 @@ export default {
     data () {
         return {
         }
+    },
+    methods: {
     }
-    
 }
 </script>
