@@ -84,6 +84,8 @@ export default {
         this.path = this.url
         if (this.search) {
             this.remote(this.url)
+        } else {
+            this.reset({})
         }
     },
     methods: {
@@ -94,6 +96,7 @@ export default {
             reverse: 'files/reverse'
         }),
         ...mapMutations({
+            reset: 'files/FILES_SET',
             delete: 'files/FILES_DELETE'
         }),
         open() {
@@ -128,8 +131,9 @@ export default {
     },
     beforeDestroy() {
         if (! this.processing) {
-            this.reverse(this.url)
-            //console.log('delete or process files remotely')
+            if (_.size(this.files)) {
+                this.reverse(this.url)
+            }
         }
     }
 }

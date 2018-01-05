@@ -76,10 +76,11 @@ const actions = {
                  });
         })
     },
-    reverse ({state}, url) {
+    reverse ({commit, state}, url) {
         $http.post(`${url}/reverse`, {files:state.files})
              .then(response => {
-                console.log(response.data)
+                 commit(types.FILES_SET, {})
+                 return response.data
              })
              .catch(error => {
                 console.log(error)

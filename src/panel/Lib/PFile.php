@@ -8,7 +8,7 @@ class PFile
 {
     protected $files;
     protected $file;
-    protected $filepath;
+    protected $pathfile;
     public $basename;
     public $filename;
     public $size = 0;
@@ -63,16 +63,20 @@ class PFile
 
     public function get()
     {
-        return Storage::disk(config('panel.disk'))->get($this->filepath);
+        return Storage::disk(config('panel.disk'))->get($this->pathfile);
     }
 
     public function move($file)
     {
+        $this->file = $file;
         $pfile = $this->files->path() . '/' . $file;
         if (static::exists($pfile)) {
             static::delete($pfile);
         }
-        return Storage::disk(config('panel.disk'))->move($this->files->tmp() . '/' . $file, $pfile);
+        Storage::disk(config('panel.disk'))->move($this->files->tmp() . '/' . $file, $pfile);
+        $this->isStored();
+
+        return $this;
     }
 
     public function getExtension()
@@ -93,12 +97,12 @@ class PFile
 
     public function rawSize()
     {
-        return Storage::disk(config('panel.disk'))->size($this->filepath);
+        return Storage::disk(config('panel.disk'))->size($this->pathfile);
     }
 
     public function getMime()
     {
-        return Storage::disk(config('panel.disk'))->mimeType($this->filepath);
+        return Storage::disk(config('panel.disk'))->mimeType($this->pathfile);
     }
 
     public function getType()
@@ -113,7 +117,7 @@ class PFile
 
     public function url()
     {
-        return Storage::disk(config('panel.disk'))->url($this->filepath);
+        return Storage::disk(config('panel.disk'))->url($this->pathfile);
     }
 
     public static function exists($file)
@@ -131,7 +135,7 @@ class PFile
         $this->extension = $this->getExtension();
         $this->basename = str_slug(basename($this->file, '.' . $this->extension));
         $this->filename = $this->basename . '.' . $this->extension;
-        $this->filepath = $this->files->path() . '/' . $this->filename;
+        $this->pathfile = $this->files->path() . '/' . $this->filename;
         $this->size = $this->rawSize();
         $this->mime = $this->getMime();
         $this->type = $this->getType();
@@ -142,7 +146,7 @@ class PFile
         $this->extension = $this->file->getClientOriginalExtension();
         $this->basename = str_slug(basename($this->file->getClientOriginalName(), '.' . $this->extension));
         $this->filename = $this->basename . '.' . $this->extension;
-        $this->filepath = $this->files->path() . '/' . $this->filename;
+        $this->pathfile = $this->files->path() . '/' . $this->filename;
         $this->size = $this->file->getClientSize();
         $this->mime = $this->file->getMimeType();
         $this->type = $this->getType();
