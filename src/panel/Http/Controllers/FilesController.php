@@ -29,7 +29,7 @@ class FilesController extends Controller
         return response()->json(compact('files'));
     }
 
-    public function upload($model, $id)
+    public function upload($model, $id = null)
     {
         $model = $this->getBlueprint($model);
         $files = $model->files()->save();

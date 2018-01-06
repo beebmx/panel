@@ -35,6 +35,7 @@ class Blueprint
                 'icon' => 'list',
                 'options' => [],
                 'order' => [],
+                'files' => false,
         ];
     }
 

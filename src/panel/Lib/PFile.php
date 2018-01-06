@@ -3,6 +3,7 @@
 namespace Beebmx\Panel;
 
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class PFile
 {
@@ -71,17 +72,14 @@ class PFile
         $this->file = $file;
         $pfile = $this->files->path() . '/' . $file;
         if (static::exists($pfile)) {
-            static::delete($pfile);
+            static::delete($this->files->path(), $file);
         }
         Storage::disk(config('panel.disk'))->move($this->files->tmp() . '/' . $file, $pfile);
+
         $this->isStored();
+        $this->process();
 
         return $this;
-    }
-
-    public function getExtension()
-    {
-        return pathinfo($this->file, PATHINFO_EXTENSION);
     }
 
     public function getSize()
@@ -105,40 +103,61 @@ class PFile
         return Storage::disk(config('panel.disk'))->mimeType($this->pathfile);
     }
 
-    public function getType()
-    {
-        foreach (static::$types as $type => $extensions) {
-            if (in_array($this->extension, $extensions)) {
-                return $type;
-            }
-        }
-        return null;
-    }
-
     public function url()
     {
         return Storage::disk(config('panel.disk'))->url($this->pathfile);
     }
 
-    public static function exists($file)
+    public function isImage()
     {
-        return Storage::disk(config('panel.disk'))->exists($file);
+        return static::getType($this->extension) === 'image';
     }
 
-    public static function delete($file)
+    public function isDocument()
     {
-        Storage::disk(config('panel.disk'))->delete($file);
+        return static::getType($this->extension) === 'document';
+    }
+
+    public function isVideo()
+    {
+        return static::getType($this->extension) === 'video';
+    }
+
+    public function isAudio()
+    {
+        return static::getType($this->extension) === 'audio';
+    }
+
+    public function isArchive()
+    {
+        return static::getType($this->extension) === 'archive';
+    }
+
+    public function isCode()
+    {
+        return static::getType($this->extension) === 'code';
+    }
+
+    public function thumb()
+    {
+        $this->pathfile = $this->files->path() . '/thumb/' . $this->filename;
+        return $this;
+    }
+
+    public function hasOptions()
+    {
+        return is_array($this->files->options()) ? true : false;
     }
 
     protected function isStored()
     {
-        $this->extension = $this->getExtension();
+        $this->extension = static::getExtension($this->file);
         $this->basename = str_slug(basename($this->file, '.' . $this->extension));
         $this->filename = $this->basename . '.' . $this->extension;
         $this->pathfile = $this->files->path() . '/' . $this->filename;
         $this->size = $this->rawSize();
         $this->mime = $this->getMime();
-        $this->type = $this->getType();
+        $this->type = static::getType($this->extension);
     }
 
     protected function isUpload()
@@ -149,6 +168,143 @@ class PFile
         $this->pathfile = $this->files->path() . '/' . $this->filename;
         $this->size = $this->file->getClientSize();
         $this->mime = $this->file->getMimeType();
-        $this->type = $this->getType();
+        $this->type = static::getType($this->extension);
+    }
+
+    protected function process()
+    {
+        if ($this->isImage()) {
+            $file = $this->get();
+            $this->makeThumbnail($file);
+            if ($this->hasOptions()) {
+                $this->processImage($file);
+            }
+        }
+        return $this;
+    }
+
+    protected function makeThumbnail($file)
+    {
+        $image = Image::make($file)
+                      ->interlace()
+                      ->fit(70, 70);
+        Storage::disk(config('panel.disk'))
+               ->put($this->files->path() . '/thumb/' . $this->filename, (string) $image->encode());
+
+        return $this;
+    }
+
+    protected function processImage($file)
+    {
+        $toProcess = $this->files->options();
+        $path = $this->files->path() . '/process/';
+        foreach ($toProcess['images'] as $name => $process) {
+            $prefix = isset($process['prefix']) ? $process['prefix'] : false;
+            $methods = isset($process['methods']) ? $process['methods'] : [];
+            $filename = $prefix ? $name . '_' . $this->basename . '.' . $this->extension :
+                                  $this->basename . '_' . $name . '.' . $this->extension;
+
+            $image = Image::make($file)->interlace();
+
+            foreach ($methods as $method => $options) {
+                $this->processImageMethod($image, $method, $options);
+            }
+            if (static::exists($path . $filename)) {
+                static::delete($path, $filename);
+            }
+            Storage::disk(config('panel.disk'))->put($path . $filename, (string) $image->encode());
+        }
+    }
+
+    protected function processImageMethod($image, $method, $options)
+    {
+        switch ($method) {
+            case 'fit': case 'resize':
+                $size = isset($options['size']) ? $options['size'] : '200x200';
+                $size = explode('x', $size);
+                return $image->$method($size[0], isset($size[1]) ? $size[1] : null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            break;
+            case 'blur': case 'brightness': case 'contrast': case 'gamma':
+            case 'opacity': case 'pixelate': case 'rotate': case 'sharpen':
+                $amount = isset($options['amount']) ? (int) $options['amount'] : 0;
+                return $image->$method($amount);
+            break;
+            case 'flip':
+                $mode = isset($options['mode']) ? $options['mode'] : 'h';
+                return $image->$method($mode);
+            break;
+            case 'greyscale': case 'invert':
+                return $image->$method();
+            break;
+            case 'watermark':
+                $position = isset($options['position']) ? $options['position'] : 'bottom-right';
+                $size = isset($options['size']) ? $options['size'] : '50x50';
+                $x = isset($options['x']) ? $options['x'] : 0;
+                $y = isset($options['y']) ? $options['y'] : 0;
+                $size = explode('x', $size);
+
+                $watermark = Image::make(public_path($options['url']));
+                $watermark->resize($size[0], isset($size[1]) ? $size[1] : null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                return $image->insert($watermark, $position, $x, $y);
+            break;
+        }
+    }
+
+    public static function exists($file)
+    {
+        return Storage::disk(config('panel.disk'))->exists($file);
+    }
+
+    public static function getExtension($file)
+    {
+        return pathinfo($file, PATHINFO_EXTENSION);
+    }
+
+    public static function getType($extension)
+    {
+        foreach (static::$types as $type => $extensions) {
+            if (in_array($extension, $extensions)) {
+                return $type;
+            }
+        }
+        return null;
+    }
+
+    public static function delete($path, $file, $dependencies = false, $options = false)
+    {
+        Storage::disk(config('panel.disk'))->delete($path . '/' . $file);
+        if ($dependencies) {
+            static::deleteDependencies($path, $file, $options);
+        }
+    }
+
+    public static function deleteDependencies($path, $file, $options)
+    {
+        if (static::getType(static::getExtension($file)) === 'image') {
+            static::deleteImages($path, $file, $options['images']);
+        }
+    }
+
+    public static function deleteImages($path, $file, $options)
+    {
+        if (static::exists($path . '/thumb/' . $file)) {
+            Storage::disk(config('panel.disk'))->delete($path . '/thumb/' . $file);
+
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $extension = static::getExtension($file);
+            foreach ($options as $name => $process) {
+                $prefix = isset($process['prefix']) ? $process['prefix'] : false;
+                $process = $prefix ? $name . '_' . $filename . '.' . $extension :
+                                     $filename . '_' . $name . '.' . $extension;
+
+                Storage::disk(config('panel.disk'))->delete($path . '/process/' . $process);
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ class PFiles
     protected $base;
     protected $blueprint;
     protected $id = false;
+    protected $options;
     protected $path;
     protected $storage;
     protected $tmp;
@@ -22,6 +23,7 @@ class PFiles
         $this->base = $this->blueprint->type . '/' . $this->storage;
         $this->tmp = $this->base . '/tmp';
         $this->path = $this->tmp;
+        $this->options = $this->blueprint->files;
     }
 
     public function getSettings()
@@ -71,9 +73,9 @@ class PFiles
             if ($file['status'] === 'pending') {
                 tap(new PFile($this))->move($file['filename']);
             } elseif ($file['location'] === 'tmp' && $file['status'] === 'deleted') {
-                PFile::delete($this->tmp() . '/' . $file['filename']);
+                PFile::delete($this->tmp(), $file['filename']);
             } elseif ($file['location'] === 'remote' && $file['status'] === 'deleted') {
-                PFile::delete($this->path() . '/' . $file['filename']);
+                PFile::delete($this->path(), $file['filename'], true, $this->options());
             }
         }
         return $this->all();
@@ -85,15 +87,17 @@ class PFiles
             return $file['location'] !== 'remote';
         });
         foreach ($files as $file) {
-            PFile::delete($this->tmp() . '/' . $file['filename']);
+            PFile::delete($this->tmp(), $file['filename']);
         }
         return true;
     }
 
     public function setId($id)
     {
-        $this->id = $id;
-        $this->path = $this->base . '/' . $this->id;
+        if ($id) {
+            $this->id = $id;
+            $this->path = $this->base . '/' . $this->id;
+        }
 
         return $this;
     }
@@ -116,5 +120,10 @@ class PFiles
     public function tmp()
     {
         return $this->tmp;
+    }
+
+    public function options()
+    {
+        return $this->options;
     }
 }

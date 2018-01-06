@@ -132,7 +132,8 @@ export default {
     beforeDestroy() {
         if (! this.processing) {
             if (_.size(this.files)) {
-                this.reverse(this.url)
+                const url = !this.search ? `${this.url}/0` : this.url
+                this.reverse(url)
             }
         }
     }
