@@ -1,8 +1,9 @@
 <template>
-        <input class="radio"
+        <input class="is-checkradio"
             :class="[size, design]"
             type="radio"
             :name="id"
+            :id="id+'-'+value"
             :value="value"
             :required="required"
             :readonly="readonly"

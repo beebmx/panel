@@ -1,10 +1,9 @@
 <template>
     <panel-field v-bind="$props">
         <label class="label" :for="id" v-text="label"></label>
-            <div class="control">
-                <label class="radio" v-for="option in options" :key="option">
-                    <panel-radio-input v-bind="$props" :value="option" v-model="data"/> {{option}} 
-                </label>
+            <div class="field" v-for="option in options" :key="option">
+                <panel-radio-input v-bind="$props" :value="option" v-model="data"/> 
+                <label :for="id+'-'+option" v-text="option"></label>
             </div>
         <p v-if="help" class="help" v-text="help"></p>
     </panel-field>

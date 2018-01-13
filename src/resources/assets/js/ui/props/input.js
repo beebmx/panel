@@ -42,6 +42,10 @@ export default {
         design: {
             type: [String, Boolean],
             default: false
+        },
+        align: {
+            type: [String],
+            default: 'vertical'
         }
     }
 }
