@@ -33,14 +33,8 @@ export default {
     },
     methods: {
         update(event) {
-            // this.data = event.target.value
             this.$emit('input', event.target.value)
         }
-    },
-    // watch: {
-    //     value(value) {
-    //         this.data = value
-    //     }
-    // }
+    }
 }
 </script>

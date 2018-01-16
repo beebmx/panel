@@ -9,9 +9,9 @@ trait Administrable
 {
     public function getBlueprint()
     {
-        if (Blueprint::exists($this->blueprint)){
-            return new Blueprint(Blueprint::path($this->blueprint));
-        }else{
+        if (Blueprint::exists($this->blueprint)) {
+            return tap(new Blueprint(Blueprint::path($this->blueprint)))->setId($this->id);
+        } else {
             throw new BlueprintNotExists;
         }
     }

@@ -33,11 +33,11 @@ class PFiles
 
     public function all()
     {
-        $files = [];
+        $files = collect();
         if (Storage::disk(config('panel.disk'))->exists($this->path)) {
             foreach (Storage::disk(config('panel.disk'))->files($this->path) as $file) {
                 if (basename($file) !== '.DS_Store') {
-                    $files[] = new PFile($this, basename($file));
+                    $files->push(new PFile($this, basename($file)));
                 }
             }
             return $files;
@@ -45,8 +45,45 @@ class PFiles
         return false;
     }
 
-    public function find($id)
+    public function images()
     {
+        return $this->all()->filter(function ($file, $key) {
+            return !!$file->isImage();
+        });
+    }
+
+    public function documents()
+    {
+        return $this->all()->filter(function ($file, $key) {
+            return !!$file->isDocument();
+        });
+    }
+
+    public function image($file)
+    {
+        //find and check if its an image and return pfile
+    }
+
+    public function document($file)
+    {
+        //find and check if its an document and return pfile
+    }
+
+    // public function getByType($type)
+    // {
+    //     $types = collect();
+    //     $files = $this->all();
+    //     foreach ($files as $file) {
+    //         if ($file->type() === $type) {
+    //             $types->push($file);
+    //         }
+    //     }
+    //     return $types;
+    // }
+
+    public function find($file)
+    {
+        //find file and return pfile
     }
 
     public function save($id = false)

@@ -73,10 +73,14 @@ export default {
         save() {
             this.saveData({type:this.type, id:this.id}).then(data => {
                 if (this.id === false) {
-                    this.$refs.files.manage(`${this.upload}/${data.id}`)
+                    if (this.allowFiles) {
+                        this.$refs.files.manage(`${this.upload}/${data.id}`)
+                    }
                     this.$router.push({name:'model.edit', params:{id:data.id}})
                 } else {
-                    this.$refs.files.manage(this.upload)
+                    if (this.allowFiles) {
+                        this.$refs.files.manage(this.upload)
+                    }
                 }
             })
             .catch(error => {

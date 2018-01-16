@@ -10,9 +10,12 @@ class Blueprint
 {
     use HasSettings;
 
-    protected $filename;
     protected $class;
+    protected $data = false;
     protected $file;
+    protected $filename;
+    protected $files = false;
+    protected $id = false;
 
     public function __construct($file)
     {
@@ -46,12 +49,18 @@ class Blueprint
 
     public function data()
     {
-        return new BlueprintData($this);
+        if (!$this->data) {
+            $this->data = new BlueprintData($this);
+        }
+        return $this->data;
     }
 
     public function files()
     {
-        return new PFiles($this);
+        if (!$this->files) {
+            $this->files = new PFiles($this);
+        }
+        return $this->files;
     }
 
     public function getUrl()
@@ -67,6 +76,20 @@ class Blueprint
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        $this->files()->setId($this->id);
+        $this->data()->setId($this->id);
+
+        return $this->id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public static function exists($model)

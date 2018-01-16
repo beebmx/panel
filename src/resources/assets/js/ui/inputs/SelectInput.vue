@@ -3,7 +3,8 @@
     <select
         :id="id"
         :name="id"
-        v-model="data">
+        :value="value"
+        @change="update">
         <option
             v-for="option in options"
             :key="option.value"
@@ -27,16 +28,13 @@ export default {
     },
     data () {
         return {
-            data: this.value,
+            // data: this.value,
         }
     },
-    watch: {
-        // data () {
-        //     this.$emit('input', this.data)
-        // },
-        // value(value) {
-        //     this.data = value
-        // }
+    methods: {
+        update(event) {
+            this.$emit('input', event.target.value)
+        }
     }
 }
 </script>

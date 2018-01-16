@@ -44,7 +44,10 @@ export default {
     computed: {
         ...mapGetters({
             relationship: 'model/getRelationship',
-        })
+        }),
+        isParent() {
+            return this.options === 'parent'
+        }
     },
     data () {
         return {
@@ -53,7 +56,7 @@ export default {
     },
     methods: {
         resource() {
-            if (this.options === 'parent' && this.relationship(this.parent.relation)) {
+            if (this.isParent && this.relationship(this.parent.relation)) {
                 const fields = this.query.text.split(this.query.separator || '|')
                 return [{
                     value: '',
@@ -80,7 +83,11 @@ export default {
             this.data = value
         },
         data () {
-            this.$emit('input', {id:this.id, value:this.data})
+            if (this.isParent) {
+                this.$emit('input', {id:this.id, value:parseInt(this.data, 10)})
+            } else {
+                this.$emit('input', {id:this.id, value:this.data})
+            }
         }
     }
 }
