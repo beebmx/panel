@@ -40,9 +40,8 @@ class PFiles
                     $files->push(new PFile($this, basename($file)));
                 }
             }
-            return $files;
         }
-        return false;
+        return $files;
     }
 
     public function images()
@@ -59,43 +58,37 @@ class PFiles
         });
     }
 
-    public function image($file)
+    public function image($filename)
     {
-        //find and check if its an image and return pfile
+        return $this->images()->first(function ($file, $key) use ($filename) {
+            return $file->filename() === $filename;
+        });
     }
 
-    public function document($file)
+    public function document($filename)
     {
-        //find and check if its an document and return pfile
+        return $this->documents()->first(function ($file, $key) use ($filename) {
+            return $file->filename() === $filename;
+        });
     }
 
-    // public function getByType($type)
-    // {
-    //     $types = collect();
-    //     $files = $this->all();
-    //     foreach ($files as $file) {
-    //         if ($file->type() === $type) {
-    //             $types->push($file);
-    //         }
-    //     }
-    //     return $types;
-    // }
-
-    public function find($file)
+    public function find($filename)
     {
-        //find file and return pfile
+        return $this->all()->first(function ($file, $key) use ($filename) {
+            return $file->filename() === $filename;
+        });
     }
 
     public function save($id = false)
     {
         //Validate files
         $files = request()->file('files');
-        $uploaded = [];
+        $uploaded = collect();
         if ($id) {
             $this->setId($id);
         }
         foreach ($files as $file) {
-            $uploaded[] = tap(new PFile($this, $file))->save();
+            $uploaded->push(tap(new PFile($this, $file))->save());
         }
         return $uploaded;
     }

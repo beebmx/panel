@@ -56,9 +56,6 @@ export default {
     mounted() {
         this.getData({ blueprint: this.blueprint, id:this.id })
     },
-    // beforeUpdate() {
-    //     console.log('update', this.id, this.redirect)
-    // },
     methods: {
         ...mapMutations({
             updateField: 'model/MODEL_UPDATE_FIELD'

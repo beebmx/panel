@@ -5,6 +5,7 @@ namespace Beebmx\Panel\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
+use Beebmx\Panel\Http\Resources\BlueprintFileCollection;
 use Beebmx\Panel\Features\Blueprintable;
 
 class FilesController extends Controller
@@ -26,7 +27,7 @@ class FilesController extends Controller
         $model = $this->getBlueprint($model);
         $files = $model->files()->setId($id)->all();
 
-        return response()->json(compact('files'));
+        return new BlueprintFileCollection($files);
     }
 
     public function upload($model, $id = null)
@@ -34,7 +35,7 @@ class FilesController extends Controller
         $model = $this->getBlueprint($model);
         $files = $model->files()->save();
 
-        return response()->json(compact('files'));
+        return new BlueprintFileCollection($files);
     }
 
     public function process($model, $id)
@@ -42,7 +43,7 @@ class FilesController extends Controller
         $model = $this->getBlueprint($model);
         $files = $model->files()->setId($id)->process();
 
-        return response()->json(compact('files'));
+        return new BlueprintFileCollection($files);
     }
 
     public function reverse($model, $id = false)

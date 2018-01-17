@@ -29,7 +29,7 @@ const actions = {
 
         $http.post(url, data, config)
              .then(response => {
-                _.forEach(response.data.files, file => {
+                _.forEach(response.data.data, file => {
                     if (typeof _.find(getters.files, { 'filename': file.filename }) === 'undefined') {
                         file.status = 'pending'
                         file.location = 'tmp'
@@ -50,7 +50,7 @@ const actions = {
         $http.get(url)
              .then(response => {
                  let files = {};
-                _.forEach(response.data.files, file => {
+                _.forEach(response.data.data, file => {
                     file.status = 'remote'
                     file.location = 'remote'
                     files[file.filename] = file
@@ -63,7 +63,7 @@ const actions = {
             $http.post(`${url}/process`, {files:state.files})
                  .then(response => {
                     let files = {};
-                    _.forEach(response.data.files, file => {
+                    _.forEach(response.data.data, file => {
                         file.status = 'remote'
                         file.location = 'remote'
                         files[file.filename] = file

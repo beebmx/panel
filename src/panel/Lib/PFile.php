@@ -10,12 +10,12 @@ class PFile
     protected $files;
     protected $file;
     protected $pathfile;
-    public $basename;
-    public $filename;
-    public $size = 0;
-    public $type;
-    public $mime;
-    public $extension;
+    protected $basename;
+    protected $filename;
+    protected $size = 0;
+    protected $type;
+    protected $mime;
+    protected $extension;
 
     public static $types = [
         'image' => [
@@ -82,7 +82,17 @@ class PFile
         return $this;
     }
 
-    public function getSize()
+    public function rawSize()
+    {
+        return Storage::disk(config('panel.disk'))->size($this->pathfile);
+    }
+
+    public function mime()
+    {
+        return Storage::disk(config('panel.disk'))->mimeType($this->pathfile);
+    }
+
+    public function size()
     {
         if ($this->size >= 1000000000) {
             return round($this->size / 1000000000, 2) . ' GB';
@@ -93,19 +103,34 @@ class PFile
         return round($this->size / 1000, 2) . ' KB';
     }
 
-    public function rawSize()
-    {
-        return Storage::disk(config('panel.disk'))->size($this->pathfile);
-    }
-
-    public function getMime()
-    {
-        return Storage::disk(config('panel.disk'))->mimeType($this->pathfile);
-    }
-
     public function url()
     {
         return Storage::disk(config('panel.disk'))->url($this->pathfile);
+    }
+
+    public function filename()
+    {
+        return $this->filename;
+    }
+
+    public function basename()
+    {
+        return $this->basename;
+    }
+
+    public function extension()
+    {
+        return $this->extension;
+    }
+
+    public function type()
+    {
+        foreach (static::$types as $type => $extensions) {
+            if (in_array($this->extension, $extensions)) {
+                return $type;
+            }
+        }
+        return null;
     }
 
     public function isImage()
@@ -140,7 +165,20 @@ class PFile
 
     public function thumb()
     {
-        $this->pathfile = $this->files->path() . '/thumb/' . $this->filename;
+        if ($this->isImage()) {
+            $this->pathfile = $this->files->path() . '/thumb/' . $this->filename;
+        }
+        return $this;
+    }
+
+    public function processed($method)
+    {
+        if ($this->isImage()) {
+            $toProcess = $this->files->options();
+            $process = $toProcess['images'][$method];
+            $filename = static::getImageProcessFilename($method, $this->basename, $this->extension, $process);
+            $this->pathfile = $this->files->path() . '/process/' . $filename;
+        }
         return $this;
     }
 
@@ -156,7 +194,7 @@ class PFile
         $this->filename = $this->basename . '.' . $this->extension;
         $this->pathfile = $this->files->path() . '/' . $this->filename;
         $this->size = $this->rawSize();
-        $this->mime = $this->getMime();
+        $this->mime = $this->mime();
         $this->type = static::getType($this->extension);
     }
 
@@ -199,10 +237,8 @@ class PFile
         $toProcess = $this->files->options();
         $path = $this->files->path() . '/process/';
         foreach ($toProcess['images'] as $name => $process) {
-            $prefix = isset($process['prefix']) ? $process['prefix'] : false;
             $methods = isset($process['methods']) ? $process['methods'] : [];
-            $filename = $prefix ? $name . '_' . $this->basename . '.' . $this->extension :
-                                  $this->basename . '_' . $name . '.' . $this->extension;
+            $filename = static::getImageProcessFilename($name, $this->basename, $this->extension, $process);
 
             $image = Image::make($file)->interlace();
 
@@ -299,12 +335,17 @@ class PFile
             $filename = pathinfo($file, PATHINFO_FILENAME);
             $extension = static::getExtension($file);
             foreach ($options as $name => $process) {
-                $prefix = isset($process['prefix']) ? $process['prefix'] : false;
-                $process = $prefix ? $name . '_' . $filename . '.' . $extension :
-                                     $filename . '_' . $name . '.' . $extension;
+                $process = static::getImageProcessFilename($name, $filename, $extension, $process);
 
                 Storage::disk(config('panel.disk'))->delete($path . '/process/' . $process);
             }
         }
+    }
+
+    public static function getImageProcessFilename($name, $filename, $extension, $process = false)
+    {
+        $prefix = isset($process['prefix']) ? $process['prefix'] : false;
+        return $prefix ? $name . '_' . $filename . '.' . $extension :
+                         $filename . '_' . $name . '.' . $extension;
     }
 }
