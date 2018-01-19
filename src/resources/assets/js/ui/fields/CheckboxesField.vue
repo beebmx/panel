@@ -73,7 +73,6 @@ export default {
                 })
                 return obj
             } else if (typeof this.options === 'object') {
-                console.log(this.options)
                 return this.options
             } else {
                 return []
