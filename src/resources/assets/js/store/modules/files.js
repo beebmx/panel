@@ -9,9 +9,25 @@ const getters = {
     all (state) {
         return state.files
     },
+    visible (state) {
+        return _.filter(state.files, file => {
+            return file.status !== 'deleted'
+        });
+    },
     getProgress (state) {
         return state.progress
     },
+    getByType: (state) => (type) => {
+        if (type === '*' || type === 'files') {
+            return _.filter(state.files, file => {
+                return file.status !== 'deleted'
+            });
+        } else {
+            return _.filter(state.files, file => {
+                return file.status !== 'deleted' && file.type === type
+            });
+        }
+    }
 }
 
 const actions = {

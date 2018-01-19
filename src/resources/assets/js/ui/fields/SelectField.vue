@@ -6,7 +6,7 @@
                 <panel-select-input
                     v-bind="$props"
                     v-model="data"
-                    :options="resource()">
+                    :options="rows">
                 </panel-select-input>
             </div>
             <span v-if="icon" class="icon is-small is-left">
@@ -20,16 +20,16 @@
 <script>
 import field from '../props/field'
 import props from '../props/input'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     mixins: [field, props],
     props: {
         options: {
-            type: [Array, String]
+            type: [Object, String]
         },
         parent: {
-            type: [Array, Object]
+            type: [Array, Object, Boolean]
         },
         query: {
             type: Object,
@@ -43,35 +43,52 @@ export default {
     },
     computed: {
         ...mapGetters({
-            relationship: 'model/getRelationship',
+            files: 'files/visible',
+            filesByType: 'files/getByType'
         }),
         isParent() {
-            return this.options === 'parent'
+            return typeof this.options === 'string' && this.options === 'parent'
+        },
+        isObject() {
+            return typeof this.options === 'object'
         }
     },
     data () {
         return {
-            data: this.value
+            data: this.value,
+            rows: []
         }
     },
+    created() {
+        this.resource()
+    },
     methods: {
+        ...mapActions({
+            getParent: 'model/getParent',
+        }),
         resource() {
-            if (this.isParent && this.relationship(this.parent.relation)) {
+            if (this.isParent) {
                 const fields = this.query.text.split(this.query.separator || '|')
-                return [{
+                this.getParent({model:this.parent.model, relationship:this.parent.relation}).then(resource => {
+                    this.rows = [{
+                        value: '',
+                        text: 'Seleccione una opción',
+                        disabled: true
+                    }, ...resource.map((e) => {
+                        const value = e.id, text = fields.map((f) => {
+                            return e[f]
+                        }).join(' ');
+                        return {value, text}
+                    })]
+                })
+            } else if (this.isObject) {
+                this.rows = [{
                     value: '',
                     text: 'Seleccione una opción',
                     disabled: true
-                }, ...this.relationship(this.parent.relation).map((e) => {
-                    const value = e.id, text = fields.map((f) => {
-                        return e[f]
-                    }).join(' ');
-                    return {value, text}
+                }, ..._.map(this.options, (e, i) => {
+                    return {value:i, text:e}
                 })]
-            } else if (typeof this.options === 'object') {
-                return this.options
-            } else {
-                return []
             }
         },
         input (data) {
@@ -87,6 +104,22 @@ export default {
                 this.$emit('input', {id:this.id, value:parseInt(this.data, 10)})
             } else {
                 this.$emit('input', {id:this.id, value:this.data})
+            }
+        },
+        files () {
+            if (!this.isParent && !this.isObject) {
+                this.rows = [{
+                    value: '',
+                    text: 'Seleccione una opción',
+                    disabled: true
+                }, ..._.map(this.filesByType(this.options), e => {
+                    return {value:e.filename, text:e.filename}
+                })]
+                if (!_.find(this.rows, ['value', this.data])) {
+                    // console.log('data set null')
+                    this.data = null
+                    // console.log(this.data, !!_.find(this.rows, ['value', this.data]), _.find(this.rows, ['value', this.data]))
+                }
             }
         }
     }

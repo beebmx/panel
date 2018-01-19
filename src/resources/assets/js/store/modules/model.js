@@ -21,6 +21,9 @@ const getters = {
             return false
         }
     },
+    hasRelationship: (state) => (relationship) => {
+        return !!state.relationships[relationship]
+    },
     getHeaders: state => {
         if (typeof state.blueprints[state.current] !== 'undefined') {
             return state.blueprints[state.current].headers
@@ -105,6 +108,21 @@ const actions = {
             .catch(error => {
                 console.log(error)
             });
+    },
+    getParent ({ getters }, {model, relationship}) {
+        return new Promise((resolve, reject) => {
+            if (getters.hasRelationship(relationship)) {
+                resolve (getters.getRelationship(relationship))
+            } else {
+                $http.post(`api/model/${relationship}/parent`, { model })
+                     .then(response => {
+                        resolve (response.data.data)
+                     })
+                     .catch(error => {
+                        reject (error)
+                     });
+            }
+        })
     },
     saveData ({state}, {type, id}) {
         if (type === 'create') {

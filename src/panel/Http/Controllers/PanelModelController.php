@@ -5,6 +5,7 @@ namespace Beebmx\Panel\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Beebmx\Panel\Features\Blueprintable;
 use Beebmx\Panel\Http\Resources\BlueprintDataCollection;
+use Beebmx\Panel\Http\Resources\BlueprintParentCollection;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
@@ -68,5 +69,13 @@ class PanelModelController extends Controller
 
     public function destroy()
     {
+    }
+
+    public function parent()
+    {
+        $model = request()->input('model');
+        $model = $model::all();
+
+        return new BlueprintParentCollection($model);
     }
 }

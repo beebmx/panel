@@ -9,7 +9,7 @@
             v-for="option in options"
             :key="option.value"
             :value="option.value"
-            :selected="value === option.value"
+            :selected="selected(option.value)"
             :disabled="option.disabled"
             v-text="option.text"></option>
     </select>
@@ -26,12 +26,10 @@ export default {
             default: []
         },
     },
-    data () {
-        return {
-            // data: this.value,
-        }
-    },
     methods: {
+        selected(value) {
+            return (this.value === value || (this.value === null && value === ''))
+        },
         update(event) {
             this.$emit('input', event.target.value)
         }
