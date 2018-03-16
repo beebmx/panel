@@ -1,6 +1,6 @@
 <template>
     <input class="input"
-            :class="[size, design]"
+            :class="[size, design, {'is-danger':error}]"
             :type="type"
             :id="id"
             :name="id"

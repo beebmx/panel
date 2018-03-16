@@ -1,8 +1,11 @@
 <template>
     <panel-field v-bind="$props">
-        <label class="label" :for="id" v-text="label"></label>
+        <label class="label" :for="id">
+            <span v-text="label"></span>
+            <abbr v-if="required" title="Required">*</abbr>
+        </label>
         <div class="control" :class="[size, design, {'has-icons-left':icon}]">
-            <div class="select is-fullwidth">
+            <div class="select is-fullwidth" :class="{'is-danger':error}">
                 <panel-select-input
                     v-bind="$props"
                     v-model="data"
@@ -13,6 +16,7 @@
                 <panel-icon :icon="icon" />
             </span>
         </div>
+        <p v-if="error" class="help is-danger" v-text="error"></p>
         <p v-if="help" class="help" v-text="help"></p>
     </panel-field>
 </template>
@@ -44,7 +48,7 @@ export default {
     computed: {
         ...mapGetters({
             files: 'files/visible',
-            filesByType: 'files/getByType'
+            filesByType: 'files/getByType',
         }),
         isParent() {
             return typeof this.options === 'string' && this.options === 'parent'
@@ -116,9 +120,7 @@ export default {
                     return {value:e.filename, text:e.filename}
                 })]
                 if (!_.find(this.rows, ['value', this.data])) {
-                    // console.log('data set null')
                     this.data = null
-                    // console.log(this.data, !!_.find(this.rows, ['value', this.data]), _.find(this.rows, ['value', this.data]))
                 }
             }
         }

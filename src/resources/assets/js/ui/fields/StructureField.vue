@@ -41,6 +41,7 @@
                 </div>
             </div>
         </div>
+        <p v-if="error" class="help is-danger" v-text="error"></p>
         <p v-if="help" class="help" v-text="help"></p>
         <panel-modal-card v-model="visible">
             <div slot="header" v-text="label"></div>

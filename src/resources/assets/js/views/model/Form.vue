@@ -15,6 +15,7 @@
                        :key="field.id"
                        :is="field.field"
                        :value="data[field.id]"
+                       :error="error(field.id)"
                        @input="update"></component>
         </div>
         <panel-files-manager ref="files" v-if="allowFiles" :url="upload" :search="!!id" />
@@ -51,6 +52,7 @@ export default {
     data () {
         return {
             processing: false,
+            errors:false
         }
     },
     mounted() {
@@ -80,9 +82,15 @@ export default {
                     }
                 }
             })
-            .catch(error => {
-                console.log('Error: ', error)
+            .catch(response => {
+                this.errors = response.errors;
             })
+        },
+        error(id) {
+            if (_.has(this.errors, id)) {
+                return this.errors[id][0];
+            }
+            return false;
         }
     },
     beforeRouteUpdate (to, from, next) {
@@ -91,6 +99,7 @@ export default {
     },
     beforeRouteLeave (to, from, next) {
         if (to.name === 'model.edit') {
+            this.errors = false;
             this.getData({ blueprint: to.params.blueprint, id:to.params.id })
         }
         next()

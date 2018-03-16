@@ -23,9 +23,13 @@ export default {
             type: String,
             default: ''
         },
+        required: {
+            type: Boolean,
+            default: false
+        },
         error: {
-            type: String,
-            default: ''
+            type: [Boolean, String],
+            default: false
         },
         width: {
             type: [String, Number],

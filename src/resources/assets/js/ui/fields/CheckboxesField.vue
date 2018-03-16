@@ -1,12 +1,16 @@
 <template>
     <panel-field v-bind="$props">
-        <label class="label" :for="id" v-text="label"></label>
+        <label class="label" :for="id">
+            <span v-text="label"></span>
+            <abbr v-if="required" title="Required">*</abbr>
+        </label>
         <div class="control" :class="haveColumns('columns')">
             <div class="field" :class="haveColumns('column')" v-for="(option, i) in resource()" :key="option">
                 <input class="is-checkradio " :id="id+'-'+option" :value="i" type="checkbox" v-model="data">
                 <label :for="id+'-'+option" v-text="option"></label>
             </div>
         </div>
+        <p v-if="error" class="help is-danger" v-text="error"></p>
         <p v-if="help" class="help" v-text="help"></p>
     </panel-field>
 </template>
@@ -50,7 +54,7 @@ export default {
     },
     methods :{
         haveColumns (type){
-            if (type=="columns"){
+            if (type==="columns"){
                 return this.isHorizontal ? 'columns is-multiline' : ''
             }else{
                 return this.isHorizontal ? 'column is-narrow' : ''

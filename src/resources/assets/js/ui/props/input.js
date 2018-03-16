@@ -46,6 +46,10 @@ export default {
         align: {
             type: [String],
             default: 'vertical'
-        }
+        },
+        error: {
+            type: [Boolean, String],
+            default: false
+        },
     }
 }

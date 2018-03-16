@@ -18,7 +18,7 @@ const getters = {
         return state.progress
     },
     getByType: (state) => (type) => {
-        if (type === '*' || type === 'files') {
+        if (type === 'files') {
             return _.filter(state.files, file => {
                 return file.status !== 'deleted'
             });
@@ -46,13 +46,11 @@ const actions = {
         $http.post(url, data, config)
              .then(response => {
                 _.forEach(response.data.data, file => {
+                    file.status = 'pending'
+                    file.location = 'tmp'
                     if (typeof _.find(getters.files, { 'filename': file.filename }) === 'undefined') {
-                        file.status = 'pending'
-                        file.location = 'tmp'
                         commit(types.FILES_ADD, file)
                     } else {
-                        file.status = 'pending'
-                        file.location = 'tmp'
                         commit(types.FILES_REPLACE, file)
                     }
                 })
@@ -112,7 +110,10 @@ const mutations = {
         state.files = files
     },
     [types.FILES_ADD] (state, file) {
-        state.files[file.filename] = file
+        let files = _.merge({}, state.files);
+        files[file.filename] = file
+        state.files = files;
+        
     },
     [types.FILES_REPLACE] (state, file) {
         state.files[file.filename] = file
