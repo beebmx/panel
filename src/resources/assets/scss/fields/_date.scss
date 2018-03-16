@@ -1,0 +1,16 @@
+.is-date-field{
+    .datepicker{
+        position: absolute;
+        z-index: 100;
+        box-shadow: 0 2px 3px rgba($black, 0.1); 
+        &.is-right{
+            right: 2rem;
+            @include desktop{
+                right: 0.75rem;
+            }
+        } 
+        .calendar-nav{
+            font-size: 1.05rem;
+        }
+    }
+}
