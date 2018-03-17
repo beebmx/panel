@@ -2,10 +2,10 @@
     <panel-content>
         <div slot="header" class="columns is-multiline">
             <div class="column">
-                FORMULARIO
+                <div class="title is-4" v-text="name"></div>
             </div>
             <div class="column is-1 has-text-right">
-                <!-- <panel-icon icon="spinner-third" :spin="true" /> -->
+                <panel-icon v-if="processing" icon="spinner-third" :spin="true" />
             </div>
         </div>
         <div class="columns is-multiline">
@@ -22,7 +22,7 @@
         <div slot="footer" class="columns">
             <div class="column has-text-right">
                 <panel-button design="is-white" :link="{name:'model.index'}">Cancelar</panel-button>
-                <panel-button design="is-primary" @click="save">Guardar</panel-button>
+                <panel-button design="is-primary" :loading="processing" @click="save">Guardar</panel-button>
             </div>
         </div>
     </panel-content>
@@ -37,7 +37,8 @@ export default {
         ...mapGetters({
             fields: 'model/getFields',
             data: 'model/getDataFields',
-            allowFiles: 'model/allowFiles'
+            allowFiles: 'model/allowFiles',
+            name: 'model/getName'
         }),
         blueprint() {
                 return this.$route.params.blueprint;
@@ -70,7 +71,10 @@ export default {
             this.updateField({ id:data.id, value:data.value })
         },
         save() {
+            this.processing = true;
             this.saveData({type:this.type, id:this.id}).then(data => {
+                this.processing = false;
+                this.errors = false;
                 if (this.id === false) {
                     if (this.allowFiles) {
                         this.$refs.files.manage(`${this.upload}/${data.id}`)
@@ -83,6 +87,7 @@ export default {
                 }
             })
             .catch(response => {
+                this.processing = false;
                 this.errors = response.errors;
             })
         },
@@ -99,7 +104,6 @@ export default {
     },
     beforeRouteLeave (to, from, next) {
         if (to.name === 'model.edit') {
-            this.errors = false;
             this.getData({ blueprint: to.params.blueprint, id:to.params.id })
         }
         next()

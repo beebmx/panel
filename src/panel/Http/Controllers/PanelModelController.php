@@ -30,8 +30,9 @@ class PanelModelController extends Controller
         $fields = $model->fields()->getSettings();
         $headers = $model->data()->getHeaders();
         $files = $model->files()->getSettings();
+        $name = $model->name;
 
-        return response()->json(compact('permissions', 'fields', 'headers', 'files'));
+        return response()->json(compact('permissions', 'fields', 'headers', 'files', 'name'));
     }
 
     public function data(Request $request, $model)
@@ -67,8 +68,12 @@ class PanelModelController extends Controller
         return response()->json(compact('data'));
     }
 
-    public function destroy()
+    public function destroy($model, $id)
     {
+        $model = $this->getBlueprint($model);
+        $record = $model->data()->delete($id);
+
+        return response()->json(compact('record'));
     }
 
     public function parent()

@@ -8,9 +8,9 @@
                     <panel-button v-if="permission.update" design="is-link is-small" :link="{name:'model.edit', params: { id: row.panel_row_id }}">
                         <panel-icon icon="edit" />
                     </panel-button>
-                    <a v-if="permission.delete" class="button is-link is-small" @click.prevent="deleteRow(row.panel_row_id)">
+                    <panel-button v-if="permission.delete" design="is-link is-small" @click="deleteRow(row.panel_row_id)">
                         <panel-icon icon="trash" />
-                    </a>
+                    </panel-button>
                 </p>
         </td>
     </tr>
@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         deleteRow(id) {
-            console.log(`Delete ${id}`);
+            this.$parent.$parent.$parent.$parent.ask(id);
         }
     },
     i18n: {

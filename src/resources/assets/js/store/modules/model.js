@@ -60,6 +60,13 @@ const getters = {
     getRelationship: state => (relationship) => {
         return state.relationships[relationship];
     },
+    getName: state => {
+        if (typeof state.blueprints[state.current] !== 'undefined') {
+            return state.blueprints[state.current].name
+        } else {
+            return '';
+        }
+    },
     allowFiles: state => {
         if (typeof state.blueprints[state.current] !== 'undefined') {
             return state.blueprints[state.current].files !== false && !(_.isEmpty(state.data)) ? true : false
@@ -83,11 +90,14 @@ const actions = {
             commit(types.MODEL_CURRENT, blueprint)
         }
     },
-    getDataRows ({ commit }, {blueprint, paginate}) {
+    getDataRows ({ commit }, {blueprint, paginate, search}) {
         if (blueprint) {
-            const page = !paginate ? '' :`?page=${paginate}`
+            const page = !paginate ? '' : `page=${paginate}`,
+                  query = search === '' ? '' : `q=${search}`,
+                  concat = page !== '' && search !== '' ? '&' : '';
+            console.log('serach', search, query)
             commit(types.MODEL_LOADING, true)
-            return $http.get(`api/model/${ blueprint }/data${page}`)
+            return $http.get(`api/model/${ blueprint }/data?${page}${concat}${query}`)
                         .then(response => {
                             commit(types.MODEL_LOADING, false)
                             commit(types.MODEL_ROWS, response.data)
@@ -147,7 +157,21 @@ const actions = {
                     });
             })
         }
-    }
+    },
+    deleteData ({state}, {id}) {
+        return new Promise((resolve, reject) => {
+            $http.delete(`api/model/${ state.current }/${id}`)
+               .then(response => {
+                   resolve (response.data)
+               })
+               .catch(error => {
+                   reject (error.response.data)
+               });
+       })
+    },
+    setLoader ({ commit }, load) {
+        commit(types.MODEL_LOADING, load)
+    },
 }
 
 const mutations = {

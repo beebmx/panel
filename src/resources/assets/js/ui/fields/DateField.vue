@@ -1,8 +1,10 @@
 <template>
     <panel-field v-bind="$props" class="is-date-field">
-        <label class="label" :for="id" v-text="label"></label>
+        <label class="label" :for="id">
+            <span v-text="label"></span>
+            <abbr v-if="required" title="Required">*</abbr>
+        </label>
         <div class="control" :class="{'has-icons-right':icon}">
-            <!--<panel-text-input v-bind="$props" v-model="data" @click="openCalendar()"/>-->
             <input type="text" class="input" icon="calendar" @keyup.esc="close" @blur="close" @click="toggle" v-model="data">
             <span v-if="icon" class="icon is-small is-right">
                 <panel-icon :icon="icon" />
@@ -31,16 +33,17 @@
                 </div>
                 <div class="calendar-container">
                     <div class="calendar-header">
-                        <div class="calendar-date" v-for="day in weekdays" :key="day"> {{ day }} </div>
+                        <div class="calendar-date" v-for="day in weekdays" :key="day">{{ day }}</div>
                     </div>
                     <div class="calendar-body">
                         <div class="calendar-date" :class="{ 'is-disabled': item.isDisabled }" v-for="(item, i) in renderDays()" :key="i">
-                            <button class="date-item" :class="{ 'is-today': item.isToday, 'is-active' : item.isSelected }" :disabled="item.isDisabled" @mousedown.prevent="preventBlur" @click="select(item.date)"> {{ item.day }} </button>
+                            <button class="date-item" :class="{ 'is-today': item.isToday, 'is-active' : item.isSelected }" :disabled="item.isDisabled" @mousedown.prevent="preventBlur" @click="select(item.date)">{{ item.day }}</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <p v-if="error" class="help is-danger" v-text="error"></p>
         <p v-if="help" class="help" v-text="help"></p>
     </panel-field>
 </template>
@@ -124,9 +127,9 @@ export default {
                 renderedDays.push ({
                     date: date,
                     day: date.date(),
-                    isToday :  ( date.diff(now, 'days') == 0 ) ? true : false,
-                    isDisabled : ( date.get('month') != this.currentMonth ) ? true : false,
-                    isSelected : ( date.diff(moment(this.dateSelected).startOf('day'), 'days') == 0 ) ? true : false,
+                    isToday :  ( date.diff(now, 'days') === 0 ) ? true : false,
+                    isDisabled : ( date.get('month') !== this.currentMonth ) ? true : false,
+                    isSelected : ( date.diff(moment(this.dateSelected).startOf('day'), 'days') === 0 ) ? true : false,
                     });
             }
             return renderedDays

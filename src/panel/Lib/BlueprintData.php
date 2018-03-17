@@ -17,7 +17,8 @@ class BlueprintData
             'paginate' => config('panel.paginate'),
             'create' => true,
             'update' => true,
-            'delete' => true
+            'delete' => true,
+            'search' => 'name'
         ];
         $order = [
             'field' => 'id',
@@ -31,7 +32,7 @@ class BlueprintData
     public function all()
     {
         $relationships = $this->getRelationships();
-        $q = request()->has('q') ?: false;
+        $q = request()->has('q') ? request()->input('q') : false;
         if (!$q) {
             if (count($relationships)) {
                 return $this->class::with($relationships)
@@ -41,6 +42,24 @@ class BlueprintData
                 return $this->class::orderBy($this->order['field'], $this->order['sort'])
                                 ->paginate($this->options['paginate']);
             }
+        } else {
+            $search = $this->getAllSearchableFields($q);
+            if (count($relationships)) {
+                $model = $this->class::with($relationships)
+                                ->orderBy($this->order['field'], $this->order['sort']);
+            } else {
+                $model = $this->class::orderBy($this->order['field'], $this->order['sort']);
+            }
+            $first = false;
+            foreach ($search as $w) {
+                if (!$first) {
+                    $first = true;
+                    $model->where($w[0], $w[1], $w[2]);
+                } else {
+                    $model->orWhere($w[0], $w[1], $w[2]);
+                }
+            }
+            return $model->paginate($this->options['paginate']);
         }
     }
 
@@ -74,8 +93,13 @@ class BlueprintData
         return $model;
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $this->setId($id);
+        $record = $this->class::find($this->getId());
+        $record->delete();
+
+        return $record;
     }
 
     public function setId($id)
@@ -147,5 +171,23 @@ class BlueprintData
         return collect($this->blueprint->fields()->all())->map(function ($field, $id) {
             return '';
         });
+    }
+
+    protected function getAllSearchableFields($q)
+    {
+        $search = [];
+        if (is_array($this->options['search'])) {
+            $search = [];
+            foreach ($this->options['search'] as $field => $option) {
+                if ($option !== null) {
+                    $search[] = [$field, $option, $q];
+                } else {
+                    $search[] = [$field, 'LIKE', '%' . $q . '%'];
+                }
+            }
+        } else {
+            $search[] = [$this->options['search'], 'LIKE', '%' . $q . '%'];
+        }
+        return $search;
     }
 }

@@ -1,7 +1,7 @@
 import * as types from '../mutation-types'
 
 const state = {
-    files: {},
+    files: [],
     progress: 0
 }
 
@@ -107,13 +107,13 @@ const mutations = {
         state.progress = progress
     },
     [types.FILES_SET] (state, files) {
-        state.files = files
+        state.files = [];
+        _.each(files, file => {
+            state.files.push(file)
+        })
     },
     [types.FILES_ADD] (state, file) {
-        let files = _.merge({}, state.files);
-        files[file.filename] = file
-        state.files = files;
-        
+        state.files.push(file)
     },
     [types.FILES_REPLACE] (state, file) {
         state.files[file.filename] = file
