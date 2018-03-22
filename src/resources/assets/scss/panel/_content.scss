@@ -1,0 +1,17 @@
+.panel-content {
+    background-color: $white;
+    border-radius: $radius;
+    box-shadow: 0 2px 3px rgba($black, 0.1);
+    color: $text;
+    > .panel-content-header {
+        border-bottom: 1px solid $grey-lighter;
+        padding: 0.75rem;
+    }
+    > .panel-content-data {
+        padding: 0.75rem 0;
+    }
+    > .panel-content-footer {
+        border-top: 1px solid $grey-lighter;
+        padding: 0.75rem;
+    }
+}

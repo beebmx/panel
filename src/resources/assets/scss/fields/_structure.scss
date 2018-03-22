@@ -1,0 +1,14 @@
+.is-structure-field {
+    .has-table {
+        border: 2px solid $grey-lighter;
+    }
+    .table {
+        margin-bottom: 0.55rem;
+    }
+    thead th {
+        border-bottom: 1px solid $grey-lighter;
+    }
+    th.is-last {
+        width: 5rem;
+    }
+}

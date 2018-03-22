@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+}
+
+.panel-top-container {
+    position: initial;
+    @include desktop {
+        position: relative;
+    }
+}

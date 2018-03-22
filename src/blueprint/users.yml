@@ -1,34 +1,38 @@
 name: Usuarios
+type: model
 class: App\User
-storage: usuario
 admin: true
-icon: <i class="material-icons">person</i>
+icon: user
+options:
+  storage: usuario
 fields:
   id:
-    name: ID
+    label: ID
     type: id
     list: false
-  email:
-    name: Email
-    type: email
-    required: true
-    unique: users
-  profile_id:
-    name: Perfil
-    type: select
-    options: class
-    query:
-      class: App\Profile
-  password:
-    name: Contraseña
-    type: password
-    list: false
-    required: true
   name:
-    name: Nombre
+    label: Nombre
     type: text
   lastname:
-    name: Apellidos
+    label: Apellidos
     type: text
     list: true
     mobile: false
+  email:
+    label: Email
+    type: email
+    required: true
+    unique: users
+    mobile: false
+  password:
+    label: Contraseña
+    type: password
+    required: true
+  profile_id:
+    label: Perfil
+    type: select
+    icon: users
+    options: parent
+    parent: 
+      model: App\Profile
+      relation: profile

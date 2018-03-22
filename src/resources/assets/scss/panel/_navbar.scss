@@ -1,0 +1,29 @@
+nav.panel-navbar {
+    .navbar-burger {
+        margin-left: ($navbar-height / 4);
+        span {
+            background-color: $navbar-item-color;
+        }
+        &:hover {
+            background-color: transparent;
+        }
+    }
+    .navbar-title {
+        color: $navbar-title-color;
+        font-size: $navbar-title-size;
+        line-height: 2;
+        margin-left: auto;
+    }
+    .navbar-image {
+        img {
+            float: left;
+            margin-left: ($navbar-height / 4);
+            margin-right: ($navbar-height / 4);
+            margin-top: 4px;
+            max-height: calc(#{$navbar-height} - 8px);
+        }
+    }
+    .has-logo {
+        padding: 0;
+    }
+}

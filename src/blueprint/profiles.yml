@@ -1,30 +1,28 @@
 name: Perfiles
+type: model
 class: App\Profile
-storage: perfil
 admin: true
-icon: <i class="material-icons">supervisor_account</i>
+icon: users
+options:
+  storage: perfil
 fields:
   id:
-    name: ID
+    label: ID
     type: id
     list: false
   name:
-    name: Nombre
+    label: Nombre
     type: text
     required: true
   is_admin:
-    name: ¿Es administrador?
+    label: Administrador
     type: checkbox
+    width: 6
   has_panel:
-    name: ¿Tiene acceso al panel?
+    label: Panel
     type: checkbox
+    width: 6
   created_at:
-    name: Creado
+    label: Creado
     type: timestamp
-    readonly: true
     mobile: false
-  updated_at:
-    name: Modificado
-    type: timestamp
-    list: false
-    readonly: true

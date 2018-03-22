@@ -1,0 +1,264 @@
+//
+// Bootstrap personalization
+// --------------------------------------------------
+
+// Colors
+// --------------------------------------------------
+$black:                           hsl(0, 0%, 4%);
+$black-bis:                       hsl(0, 0%, 7%);
+$black-ter:                       hsl(0, 0%, 14%);
+
+$grey-darker:                     hsl(0, 0%, 21%);
+$grey-dark:                       hsl(0, 0%, 29%);
+$grey:                            hsl(0, 0%, 48%);
+$grey-light:                      hsl(0, 0%, 71%);
+$grey-lighter:                    hsl(0, 0%, 86%);
+
+$white-ter:                       hsl(0, 0%, 96%);
+$white-bis:                       hsl(0, 0%, 98%);
+$white:                           hsl(0, 0%, 100%);
+
+$orange:                          #F6943F;
+$yellow:                          hsl(48,  100%, 67%);
+$green:                           #00A79D;
+$turquoise:                       #5BC9E1;
+$blue:                            #1A79B7;
+$purple:                          hsl(271, 100%, 71%);
+$red:                             #EE554A;
+
+
+// Primary colors
+// --------------------------------------------------
+$primary:                           $blue;
+$info:                              $turquoise;
+
+// Text colors
+// --------------------------------------------------
+$text:                              $grey-dark;
+$text-light:                        $grey;
+$text-strong:                       $grey-darker;
+
+// Body
+$body-background-color:           #F1F1F1;
+//$body-background:                 #f0f0f0;
+$body-size:                         14px;
+
+// Miscellaneous
+$radius-small:                      1px;
+$radius:                            2px;
+$radius-large:                      3px;
+
+// Sidebar
+// --------------------------------------------------
+$sidebar-text-color:                $text;
+$sidebar-background-color:          $white;
+$sidebar-width:                     200px;
+$sidebar-transition:                250ms cubic-bezier(.16, .68, .43, .99);
+$sidebar-shadow-color:              $grey-light;
+
+// Navbar
+// --------------------------------------------------
+$navbar-background-color:           $blue;
+$navbar-title-color:                $white;
+$navbar-title-size:                 1.25rem;
+$navbar-height:                     2.65rem;
+$navbar-item-color:                 $white;
+$navbar-item-hover-color:           $white-ter;
+$navbar-item-hover-background-color:transparent;
+
+// Sidebar
+// --------------------------------------------------
+$sidebar-top:                       $navbar-height;
+$sidebar-width:                     17.55rem;
+$sidebar-speed:                     86ms;
+$sidebar-easing:                    ease-out;
+
+// Box
+// --------------------------------------------------
+$box-radius:                        $radius;
+
+// Tables
+// --------------------------------------------------
+$table-cell-border:                 0;
+$table-cell-padding:                0.6em 0.75em;
+$table-background-color:            transparent;
+
+// Forms
+// --------------------------------------------------
+// $input-border-focus:        lighten($brand-primary, 5%);
+// $input-border:              #CCCCCC;       
+// $input-color-placeholder:   #999;
+// $legend-color:              $brand-primary;
+
+// Modal
+// --------------------------------------------------
+$modal-z:                           100;
+$modal-card-head-background-color:  $white;
+$modal-content-width:               820px;
+
+// Extensions
+// --------------------------------------------------
+$checkradio-focus:                  0;
+
+
+// Panel theme
+// --------------------------------------------------
+// $header-height:             3em;
+// $sidebar-brand:             lighten($brand-primary, 35%);
+// $sidebar-color:             $white;
+// $header-shadow:             rgba(55, 57, 60, 0.35);
+
+
+/*
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// 1. Initial variables
+
+// Colors
+$black:        hsl(0, 0%, 4%) !default
+$black-bis:    hsl(0, 0%, 7%) !default
+$black-ter:    hsl(0, 0%, 14%) !default
+
+$grey-darker:  hsl(0, 0%, 21%) !default
+$grey-dark:    hsl(0, 0%, 29%) !default
+$grey:         hsl(0, 0%, 48%) !default
+$grey-light:   hsl(0, 0%, 71%) !default
+$grey-lighter: hsl(0, 0%, 86%) !default
+
+$white-ter:    hsl(0, 0%, 96%) !default
+$white-bis:    hsl(0, 0%, 98%) !default
+$white:        hsl(0, 0%, 100%) !default
+
+$orange:       hsl(14,  100%, 53%) !default
+$yellow:       hsl(48,  100%, 67%) !default
+$green:        hsl(141, 71%,  48%) !default
+$turquoise:    hsl(171, 100%, 41%) !default
+$blue:         hsl(217, 71%,  53%) !default
+$purple:       hsl(271, 100%, 71%) !default
+$red:          hsl(348, 100%, 61%) !default
+
+// Typography
+$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
+$family-monospace: monospace !default
+$render-mode: optimizeLegibility !default
+
+$size-1: 3rem !default
+$size-2: 2.5rem !default
+$size-3: 2rem !default
+$size-4: 1.5rem !default
+$size-5: 1.25rem !default
+$size-6: 1rem !default
+$size-7: 0.75rem !default
+
+$weight-light: 300 !default
+$weight-normal: 400 !default
+$weight-semibold: 500 !default
+$weight-bold: 700 !default
+
+// Body
+$body-background: #fff !default
+$body-size: 16px !default
+
+// Responsiveness
+// 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
+$tablet: 769px !default
+// 960px container + 40px
+$desktop: 1000px !default
+// 1152px container + 40
+$widescreen: 1192px !default
+// 1344px container + 40
+$fullhd: 1384px !default
+
+// Miscellaneous
+$easing: ease-out !default
+$radius-small: 2px !default
+$radius: 3px !default
+$radius-large: 5px !default
+$speed: 86ms !default
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// 2. Primary colors
+
+$primary: $turquoise !default
+
+$info: $blue !default
+$success: $green !default
+$warning: $yellow !default
+$danger: $red !default
+
+$light: $white-ter !default
+$dark: $grey-darker !default
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// 3. Applied variables
+
+// Invert colors
+$orange-invert: findColorInvert($orange) !default
+$yellow-invert: findColorInvert($yellow) !default
+$green-invert: findColorInvert($green) !default
+$turquoise-invert: findColorInvert($turquoise) !default
+$blue-invert: findColorInvert($blue) !default
+$purple-invert: findColorInvert($purple) !default
+$red-invert: findColorInvert($red) !default
+
+$primary-invert: $turquoise-invert !default
+$info-invert: $blue-invert !default
+$success-invert: $green-invert !default
+$warning-invert: $yellow-invert !default
+$danger-invert: $red-invert !default
+$light-invert: $dark !default
+$dark-invert: $light !default
+
+// General colors
+$background: $white-ter !default
+
+$border: $grey-lighter !default
+$border-hover: $grey-light !default
+
+// Text colors
+$text: $grey-dark !default
+$text-invert: findColorInvert($text) !default
+$text-light: $grey !default
+$text-strong: $grey-darker !default
+
+// Code colors
+$code: $red !default
+$code-background: $background !default
+
+$pre: $text !default
+$pre-background: $background !default
+
+// Link colors
+$link: $primary !default
+$link-invert: $primary-invert !default
+$link-visited: $purple !default
+
+$link-hover: $grey-darker !default
+$link-hover-border: $grey-light !default
+
+$link-focus: $grey-darker !default
+$link-focus-border: $primary !default
+
+$link-active: $grey-darker !default
+$link-active-border: $grey-dark !default
+
+// Typography
+$family-primary: $family-sans-serif !default
+$family-code: $family-monospace !default
+
+$size-small: $size-7 !default
+$size-normal: $size-6 !default
+$size-medium: $size-5 !default
+$size-large: $size-4 !default
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// 4. Lists and maps
+
+$colors: ("white": ($white, $black), "black": ($black, $white), "light": ($light, $light-invert), "dark": ($dark, $dark-invert), "primary": ($primary, $primary-invert), "info": ($info, $info-invert), "success": ($success, $success-invert), "warning": ($warning, $warning-invert), "danger": ($danger, $danger-invert)) !default
+
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 !default
+
+ */
