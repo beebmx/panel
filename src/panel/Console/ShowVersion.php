@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class ShowVersion extends Command
 {
-    protected $version = '3.0.0-alpha.1';
+    protected $version = '3.0.2';
     /**
      * The name and signature of the console command.
      *
@@ -29,7 +29,6 @@ class ShowVersion extends Command
     public function __construct()
     {
         parent::__construct();
-        
     }
 
     /**
@@ -39,6 +38,6 @@ class ShowVersion extends Command
      */
     public function handle()
     {
-        $this->line('Current version of Beebmx/Panel: '.$this->version); 
+        $this->line('Current version of Beebmx/Panel: ' . $this->version);
     }
 }

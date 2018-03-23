@@ -1,8 +1,8 @@
 {
-    "/resources/dist/js/app.js": "/resources/dist/js/app.js",
+    "/resources/dist/js/panel-app.js": "/resources/dist/js/panel-app.js",
     "/resources/dist/css/components.css": "/resources/dist/css/components.css",
-    "/resources/dist/css/panel.css": "/resources/dist/css/panel.css",
-    "/resources/dist/css/login.css": "/resources/dist/css/login.css",
-    "/resources/dist/js/login.js": "/resources/dist/js/login.js",
+    "/resources/dist/css/panel-app.css": "/resources/dist/css/panel-app.css",
+    "/resources/dist/css/panel-login.css": "/resources/dist/css/panel-login.css",
+    "/resources/dist/js/panel-login.js": "/resources/dist/js/panel-login.js",
     "/resources/dist/js/fontawesome.js": "/resources/dist/js/fontawesome.js"
 }

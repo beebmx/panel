@@ -7,7 +7,7 @@
         <meta name="author" content="Beeb.mx" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="stylesheet" href="{{ asset('css/panel.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/panel-app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/components.css') }}">
         <script defer src="{{ asset('js/fontawesome.js') }}"></script>
 <script>
@@ -17,6 +17,6 @@
 
     <body class="beebmx-panel">
         <div id="root" api="{{ url(config('panel.prefix') . '/api') }}"></div>
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/panel-app.js') }}"></script>
     </body>
 </html>

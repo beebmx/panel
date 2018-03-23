@@ -12,7 +12,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
         
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/panel.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/panel-app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/components.css') }}">
         <script defer src="{{ asset('js/fontawesome.js') }}"></script>
 		@yield('css')
@@ -52,83 +52,9 @@
             </div>
         </div>
     </div>
-
-{{-- <div id="sidebar" class="panel-main-container {{ config('panel.sidebarEffect') }}" :class="{'sidebar-open':isOpen}">
-
-        <nav class="panel-menu">
-            <h2 class="subtitle">Sidebar</h2>
-            <ul class="sidebar-links">
-                @foreach($models as $model)
-                    @if (!$model->isChildren())
-                <li>
-                    @if ($model->type === 'external')
-                    <a href="{{ $model->url }}">
-                    @else
-                    <a href="{{ url(config('panel.prefix').'/page/'.$model->url) }}">
-                    @endif
-                        <div class="link">
-                            <div class="icon is-small"><i class="fal fa-{!! $model->icon !!}"></i></div>
-                            <div class="link-text">{{ $model->name }}</div>
-                        </div>
-                    </a>
-                </li>
-                    @endif
-                @endforeach
-                <li>
-                    <form action="{{ url(config('panel.prefix').'/logout') }}" method="post">
-                        {{ csrf_field() }}
-                        <button type="submit">
-                            <div class="link">
-                                <div class="icon is-small"><i class="fal fa-chevron-right"></i></div>
-                                <div class="link-text">@lang('panel::panel.logout')</div>
-                            </div>
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-</div>        
-        <div class="panel-pusher">
-            <header>
-                <nav class="nav">
-                    <div class="nav-left is-hidden-mobile">
-                        <a class="logo nav-item">
-                            
-                        </a>
-                    </div>
-                    <a href="#" class="nav-toggle" @click.prevent="slideBarToggle">
-                        <span></span><span></span><span></span>
-                    </a>
-                    <div class="nav-right is-hidden-tablet">
-                        <div class="title is-spaced">{{ config('panel.name') }}</div>
-                    </div>
-                    <div class="nav-center is-hidden-mobile">
-                        <div class="title">{{ config('panel.name') }}</div>
-                    </div>
-                    <div class="nav-right nav-menu">
-                        @foreach (config('panel.social') as $social)
-                        <a href="{{ $social['url'] }}" class="nav-item" target="_blank">
-                            <span class="icon is-small"><i class="fab fa-{{ $social['icon'] }}"></i></span>
-                        </a>
-                        @endforeach
-                  </div>
-                </nav>
-            </header>
-            <div class="panel-main-content">
-                <div class="panel-general-content">
-                    @yield('content')
-                </div>
-            </div>
-        </div> --}}
-
 @yield('jsrequired')
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/panel-app.js') }}"></script>
 <script>
-/*
-$(document).ready(function(){
-//Panel.init();
-});
-*/
 </script>
 @yield('js')
 </body>

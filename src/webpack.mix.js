@@ -15,12 +15,12 @@ mix.options({
     });
 
 
-mix.js('resources/assets/js/app.js', 'resources/dist/js/')
-   .js('resources/assets/js/login.js', 'resources/dist/js/')
+mix.js('resources/assets/js/panel-app.js', 'resources/dist/js/')
+   .js('resources/assets/js/panel-login.js', 'resources/dist/js/')
    .js('resources/assets/js/fontawesome/fontawesome-all.js', 'resources/dist/js/fontawesome.js')
    .sass('resources/assets/scss/components.scss', 'resources/dist/css/')
-   .sass('resources/assets/scss/panel.scss', 'resources/dist/css/')
-   .sass('resources/assets/scss/login.scss', 'resources/dist/css/');
+   .sass('resources/assets/scss/panel-app.scss', 'resources/dist/css/')
+   .sass('resources/assets/scss/panel-login.scss', 'resources/dist/css/');
 
 
 // Full API

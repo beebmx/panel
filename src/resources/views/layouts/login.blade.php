@@ -12,14 +12,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 		
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/panel-login.css') }}">
 		<script defer src="{{ asset('js/fontawesome.js') }}"></script>
 	</head>
 <body class="@yield('module')">
 	
 	@yield('content')
 	
-	<script src="{{ asset('js/login.js') }}"></script>
+	<script src="{{ asset('js/panel-login.js') }}"></script>
 	@yield('js')
 	
 </body>
