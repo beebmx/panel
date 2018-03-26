@@ -14,9 +14,9 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function ($table) {
             $table->integer('profile_id')->unsigned()->after('id');
-            $table->string('lastname')->after('name');
+            $table->string('lastname')->nullable()->after('name');
             $table->softDeletes();
-            
+
             $table->foreign('profile_id')->references('id')->on('profiles')->onUpdate('cascade');
         });
     }
