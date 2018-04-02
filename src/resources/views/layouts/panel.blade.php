@@ -14,7 +14,6 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/panel-app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-        <script defer src="{{ asset('js/fontawesome.js') }}"></script>
 		@yield('css')
 		@yield('style')
 	</head>
@@ -53,6 +52,7 @@
         </div>
     </div>
 @yield('jsrequired')
+<script defer src="{{ asset('js/panel-fontawesome.js') }}"></script>
 <script src="{{ asset('js/panel-app.js') }}"></script>
 <script>
 </script>

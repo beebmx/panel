@@ -9,7 +9,6 @@
 
         <link rel="stylesheet" href="{{ asset('css/panel-app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-        <script defer src="{{ asset('js/fontawesome.js') }}"></script>
 <script>
     window.panel = {"token":"{{ csrf_token() }}","base":"{{ config('panel.prefix') }}","baseURL":"{{ url(config('panel.prefix')) }}"};
 </script>
@@ -17,6 +16,7 @@
 
     <body class="beebmx-panel">
         <div id="root" api="{{ url(config('panel.prefix') . '/api') }}"></div>
+        <script defer src="{{ asset('js/panel-fontawesome.js') }}"></script>
         <script src="{{ asset('js/panel-app.js') }}"></script>
     </body>
 </html>

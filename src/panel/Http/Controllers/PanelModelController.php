@@ -35,10 +35,10 @@ class PanelModelController extends Controller
         return response()->json(compact('permissions', 'fields', 'headers', 'files', 'name'));
     }
 
-    public function data(Request $request, $model)
+    public function data(Request $request, $model, $parent = false)
     {
         $model = $this->getBlueprint($model);
-        $data = $model->data()->all();
+        $data = $model->data($parent)->all();
 
         return new BlueprintDataCollection($data);
     }
@@ -52,10 +52,10 @@ class PanelModelController extends Controller
         return response()->json(compact('models', 'data'));
     }
 
-    public function store($model)
+    public function store($model, $parent = false)
     {
         $model = $this->getBlueprint($model);
-        $data = $model->data()->save();
+        $data = $model->data($parent)->save();
 
         return response()->json(compact('data'));
     }

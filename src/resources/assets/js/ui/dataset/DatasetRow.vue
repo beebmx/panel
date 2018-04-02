@@ -1,11 +1,18 @@
 <template>
     <tr>
         <td v-for="(field, id) in headers" v-if="id !== 'panel_row_id'" :key="id" :class="{'is-hidden-mobile' : !field['mobile']}">
-            <component :is="field['cell']" :value="row[id]" :maxChars="field['maxCellChars']"></component>    
+            <component
+                v-bind="field"
+                :is="field['cell']"
+                :value="row[id]"
+                :maxChars="field['maxCellChars']"></component>    
         </td>
         <td v-if="permission.update || permission.delete">
                 <p class="field">
-                    <panel-button v-if="permission.update" design="is-link is-small" :link="{name:'model.edit', params: { id: row.panel_row_id }}">
+                    <panel-button v-if="permission.update && parent" design="is-link is-small" :link="{name:'model.edit', params: { id: row.panel_row_id, parent: parent }}">
+                        <panel-icon icon="edit" />
+                    </panel-button>
+                    <panel-button v-if="permission.update && !parent" design="is-link is-small" :link="{name:'model.edit', params: { id: row.panel_row_id }}">
                         <panel-icon icon="edit" />
                     </panel-button>
                     <panel-button v-if="permission.delete" design="is-link is-small" @click="deleteRow(row.panel_row_id)">
@@ -30,7 +37,10 @@ export default {
         ...mapGetters({
             headers: 'model/getHeaders',
             permission: 'model/getPermissions',
-        })
+        }),
+        parent() {
+            return this.$route.params.parent ? this.$route.params.parent : false;
+        }
     },
     methods: {
         deleteRow(id) {

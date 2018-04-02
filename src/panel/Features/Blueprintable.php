@@ -7,10 +7,11 @@ use Beebmx\Panel\Exception\BlueprintNotExists;
 
 trait Blueprintable
 {
-    protected function getBlueprint($model){
-        if (Blueprint::exists($model)){
+    protected function getBlueprint($model)
+    {
+        if (Blueprint::exists($model)) {
             return new Blueprint(Blueprint::path($model));
-        }else{
+        } else {
             throw new BlueprintNotExists;
         }
     }

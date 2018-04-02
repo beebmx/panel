@@ -1,7 +1,7 @@
 {
     "name": "beebmx/panel",
     "description": "Beebmx Panel.",
-    "version":"3.0.6",
+    "version":"3.0.7",
     "keywords": ["cms", "panel", "beebmx", "beeb.mx", "administrator"],
     "homepage": "https://github.com/beebmx/panel",
     "authors": [
@@ -24,9 +24,6 @@
             "Beebmx\\Panel\\" : "src/"
         }
     },
-    "post-update-cmd": [
-        "php artisan vendor:publish --provider=\"Beebmx\\Panel\\PanelServiceProvider\" --tag=config"
-    ],
     "extra": {
         "laravel": {
             "providers": [

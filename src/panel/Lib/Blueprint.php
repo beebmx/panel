@@ -39,6 +39,7 @@ class Blueprint
                 'options' => [],
                 'order' => [],
                 'files' => false,
+                'parent' => false
         ];
     }
 
@@ -47,10 +48,10 @@ class Blueprint
         return new Fields($this->fields);
     }
 
-    public function data()
+    public function data($parent = false)
     {
         if (!$this->data) {
-            $this->data = new BlueprintData($this);
+            $this->data = new BlueprintData($this, $parent);
         }
         return $this->data;
     }
@@ -108,9 +109,9 @@ class Blueprint
         $models = [];
         foreach ($files as $file) {
             $model = new Blueprint($file);
-            if ($model->admin && $admin) {
+            if (!$model->parent && $model->admin && $admin) {
                 $models[] = $model;
-            } elseif (!$model->admin) {
+            } elseif (!$model->parent && !$model->admin) {
                 $models[] = $model;
             }
         }

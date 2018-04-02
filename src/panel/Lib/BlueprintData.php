@@ -5,12 +5,14 @@ namespace Beebmx\Panel;
 class BlueprintData
 {
     protected $blueprint;
+    protected $parent;
     protected $id = false;
     protected $class;
 
-    public function __construct($blueprint)
+    public function __construct($blueprint, $parent = false)
     {
         $this->blueprint = $blueprint;
+        $this->parent = $parent;
         $this->class = $this->blueprint->getClass();
         $options = [
             'storage' => str_singular($this->blueprint->getFilename()),
@@ -34,13 +36,26 @@ class BlueprintData
         $relationships = $this->getRelationships();
         $q = request()->has('q') ? request()->input('q') : false;
         if (!$q) {
-            if (count($relationships)) {
-                return $this->class::with($relationships)
+            if ($this->blueprint->parent) {
+                if (count($relationships)) {
+                    return $this->class::with($relationships)
+                                ->where($this->blueprint->parent, $this->parent)
                                 ->orderBy($this->order['field'], $this->order['sort'])
                                 ->paginate($this->options['paginate']);
-            } else {
-                return $this->class::orderBy($this->order['field'], $this->order['sort'])
+                } else {
+                    return $this->class::where($this->blueprint->parent, $this->parent)
+                                ->orderBy($this->order['field'], $this->order['sort'])
                                 ->paginate($this->options['paginate']);
+                }
+            } else {
+                if (count($relationships)) {
+                    return $this->class::with($relationships)
+                                ->orderBy($this->order['field'], $this->order['sort'])
+                                ->paginate($this->options['paginate']);
+                } else {
+                    return $this->class::orderBy($this->order['field'], $this->order['sort'])
+                                ->paginate($this->options['paginate']);
+                }
             }
         } else {
             $search = $this->getAllSearchableFields($q);
@@ -49,6 +64,9 @@ class BlueprintData
                                 ->orderBy($this->order['field'], $this->order['sort']);
             } else {
                 $model = $this->class::orderBy($this->order['field'], $this->order['sort']);
+            }
+            if ($this->blueprint->parent) {
+                $model->where($this->blueprint->parent, $this->parent);
             }
             $first = false;
             foreach ($search as $w) {
@@ -86,6 +104,9 @@ class BlueprintData
 
         foreach ($inputs as $id => $value) {
             $model->$id = $value;
+        }
+        if ($this->blueprint->parent && $this->parent) {
+            $model->{$this->blueprint->parent} = $this->parent;
         }
 
         $model->save();

@@ -21,7 +21,8 @@
         <panel-files-manager ref="files" v-if="allowFiles" :url="upload" :search="!!id" />
         <div slot="footer" class="columns">
             <div class="column has-text-right">
-                <panel-button design="is-white" :link="{name:'model.index'}">Cancelar</panel-button>
+                <panel-button v-if="parent" design="is-white" :link="{name:'model.index', params: { parent: parent }}">Cancelar</panel-button>
+                <panel-button v-else design="is-white" :link="{name:'model.index'}">Cancelar</panel-button>
                 <panel-button design="is-primary" :loading="processing" @click="save">Guardar</panel-button>
             </div>
         </div>
@@ -41,7 +42,10 @@ export default {
             name: 'model/getName'
         }),
         blueprint() {
-                return this.$route.params.blueprint;
+            return this.$route.params.blueprint;
+        },
+        parent() {
+            return this.$route.params.parent ? this.$route.params.parent : false;
         },
         id() {
             return this.$route.params.id || false
@@ -72,14 +76,18 @@ export default {
         },
         save() {
             this.processing = true;
-            this.saveData({type:this.type, id:this.id}).then(data => {
+            this.saveData({type:this.type, id:this.id, parent: this.parent}).then(data => {
                 this.processing = false;
                 this.errors = false;
                 if (this.id === false) {
                     if (this.allowFiles) {
                         this.$refs.files.manage(`${this.upload}/${data.id}`)
                     }
-                    this.$router.push({name:'model.edit', params:{id:data.id}})
+                    if (this.parent) {
+                        this.$router.push({name:'model.edit', params:{id:data.id, parent:this.parent}})
+                    } else {
+                        this.$router.push({name:'model.edit', params:{id:data.id}})
+                    }
                 } else {
                     if (this.allowFiles) {
                         this.$refs.files.manage(this.upload)

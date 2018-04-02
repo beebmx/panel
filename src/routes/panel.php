@@ -11,11 +11,13 @@ Route::group(['middleware' => 'web', 'namespace' => 'Beebmx\Panel\Http\Controlle
 
             Route::get('model/{model}', 'PanelModelController@index')->name('model.index');
             Route::get('model/{model}/data', 'PanelModelController@data')->name('model.data');
+            Route::get('model/{model}/{parent}/data', 'PanelModelController@data')->name('model.parent.data');
             Route::get('model/{model}/{id}', 'PanelModelController@show')->name('model.show');
+            Route::post('model/{model}/parent', 'PanelModelController@parent')->name('model.parent');
             Route::post('model/{model}', 'PanelModelController@store')->name('model.store');
+            Route::post('model/{model}/{parent}', 'PanelModelController@store')->name('model.parent.store');
             Route::put('model/{model}/{id}', 'PanelModelController@update')->name('model.update');
             Route::delete('model/{model}/{id}', 'PanelModelController@destroy')->name('model.destroy');
-            Route::post('model/{model}/parent', 'PanelModelController@parent')->name('model.parent');
 
             Route::get('files/{model}/{id}', 'FilesController@all')->name('files.all');
             Route::post('files/{model}/{id}/process', 'FilesController@process')->name('files.process');

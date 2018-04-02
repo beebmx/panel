@@ -20,7 +20,9 @@ export default {
         },
         links: {
             type: Array,
-            default: {}
+            default: function() {
+                return {}
+            }
         },
         base: {
             type: String,

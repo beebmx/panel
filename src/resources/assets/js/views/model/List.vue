@@ -12,7 +12,8 @@
                 </div>
             </div>
             <div v-if="permission.create" class="column is-3">
-                <panel-button design="is-primary is-fullwidth" :link="{name:'model.create'}">Nuevo</panel-button>
+                <panel-button v-if="parent" design="is-primary is-fullwidth" :link="{name:'model.create', params: { parent: parent }}">Nuevo</panel-button>
+                <panel-button v-else design="is-primary is-fullwidth" :link="{name:'model.create'}">Nuevo</panel-button>
             </div>
         </div>
         <panel-dataset-view />
@@ -42,6 +43,9 @@ export default {
         blueprint() {
             return this.$route.params.blueprint;
         },
+        parent() {
+            return this.$route.params.parent ? this.$route.params.parent : false;
+        },
         lastpage() {
             return this.pages.last_page
         }
@@ -57,18 +61,18 @@ export default {
         }
     },
     created() {
-        this.getData(this.blueprint)
+        this.getData(this.blueprint, this.parent)
     },
     methods: {
         ...mapActions({
             deleteData: 'model/deleteData'
         }),
-        getData(blueprint, paginate = false, search = '') {
-            this.$store.dispatch('model/getDataRows', {blueprint, paginate, search})
+        getData(blueprint, parent, paginate = false, search = '') {
+            this.$store.dispatch('model/getDataRows', {blueprint, parent, paginate, search})
         },
         refresh(page) {
             this.page = page
-            this.getData(this.blueprint, this.page, this.search)
+            this.getData(this.blueprint, parent, this.page, this.search)
         },
         ask(id) {
             this.delete = id;
@@ -82,7 +86,7 @@ export default {
             this.deleteData({type:this.type, id:this.delete}).then(() => {
                 this.dialog = false;
                 this.delete = false;
-                this.getData(this.blueprint, this.page, this.search)
+                this.getData(this.blueprint, this.parent, this.page, this.search)
             })
             .catch(response => {
                 this.dialog = false;
@@ -93,18 +97,20 @@ export default {
         find() {
             this.page = 1;
             this.search = this.text;
-            this.getData(this.blueprint, this.page, this.search)
+            this.getData(this.blueprint, this.parent, this.page, this.search)
         }
     },
     beforeRouteUpdate (to, from, next) {
-        this.getData(to.params.blueprint)
+        this.text = '';
+        this.search = '';
+        this.getData(to.params.blueprint, to.params.parent)
         next()
     },
     watch: {
         lastpage() {
             if (this.page !== false && this.page > this.lastpage && this.lastpage !== 0) {
                 this.page = this.lastpage;
-                this.getData(this.blueprint, this.page, this.search)
+                this.getData(this.blueprint, this.parent, this.page, this.search)
             }
         }
     }

@@ -12,9 +12,8 @@ export default new VueRouter({
             path: '/',
             name: 'dashboard',
             component: require('../views/Dashboard.vue'),
-        },
-        {
-            path: '/model/:blueprint',
+        },{
+            path: '/model/:blueprint/:parent(\\d+)?',
             component: require('../views/model/Index.vue'),
             children: [
                 {
@@ -29,12 +28,12 @@ export default new VueRouter({
                     props: {type: 'create'}
                 },
                 {
-                    path: ':id/edit',
+                    path: ':id(\\d+)/edit',
                     name: 'model.edit',
                     component: require('../views/model/Form.vue'),
                     props: {type: 'update'}
                 }
             ]
-        },
+        }
     ]
 });

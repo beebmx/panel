@@ -90,14 +90,14 @@ const actions = {
             commit(types.MODEL_CURRENT, blueprint)
         }
     },
-    getDataRows ({ commit }, {blueprint, paginate, search}) {
+    getDataRows ({ commit }, {blueprint, parent, paginate, search}) {
         if (blueprint) {
             const page = !paginate ? '' : `page=${paginate}`,
                   query = search === '' ? '' : `q=${search}`,
-                  concat = page !== '' && search !== '' ? '&' : '';
-            console.log('serach', search, query)
+                  concat = page !== '' && search !== '' ? '&' : '',
+                  bparent = parent ? `/${parent}` : '';
             commit(types.MODEL_LOADING, true)
-            return $http.get(`api/model/${ blueprint }/data?${page}${concat}${query}`)
+            return $http.get(`api/model/${ blueprint }${ bparent }/data?${page}${concat}${query}`)
                         .then(response => {
                             commit(types.MODEL_LOADING, false)
                             commit(types.MODEL_ROWS, response.data)
@@ -134,10 +134,11 @@ const actions = {
             }
         })
     },
-    saveData ({state}, {type, id}) {
+    saveData ({state}, {type, id, parent}) {
         if (type === 'create') {
+            const bparent = parent ? `/${parent}` : '';
             return new Promise((resolve, reject) => {
-                 $http.post(`api/model/${ state.current }`, state.data)
+                 $http.post(`api/model/${ state.current }${bparent}`, state.data)
                     .then(response => {
                         resolve (response.data.data)
                     })
@@ -172,6 +173,16 @@ const actions = {
     setLoader ({ commit }, load) {
         commit(types.MODEL_LOADING, load)
     },
+    getFieldIcon({state}, field) {
+        return new Promise((resolve) => {
+            resolve (state.blueprints[state.current].fields[field].icon)
+        });
+    },
+    getChildrenBlueprint({state}, field) {
+        return new Promise((resolve) => {
+            resolve (state.blueprints[state.current].fields[field].blueprint)
+        });
+    }
 }
 
 const mutations = {

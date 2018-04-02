@@ -4,5 +4,5 @@
     "/resources/dist/css/panel-app.css": "/resources/dist/css/panel-app.css",
     "/resources/dist/css/panel-login.css": "/resources/dist/css/panel-login.css",
     "/resources/dist/js/panel-login.js": "/resources/dist/js/panel-login.js",
-    "/resources/dist/js/fontawesome.js": "/resources/dist/js/fontawesome.js"
+    "/resources/dist/js/panel-fontawesome.js": "/resources/dist/js/panel-fontawesome.js"
 }
