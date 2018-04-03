@@ -1,7 +1,7 @@
 {
     "name": "beebmx/panel",
     "description": "Beebmx Panel.",
-    "version":"3.0.8",
+    "version":"3.0.9",
     "keywords": ["cms", "panel", "beebmx", "beeb.mx", "administrator"],
     "homepage": "https://github.com/beebmx/panel",
     "authors": [

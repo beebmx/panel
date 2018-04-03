@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class ShowVersion extends Command
 {
-    protected $version = '3.0.8';
+    protected $version = '3.0.9';
     /**
      * The name and signature of the console command.
      *

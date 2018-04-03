@@ -1,6 +1,6 @@
 {
   "name": "panel",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "",
   "main": "webpack.mix.js",
   "private": true,
