@@ -65,10 +65,16 @@ export default {
     },
     methods: {
         ...mapActions({
-            deleteData: 'model/deleteData'
+            deleteData: 'model/deleteData',
+            getDataRows: 'model/getDataRows'
         }),
         getData(blueprint, parent, paginate = false, search = '') {
-            this.$store.dispatch('model/getDataRows', {blueprint, parent, paginate, search})
+            this.getDataRows({blueprint, parent, paginate, search}).catch(({response}) => {
+                if (response.status === 401) {
+                    window.location = panel.baseURL;
+                }
+            });
+            // this.$store.dispatch('model/getDataRows', {blueprint, parent, paginate, search})
         },
         refresh(page) {
             this.page = page

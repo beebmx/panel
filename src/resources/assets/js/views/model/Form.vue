@@ -94,9 +94,12 @@ export default {
                     }
                 }
             })
-            .catch(response => {
+            .catch(({data, status}) => {
+                if (status === 401 || status === 419) {
+                    window.location = panel.baseURL;
+                }
                 this.processing = false;
-                this.errors = response.errors;
+                this.errors = data.errors;
             })
         },
         error(id) {

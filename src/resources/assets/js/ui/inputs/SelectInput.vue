@@ -4,6 +4,7 @@
         :id="id"
         :name="id"
         :value="value"
+        :disabled="disabled"
         @change="update">
         <option
             v-for="option in options"

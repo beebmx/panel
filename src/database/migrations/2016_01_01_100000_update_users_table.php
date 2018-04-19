@@ -13,7 +13,7 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->integer('profile_id')->unsigned()->after('id');
+            $table->integer('profile_id')->unsigned()->nullable()->after('id');
             $table->string('lastname')->nullable()->after('name');
             $table->softDeletes();
 
