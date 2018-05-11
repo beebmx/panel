@@ -11,4 +11,9 @@ class PasswordField extends InputField
         'field' => 'panel-password-field',
         'list' => false
     ];
+
+    public static function process($value)
+    {
+        return bcrypt($value);
+    }
 }

@@ -98,13 +98,19 @@ class BlueprintData
         $inputs = request()->validate($this->validation());
         if (!$id && request()->isMethod('post')) {
             $model = new $this->class;
+            foreach ($inputs as $id => $value) {
+                $model->$id = $this->blueprint->fields()->{ $id }->process($value);
+            }
         } elseif ($id && request()->isMethod('put')) {
             $model = $this->class::find($this->getId());
+            foreach ($inputs as $id => $value) {
+                $field = $this->blueprint->fields()->{ $id };
+                if ($field->updatebleEmpty || !empty($value)) {
+                    $model->$id = $field->process($value);
+                }
+            }
         }
 
-        foreach ($inputs as $id => $value) {
-            $model->$id = $value;
-        }
         if ($this->blueprint->parent && $this->parent) {
             $model->{$this->blueprint->parent} = $this->parent;
         }

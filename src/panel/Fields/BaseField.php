@@ -76,6 +76,11 @@ class BaseField
         return array_merge($rules, $this->rules);
     }
 
+    public static function process($value)
+    {
+        return $value;
+    }
+
     public function __toString()
     {
         return $this->getSettings();
