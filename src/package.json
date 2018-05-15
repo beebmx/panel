@@ -1,6 +1,6 @@
 {
   "name": "panel",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "description": "",
   "main": "webpack.mix.js",
   "private": true,
@@ -8,16 +8,16 @@
     "lib": "lib"
   },
   "dependencies": {
-    "moment": "^2.20.1",
-    "vue-progressbar": "^0.7.3",
-    "vue-quill-editor": "^3.0.4"
+    "moment": "^2.22.1",
+    "vue-progressbar": "^0.7.5",
+    "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {
     "axios": "^0.16.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bulma": "^0.6.2",
     "laravel-mix": "^2.1.11",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.14.1",

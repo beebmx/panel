@@ -54,7 +54,8 @@ class BaseField
                 'mobile' => true,
                 'list' => true,
                 'width' => 'full',
-                'recordable' => static::$recordable];
+                'recordable' => static::$recordable,
+                'updatebleEmpty' => static::$updatebleEmpty];
     }
 
     protected function getSettings()
