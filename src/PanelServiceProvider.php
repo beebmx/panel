@@ -18,7 +18,8 @@ use Illuminate\Support\ServiceProvider;
 | to using a Closure or controller method. Build something great!
 |
 */
-class PanelServiceProvider extends ServiceProvider{
+class PanelServiceProvider extends ServiceProvider
+{
     public function boot()
     {
         $this->registerMiddleware();
@@ -26,13 +27,12 @@ class PanelServiceProvider extends ServiceProvider{
         $this->registerResources();
         //$this->registerViewShare();
     }
-    
+
     public function register()
     {
         $this->configure();
         $this->offerPublishing();
         $this->registerCommands();
-        
     }
 
     protected function registerMiddleware()
@@ -43,8 +43,8 @@ class PanelServiceProvider extends ServiceProvider{
 
     protected function registerRoutes()
     {
-        if (! $this->app->routesAreCached()) {
-            require __DIR__.'/routes/panel.php';
+        if (!$this->app->routesAreCached()) {
+            require __DIR__ . '/routes/panel.php';
         }
     }
 
@@ -60,10 +60,10 @@ class PanelServiceProvider extends ServiceProvider{
         View::composer(['panel::layouts.panel'], function ($view) {
             $profile = $profile = Auth::user()->profile;
             $admin = (int)$profile->is_admin ? true : false;
-            if (config('panel.sidebarOrder')){
+            if (config('panel.sidebarOrder')) {
                 View::share('models', Blueprint::getListModels($admin)->groupBy('type')->sortBy('sidebarOrder'));
-                //View::share('models', collect(Blueprint::getAllModels($admin))->groupBy('type')->sortBy('sidebarOrder'));
-            }else{
+            //View::share('models', collect(Blueprint::getAllModels($admin))->groupBy('type')->sortBy('sidebarOrder'));
+            } else {
                 View::share('models', Blueprint::getListModels($admin)->groupBy('type')->sortBy('name'));
                 //View::share('models', collect(Blueprint::getAllModels($admin))->groupBy('type')->sortBy('name'));
             }
@@ -73,21 +73,28 @@ class PanelServiceProvider extends ServiceProvider{
     protected function configure()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/config/panel.php', 'panel'
+            __DIR__ . '/config/panel.php',
+            'panel'
         );
     }
 
     protected function offerPublishing()
     {
         $this->publishes([
-            __DIR__.'/config/panel.php' => config_path('panel.php'),
-            __DIR__.'/panel/Profile.php' => app_path('Profile.php'),
-            __DIR__.'/blueprint/' => app_path('Panel/Blueprints/'),
-            __DIR__.'/database/seeds/' => database_path('seeds'),
-            __DIR__.'/resources/dist/css/' => public_path('css/'),
-            __DIR__.'/resources/dist/js/' => public_path('js/'),
-            __DIR__.'/resources/assets/images/' => public_path('images/'),
+            __DIR__ . '/config/panel.php' => config_path('panel.php'),
+            __DIR__ . '/panel/Profile.php' => app_path('Profile.php'),
+            __DIR__ . '/blueprint/' => app_path('Panel/Blueprints/'),
+            __DIR__ . '/database/seeds/' => database_path('seeds'),
+            __DIR__ . '/resources/dist/css/' => public_path('css/'),
+            __DIR__ . '/resources/dist/js/' => public_path('js/'),
+            __DIR__ . '/resources/assets/images/' => public_path('images/'),
         ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/resources/dist/css/' => public_path('css/'),
+            __DIR__ . '/resources/dist/js/' => public_path('js/'),
+            __DIR__ . '/resources/assets/images/' => public_path('images/'),
+        ], 'assets');
 
         /*
         $this->publishes([
