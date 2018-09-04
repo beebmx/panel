@@ -78,7 +78,7 @@ export default {
         },
         refresh(page) {
             this.page = page
-            this.getData(this.blueprint, parent, this.page, this.search)
+            this.getData(this.blueprint, this.parent, this.page, this.search)
         },
         ask(id) {
             this.delete = id;

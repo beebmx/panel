@@ -119,7 +119,8 @@ const mutations = {
         state.files[file.filename] = file
     },
     [types.FILES_DELETE] (state, file) {
-        state.files[file].status = 'deleted'
+        console.log(_.findIndex(state.files, {'filename':file}), file)
+        state.files[_.findIndex(state.files, {'filename':file})].status = 'deleted'
     },
 }
 
